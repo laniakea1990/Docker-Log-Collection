@@ -72,7 +72,7 @@ func main(){
 
 用Docker来启动容器的话，你有两种方式来配置LogDriver：
 
-第一种方式是在Daemon上配置，对所有的容器生效。你配置之后，所有的容器启动，如果没有额外的其他配制，默认情况下就会把所有容器标准输出全部都发送给Syslog服务，这样就可以在这个Syslog服务上面收集这台机器上的所有容器的标准输出；![](/assets/import3.png)第二种方式是在容器上配置，只对当前容器生效。如果你希望这个配置只对一个容器生效，不希望所有容器都受到影响，你可以在容器上面配置。启动一个容器，单独配置它自身使用的logdriver。![](/assets/import4.png)其实Docker之前已经支持了很多的logdriver，图中列表是直接从Docker的官方文档上面拿到的。![](/assets/import5.png)Driver
+第一种方式是在Daemon上配置，对所有的容器生效。你配置之后，所有的容器启动，如果没有额外的其他配制，默认情况下就会把所有容器标准输出全部都发送给Syslog服务，这样就可以在这个Syslog服务上面收集这台机器上的所有容器的标准输出；![](/assets/import3.png)第二种方式是在容器上配置，只对当前容器生效。如果你希望这个配置只对一个容器生效，不希望所有容器都受到影响，你可以在容器上面配置。启动一个容器，单独配置它自身使用的logdriver。![](/assets/import4.png)其实Docker之前已经支持了很多的logdriver，图中列表是直接从Docker的官方文档上面拿到的。![](/assets/import5.png)官方列表：
 
 | Driver | Description |  |
 | :--- | :--- | :--- |
@@ -85,7 +85,7 @@ func main(){
 | [`awslogs`](https://docs.docker.com/engine/admin/logging/awslogs/) | Writes log messages to Amazon CloudWatch Logs. |  |
 | [`splunk`](https://docs.docker.com/engine/admin/logging/splunk/) | Writes log messages to`splunk`using the HTTP Event Collector. |  |
 | [`etwlogs`](https://docs.docker.com/engine/admin/logging/etwlogs/) | Writes log messages as Event Tracing for Windows \(ETW\) events. Only available on Windows platforms. |  |
-| [`gcplogs`](https://docs.docker.com/engine/admin/logging/gcplogs/)  |Writes log messages to Google Cloud Platform \(GCP\) Logging. |  |
+| [`gcplogs`](https://docs.docker.com/engine/admin/logging/gcplogs/) | Writes log messages to Google Cloud Platform \(GCP\) Logging. |  |
 
 
 
