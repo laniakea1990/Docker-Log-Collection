@@ -85,7 +85,7 @@ func main(){
 | [`awslogs`](https://docs.docker.com/engine/admin/logging/awslogs/) | Writes log messages to Amazon CloudWatch Logs. |  |
 | [`splunk`](https://docs.docker.com/engine/admin/logging/splunk/) | Writes log messages to`splunk`using the HTTP Event Collector. |  |
 | [`etwlogs`](https://docs.docker.com/engine/admin/logging/etwlogs/) | Writes log messages as Event Tracing for Windows \(ETW\) events. Only available on Windows platforms. |  |
-|  | [`gcplogs`](https://docs.docker.com/engine/admin/logging/gcplogs/) | Writes log messages to Google Cloud Platform \(GCP\) Logging. |
+| [`gcplogs`](https://docs.docker.com/engine/admin/logging/gcplogs/)  |Writes log messages to Google Cloud Platform \(GCP\) Logging. |  |
 
 
 
