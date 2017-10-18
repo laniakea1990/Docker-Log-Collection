@@ -9,6 +9,6 @@ git checkout --orphan gh-pages
 git add .
 echo "commit gitbook file"
 git commit -m "Auto publisher"
-git remote add origin https://github.com/laniakea1990/Docker-Log-Collector.git 
+git remote add origin https://github.com/laniakea1990/Docker-Log-Collection.git
 echo "push gh-pages branch to origin"
 git push --force -u origin gh-pages > /dev/null 2>&1
