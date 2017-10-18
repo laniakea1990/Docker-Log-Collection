@@ -38,29 +38,41 @@ Docker的日志我们可以把它分成两类，一类是stdout标准输出，�
 package pilot
 
 import (
-	"bufio"
-	"os/exec"
-	"os"
-	"fmt"
+    "bufio"
+    "os/exec"
+    "os"
+    "fmt"
 )
 
 func main(){
-	cmd := exec.Command("cmcd", "args")
-	stdout, err := cmd.StdoutPipe()
-	if err != nil{
-		panic(err)
-	}
-	cmd.Start()
-	r := bufio.NewReader(stdout)
-	for {
-		line, _, err := r.ReadLine()
-		if err != nil {
-			os.Exit(0)
-		}
-		fmt.Printlin(line)
-	}
+    cmd := exec.Command("cmcd", "args")
+    stdout, err := cmd.StdoutPipe()
+    if err != nil{
+        panic(err)
+    }
+    cmd.Start()
+    r := bufio.NewReader(stdout)
+    for {
+        line, _, err := r.ReadLine()
+        if err != nil {
+            os.Exit(0)
+        }
+        fmt.Printlin(line)
+    }
 }
 ```
 
+在Docker的场景里面，目前比较推崇这种标准输出的日志，标准输出日志具体过程如图。标准输出日志的原理在于，当在启动进程的时候，进程之间有一个父子关系，父进程可以拿到子进程的标准输出。拿到子进程标准输出的后，父进程可以对标准输出做所有希望的处理。
 
+![](/assets/import1.png)
+
+例如，我们通过exec.Command启动了一个命令，带一些参数，然后就可以通过标准的pipeline拿到标准输出，后面就可以拿到程序运行过程中产生标准输出。Docker也是用这个原理来拿的，所有的容器通过Docker Daemon启动，实际上属于Docker的一个子进程，它可以拿到你的容器里面进程的标准输出，然后拿到标准输出之后，会通过它自身的一个叫做LogDriver的模块来处理，LogDriver就是Docker用来处理容器标准输出的一个模块。Docker支持很多种不同的处理方式，比如你的标准输出之后，在某一种情况下会把它写到一个日志里面，Docker默认的JSON File日志，除此之外，Docker还可以把它发送到syslog里面，或者是发送到journald里面去，或者是gelf的一个系统。
+
+怎么配置log driver呢？
+
+用Docker来启动容器的话，你有两种方式来配置LogDriver：
+
+第一种方式是在Daemon上配置，对所有的容器生效。你配置之后，所有的容器启动，如果没有额外的其他配制，默认情况下就会把所有容器标准输出全部都发送给Syslog服务，这样就可以在这个Syslog服务上面收集这台机器上的所有容器的标准输出；![](/assets/import3.png)第二种方式是在容器上配置，只对当前容器生效。如果你希望这个配置只对一个容器生效，不希望所有容器都受到影响，你可以在容器上面配置。启动一个容器，单独配置它自身使用的logdriver。![](/assets/import4.png)
+
+![](/assets/import5.png)其实Docker之前已经支持了很多的logdriver，图中列表是直接从Docker的官方文档上面拿到的。
 
