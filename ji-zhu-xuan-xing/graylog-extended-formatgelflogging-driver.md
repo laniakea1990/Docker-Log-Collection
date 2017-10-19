@@ -65,7 +65,7 @@ The`gelf`logging driver supports the following options:
 |  | `tag` | optional | A string that is appended to the`APP-NAME`in the`gelf`message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the[log tag option documentation](https://docs.docker.com/engine/admin/logging/log_tags/)for customizing the log tag format. | `--log-opt tag=mailer` |
 |  | `labels` | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the`extra`fields, prefixed by an underscore \(`_`\). Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt labels=production_status,geo` |
 |  | `env` | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the`extra`fields, prefixed by an underscore \(`_`\). Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt env=os,customer` |
-|  | `env-regex` | optional| Similar to and compatible with`env`. A regular expression to match logging-related environment variables. Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/).  | \--log-opt env-regex=^\(os customer\).\ |
+|  | `env-regex` | optional| Similar to and compatible with`env`. A regular expression to match logging-related environment variables. Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/).  | \--log-opt env-regex=^\(os customer\).|
 
 ### Examples {#examples}
 
