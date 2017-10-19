@@ -17,6 +17,8 @@ The following example sets the log driver to`json-file`and sets the`max-size`opt
 
 Restart Docker for the changes to take effect for newly created containers. Existing containers will not use the new logging configuration.
 
+上面的配置生效后对宿主机上所有容器生效，下面的方法只对该容器生效：
+
 You can set the logging driver for a specific container by using the`--log-driver`flag to`docker create`or`docker run`:
 
 ```
