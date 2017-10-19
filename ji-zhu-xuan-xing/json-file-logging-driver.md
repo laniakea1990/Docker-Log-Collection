@@ -1,4 +1,4 @@
-By default, Docker captures the standard output \(and standard error\) of all your containers, and writes them in files using the JSON format. The JSON format annotates each line with its origin \(`stdout`or`stderr`\) and its timestamp. Each log file contains information about only one container.
+By default, Docker captures the standard output \(and standard error\) of all your containers, and writes them in files using the JSON format. The JSON format annotates each line with its origin \(`stdout`or`stderr`\) and its timestamp. Each log file contains information about only one container（每个log文件只包括一个容器的log信息）.
 
 ## Usage {#usage}
 
@@ -44,8 +44,6 @@ This example starts an`alpine`container which can have a maximum of 3 log files 
 ```
 $ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```
-
-
 
 
 
