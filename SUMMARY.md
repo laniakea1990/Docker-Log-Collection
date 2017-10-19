@@ -8,8 +8,6 @@
     * [Syslog logging driver](ji-zhu-xuan-xing/syslog-logging-driver.md)
     * [Fluentd logging driver](ji-zhu-xuan-xing/fluentd-logging-driver.md)
     * [Journald logging driver](ji-zhu-xuan-xing/journald-logging-driver.md)
-    * Other online logging driver
+    * [Other online logging driver](ji-zhu-xuan-xing/other-online-logging-driver.md)
   * [基于xxx的日志收集](ji-yu-xxx-de-ri-zhi-shou-ji.md)
-
-
 
