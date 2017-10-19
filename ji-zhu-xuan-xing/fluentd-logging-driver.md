@@ -5,7 +5,7 @@ The`fluentd`logging driver sends container logs to the [Fluentd](http://www.flue
 | Field | Description |
 | :--- | :--- |
 | `container_id` | The full 64-character container ID. |
-| **`container_name`** | The container name at the time it was started. If you use`docker rename`to rename a container, the new name is not reflected in the journal entries. |
+| `container_name` | The container name at the time it was started. If you use`docker rename`to rename a container, the new name is not reflected in the journal entries. |
 | `source` | `stdout`or`stderr` |
 
 The`docker logs`command is not available for this logging driver.
