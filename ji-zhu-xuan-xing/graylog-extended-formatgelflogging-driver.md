@@ -8,7 +8,7 @@ In GELF, every log message is a dict with the following fields:
 * short and long version of the message
 * any custom fields you configure yourself
 
-### Usage
+## Usage
 
 To use the`gelf`driver as the default logging driver, set the`log-driver`and`log-opt`keys to appropriate values in the`daemon.json`file, which is located in`/etc/docker/`on Linux hosts or`C:\ProgramData\docker\config\daemon.json`on Windows Server. For more about configuring Docker using`daemon.json`, see[daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
@@ -51,7 +51,7 @@ $ docker run \
       alpine echo hello world
 ```
 
-### GELF options {#gelf-options}
+## GELF options
 
 The`gelf`logging driver supports the following options:
 
@@ -67,7 +67,7 @@ The`gelf`logging driver supports the following options:
 | `env` | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the`extra`fields, prefixed by an underscore \(`_`\). Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt env=os,customer` |
 | `env-regex` | optional | Similar to and compatible with`env`. A regular expression to match logging-related environment variables. Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | --log-opt env-regex=^\(os customer\). |
 
-### Examples {#examples}
+## Examples
 
 This example configures the container to use the GELF server running at`192.168.0.42`on port`12201`.
 
