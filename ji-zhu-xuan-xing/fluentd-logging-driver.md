@@ -44,7 +44,7 @@ Before using this logging driver, launch a Fluentd daemon. The logging driver co
 docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 ```
 
-If container cannot connect to the Fluentd daemon, the container stops immediately unless the**`fluentd-async-connect`**option is used.
+If container cannot connect to the Fluentd daemon, the container stops immediately unless the`fluentd-async-connect`option is used.
 
 ## Options
 
@@ -58,7 +58,6 @@ By default, the logging driver connects to`localhost:24224`. Supply the`fluentd-
 docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
 docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
-
 ```
 
 Two of the above specify the same address, because`tcp`is default.
@@ -88,6 +87,38 @@ How long to wait between retries. Defaults to 1 second.
 ### fluentd-max-retries {#fluentd-max-retries}
 
 The maximum number of retries. Defaults to 10.
+
+## Fluentd daemon management with Docker {#fluentd-daemon-management-with-docker}
+
+About`Fluentd`itself, see[the project webpage](http://www.fluentd.org/)and[its documents](http://docs.fluentd.org/).
+
+To use this logging driver, start the`fluentd`daemon on a host. We recommend that you use[the Fluentd docker image](https://hub.docker.com/r/fluent/fluentd/). This image is especially useful if you want to aggregate multiple container logs on each host then, later, transfer the logs to another Fluentd node to create an aggregate store.
+
+### Test container loggers {#test-container-loggers}
+
+1. Write a configuration file \(`test.conf`\) to dump input logs:
+
+   ```
+   <source>
+      @type forward
+   </source>
+
+   <match *>
+      @type stdout
+   </match>
+   ```
+
+2. Launch Fluentd container with this configuration file:
+
+   ```
+    $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
+   ```
+
+3. Start one or more containers with the`fluentd`logging driver:
+
+   ```
+    $ docker run --log-driver=fluentd your/application
+   ```
 
 
 
