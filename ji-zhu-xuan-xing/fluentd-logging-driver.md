@@ -8,5 +8,86 @@ In addition to the log message itself, the`fluentd`log driver sends the followin
 | `container_name` | The container name at the time it was started. If you use`docker rename`to rename a container, the new name is not reflected in the journal entries. |
 | `source` | `stdout`or`stderr` |
 
+The`docker logs`command is not available for this logging driver.
+
+## Usage
+
+Some options are supported by specifying`--log-opt`as many times as needed:
+
+* `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex`fluentdhost:24224`or`unix:///path/to/fluentd.sock`
+* `tag`: specify a tag for fluentd message, which interprets some markup, ex`{{.ID}}`,`{{.FullID}}`or`{{.Name}}docker.{{.ID}}`
+
+To use the`fluentd`driver as the default logging driver, set the`log-driver`and`log-opt`keys to appropriate values in the`daemon.json`file, which is located in`/etc/docker/`on Linux hosts or`C:\ProgramData\docker\config\daemon.json`on Windows Server. For more about +configuring Docker using`daemon.json`, see +[daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
+
+The following example sets the log driver to`fluentd`and sets the`fluentd-address`option.
+
+```
+{
+   "log-driver": "fluentd",
+   "log-opts": {
+     "fluentd-address": "fluentdhost:24224"
+   }
+ }
+```
+
+Restart Docker for the changes to take effect.
+
+To set the logging driver for a specific container, pass the`--log-driver`option to`docker run`:
+
+```
+docker run --log-driver=fluentd ...
+```
+
+Before using this logging driver, launch a Fluentd daemon. The logging driver connects to this daemon through`localhost:24224`by default. Use the`fluentd-address`option to connect to a different address.
+
+```
+docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+```
+
+If container cannot connect to the Fluentd daemon, the container stops immediately unless the**`fluentd-async-connect`**option is used.
+
+## Options
+
+Users can use the`--log-opt NAME=VALUE`flag to specify additional Fluentd logging driver options.
+
+### fluentd-address {#fluentd-address}
+
+By default, the logging driver connects to`localhost:24224`. Supply the`fluentd-address`option to connect to a different address.`tcp`\(default\) and`unix`sockets are supported.
+
+```
+docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
+docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
+
+```
+
+Two of the above specify the same address, because`tcp`is default.
+
+### tag {#tag}
+
+By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the[log tag option documentation](https://docs.docker.com/engine/admin/logging/log_tags/)for customizing the log tag format.
+
+### labels, env, and env-regex {#labels-env-and-env-regex}
+
+The`labels`and`env`options each take a comma-separated list of keys. If there is collision between`label`and`env`keys, the value of the`env`takes precedence. Both options add additional fields to the extra attributes of a logging message.
+
+The`env-regex`option is similar to and compatible with`env`. Its value is a regular expression to match logging-related environment variables. It is used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/).
+
+### fluentd-async-connect {#fluentd-async-connect}
+
+Docker connects to Fluentd in the background. Messages are buffered until the connection is established.
+
+### fluentd-buffer-limit {#fluentd-buffer-limit}
+
+The amount of data to buffer before flushing to disk. Defaults to the amount of RAM available to the container.
+
+### fluentd-retry-wait {#fluentd-retry-wait}
+
+How long to wait between retries. Defaults to 1 second.
+
+### fluentd-max-retries {#fluentd-max-retries}
+
+The maximum number of retries. Defaults to 10.
+
 
 
