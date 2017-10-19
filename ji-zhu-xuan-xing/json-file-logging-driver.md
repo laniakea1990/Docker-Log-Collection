@@ -1,4 +1,4 @@
-By default, Docker captures the standard output \(and standard error\) of all your containers, and writes them in files using the JSON format. The JSON format annotates each line with its origin \(`stdout`or`stderr`\) and its timestamp. Each log file contains information about only one container（每个log文件只包括一个容器的log信息）.
+By default, Docker captures the standard output \(and standard error\) of all your containers, and writes them in files using the JSON format（Docker 默认为所有容器记录容器中的标准输出、标准错误输出，以JSON格式）. The JSON format annotates each line with its origin \(`stdout`or`stderr`\) and its timestamp. Each log file contains information about only one container（每个log文件只包括一个容器的log信息）.
 
 ## Usage {#usage}
 
