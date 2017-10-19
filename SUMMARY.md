@@ -7,7 +7,6 @@
     * JSON File logging driver
     * Graylog Extended Format\(GELF\) logging driver
     * Syslog logging driver
-
     * Fluentd logging driver
     * Journald logging driver
   * [基于xxx的日志收集](ji-yu-xxx-de-ri-zhi-shou-ji.md)
