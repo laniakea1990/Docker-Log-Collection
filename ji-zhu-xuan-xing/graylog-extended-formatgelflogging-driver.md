@@ -8,7 +8,7 @@ In GELF, every log message is a dict with the following fields:
 * short and long version of the message
 * any custom fields you configure yourself
 
-## Usage {#usage}
+### Usage
 
 To use the`gelf`driver as the default logging driver, set the`log-driver`and`log-opt`keys to appropriate values in the`daemon.json`file, which is located in`/etc/docker/`on Linux hosts or`C:\ProgramData\docker\config\daemon.json`on Windows Server. For more about configuring Docker using`daemon.json`, see[daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
@@ -55,17 +55,17 @@ $ docker run \
 
 The`gelf`logging driver supports the following options:
 
-| Option | Required | Description | Example value |
-| :--- | :--- | :--- | :--- |
-| `gelf-address` | required | The address of the GELF server.`tcp`and`udp`are the only supported URI specifier and you must specify the port. | `--log-opt gelf-address=udp://192.168.0.42:12201` |
-| `gelf-compression-type` | optional | `UDP Only`The type of compression the GELF driver uses to compress each log message. Allowed values are`gzip`,`zlib`and`none`. The default is`gzip`. | `--log-opt gelf-compression-type=gzip` |
-| `gelf-compression-level` | optional | `UDP Only`The level of compression when`gzip`or`zlib`is the`gelf-compression-type`. An integer in the range of`-1`to`9`\(BestCompression\). Default value is 1 \(BestSpeed\). Higher levels provide more compression at lower speed. Either`-1`or`0`disables compression. | `--log-opt gelf-compression-level=2` |
-| `gelf-tcp-max-reconnect` | optional | `TCP Only`The maximum number of reconnection attempts when the connection drop. An positive integer. Default value is 3. | `--log-opt gelf-tcp-max-reconnect=3` |
-| `gelf-tcp-reconnect-delay` | optional | `TCP Only`The number of seconds to wait between reconnection attempts. A positive integer. Default value is 1. | `--log-opt gelf-tcp-reconnect-delay=1` |
-| `tag` | optional | A string that is appended to the`APP-NAME`in the`gelf`message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the[log tag option documentation](https://docs.docker.com/engine/admin/logging/log_tags/)for customizing the log tag format. | `--log-opt tag=mailer` |
-| `labels` | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the`extra`fields, prefixed by an underscore \(`_`\). Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt labels=production_status,geo` |
-| `env` | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the`extra`fields, prefixed by an underscore \(`_`\). Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt env=os,customer` |
-| `env-regex` | optional | Similar to and compatible with`env`. A regular expression to match logging-related environment variables. Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt env-regex=^(os | customer).` |
+|  | Option | Required | Description | Example value |
+| :--- | :--- | :--- | :--- | :--- |
+|  | `gelf-address` | required | The address of the GELF server.`tcp`and`udp`are the only supported URI specifier and you must specify the port. | `--log-opt gelf-address=udp://192.168.0.42:12201` |
+|  | `gelf-compression-type` | optional | `UDP Only`The type of compression the GELF driver uses to compress each log message. Allowed values are`gzip`,`zlib`and`none`. The default is`gzip`. | `--log-opt gelf-compression-type=gzip` |
+|  | `gelf-compression-level` | optional | `UDP Only`The level of compression when`gzip`or`zlib`is the`gelf-compression-type`. An integer in the range of`-1`to`9`\(BestCompression\). Default value is 1 \(BestSpeed\). Higher levels provide more compression at lower speed. Either`-1`or`0`disables compression. | `--log-opt gelf-compression-level=2` |
+|  | `gelf-tcp-max-reconnect` | optional | `TCP Only`The maximum number of reconnection attempts when the connection drop. An positive integer. Default value is 3. | `--log-opt gelf-tcp-max-reconnect=3` |
+|  | `gelf-tcp-reconnect-delay` | optional | `TCP Only`The number of seconds to wait between reconnection attempts. A positive integer. Default value is 1. | `--log-opt gelf-tcp-reconnect-delay=1` |
+|  | `tag` | optional | A string that is appended to the`APP-NAME`in the`gelf`message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the[log tag option documentation](https://docs.docker.com/engine/admin/logging/log_tags/)for customizing the log tag format. | `--log-opt tag=mailer` |
+|  | `labels` | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the`extra`fields, prefixed by an underscore \(`_`\). Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt labels=production_status,geo` |
+|  | `env` | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the`extra`fields, prefixed by an underscore \(`_`\). Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt env=os,customer` |
+| `env-regex` | optional | Similar to and compatible with`env`. A regular expression to match logging-related environment variables. Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | \`--log-opt env-regex=^\(os | customer\).\` |
 
 ### Examples {#examples}
 
@@ -77,8 +77,6 @@ $ docker run -dit \
              --log-opt gelf-address=udp://192.168.0.42:12201 \
              alpine sh
 ```
-
-
 
 
 
