@@ -49,11 +49,7 @@ docker run \
 
 The following logging options are supported as options for the`syslog`logging driver. They can be set as defaults in the`daemon.json`, by adding them as key-value pairs to the`log-opts`JSON array. They can also be set on a given container by adding a`--log-opt <key>=<value>`flag for each option when starting the container.
 
-| Option |
-| :--- |
-
-
-|  | Description | Example value |
+| Option | Description | Example value |
 | :--- | :--- | :--- |
 | `syslog-address` | The address of an external`syslog`server. The URI specifier may be`[tcp | udp|tcp+tls]://host:port`,`unix://path`, or`unixgram://path`. If the transport is`tcp`,`udp`, or`tcp+tls`, the default port is`514`. | `--log-opt syslog-address=tcp+tls://192.168.1.3:514`,`--log-opt syslog-address=unix:///tmp/syslog.sock` |
 | `syslog-facility` | The`syslog`facility to use. Can be the number or name for any valid`syslog`facility. See the[syslog documentation](https://tools.ietf.org/html/rfc5424#section-6.2.1). | `--log-opt syslog-facility=daemon` |
