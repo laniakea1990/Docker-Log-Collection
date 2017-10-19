@@ -1,6 +1,6 @@
 By default, Docker captures the standard output \(and standard error\) of all your containers, and writes them in files using the JSON format（Docker 默认为所有容器记录容器中的标准输出、标准错误输出，以JSON格式）. The JSON format annotates each line with its origin \(`stdout`or`stderr`\) and its timestamp. Each log file contains information about only one container（每个log文件只包括一个容器的log信息）.
 
-### Usage
+## Usage
 
 To use the`json-file`driver as the default logging driver, set the`log-driver`and`log-opt`keys to appropriate values in the`daemon.json`file, which is located in`/etc/docker/`on Linux hosts or`C:\ProgramData\docker\config\daemon.json`on Windows Server. For more about +configuring Docker using`daemon.json`, see +[daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
@@ -27,7 +27,7 @@ $ docker run \
       alpine echo hello world
 ```
 
-### Options {#options}
+## Options
 
 The`json-file`logging driver supports the following logging options:
 
@@ -39,7 +39,7 @@ The`json-file`logging driver supports the following logging options:
 | `env` | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | `--log-opt env=os,customer` |
 | `env-regex` | Similar to and compatible with`env`. A regular expression to match logging-related environment variables. Used for advanced[log tag options](https://docs.docker.com/engine/admin/logging/log_tags/). | --log-opt env-regex=^\(os customer\). |
 
-### Examples {#examples}
+## Examples
 
 This example starts an`alpine`container which can have a maximum of 3 log files no larger than 10 megabytes each.
 
