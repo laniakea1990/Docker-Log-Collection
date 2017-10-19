@@ -18,7 +18,7 @@ The format is defined in[RFC 5424](https://tools.ietf.org/html/rfc5424)and Docke
 2017-04-01T17:41:05.616647+08:00 a.vm {taskid:aa,version:} 1787791 {taskid:aa,version:}
 ```
 
-### Usage
+## Usage
 
 To use the`syslog`driver as the default logging driver, set the`log-driver`and`log-opt`keys to appropriate values in the`daemon.json`file, which is located in`/etc/docker/`on Linux hosts or`C:\ProgramData\docker\config\daemon.json`on Windows Server. For more about configuring Docker using`daemon.json`, see[daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
@@ -45,7 +45,7 @@ docker run \
       alpine echo hello world
 ```
 
-### Options
+## Options
 
 The following logging options are supported as options for the`syslog`logging driver. They can be set as defaults in the`daemon.json`, by adding them as key-value pairs to the`log-opts`JSON array. They can also be set on a given container by adding a`--log-opt <key>=<value>`flag for each option when starting the container.
 
