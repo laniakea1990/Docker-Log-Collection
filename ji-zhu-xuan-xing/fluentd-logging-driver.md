@@ -15,7 +15,7 @@ The`docker logs`command is not available for this logging driver.
 Some options are supported by specifying`--log-opt`as many times as needed:
 
 * `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex`fluentdhost:24224`or`unix:///path/to/fluentd.sock`
-* tag: specify a tag for fluentd message, which interprets some markup, ex {{.ID}}
+* tag: specify a tag for fluentd message, which interprets some markup
 
 To use the`fluentd`driver as the default logging driver, set the`log-driver`and`log-opt`keys to appropriate values in the`daemon.json`file, which is located in`/etc/docker/`on Linux hosts or`C:\ProgramData\docker\config\daemon.json`on Windows Server. For more about +configuring Docker using`daemon.json`, see +[daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
 
