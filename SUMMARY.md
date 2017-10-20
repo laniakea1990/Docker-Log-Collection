@@ -9,8 +9,10 @@
     * [Fluentd logging driver](ji-zhu-xuan-xing/fluentd-logging-driver.md)
     * [Journald logging driver](ji-zhu-xuan-xing/journald-logging-driver.md)
     * [Other online logging driver](ji-zhu-xuan-xing/other-online-logging-driver.md)
-  * [基于xxx的日志收集](ji-yu-xxx-de-ri-zhi-shou-ji.md)
+  * [基于fluentd的日志收集](ji-yu-xxx-de-ri-zhi-shou-ji.md)
 * [Docker容器的监控](dockerrong-qi-de-jian-kong.md)
   * [容器监控选型](dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.md)
   * [基于xxx的容器自动化监控实现](dockerrong-qi-de-jian-kong/ji-yu-xxx-de-rong-qi-zi-dong-hua-jian-kong-shi-xian.md)
+
+
 
