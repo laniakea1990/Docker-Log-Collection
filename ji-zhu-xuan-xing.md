@@ -88,5 +88,9 @@ kubernetes 目前暂未支持 pod 级别的 log-driver，但社区有讨论[方�
 
 此方案是最完美的，但需要对业务应日志模块进行更改。
 
+### 参考
+
+基于 Docker 容器应用的日志收集方案：[http://lonf.me/2017/07/13/Docker-Log-Collection/\#容器挂载宿主机目录作为应用日志输出目录](http://lonf.me/2017/07/13/Docker-Log-Collection/#容器挂载宿主机目录作为应用日志输出目录)
+
 
 
