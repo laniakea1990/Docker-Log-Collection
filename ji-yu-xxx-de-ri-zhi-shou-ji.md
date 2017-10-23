@@ -126,6 +126,35 @@ When a Setup is defined, the Router Engine already contains several rules to app
 
 Now we will expand the previous basic example and add more steps in our Setup to demonstrate how the Events cycle can be altered. We will do this through the new Filters implementation.
 
+#### Filters
+
+---
+
+A Filter aims to behave like a rule to either accept or reject an event. The following configuration adds a Filter definition:
+
+```
+<source>
+  @type http
+  port 8888
+  bind 0.0.0.0
+</source>
+
+<filter test.cycle>
+  @type grep
+  exclude1 action logout
+</filter>
+
+<match test.cycle>
+  @type stdout
+</match>
+```
+
+As you can see, the new Filter definition added will be a mandatory step before passing control to the Match section. The Filter basically accepts or rejects the Event based on it type and the defined rule. For our example we want to discard any user logout action, we only care about the login action. The way this is accomplished is by the Filter doing a grep that will exclude any message where the action key has the string value “logout”.
+
+From a Terminal, run the following two curl commands \(please note that each one contains a different action value\):
+
+
+
 ## 参考
 
 Docker Logging via EFK \(Elasticsearch + Fluentd + Kibana\) Stack with Docker Compose  
