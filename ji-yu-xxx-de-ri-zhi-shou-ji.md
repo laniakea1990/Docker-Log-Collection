@@ -58,7 +58,7 @@ We will use the [in\_http](https://docs.fluentd.org/v0.12/articles/in_http) and 
 </source>
 ```
 
-This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a \_Matching \_rule and a desired output that will just print the data that arrived on each incoming request to standard output:
+This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a  Matching  rule and a desired output that will just print the data that arrived on each incoming request to standard output:
 
 ```
 <match test.cycle>
