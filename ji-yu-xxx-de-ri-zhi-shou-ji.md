@@ -4,6 +4,8 @@ Fluentd is an open source data collector, which lets you unify the data collecti
 
 Before Fluentd：
 
+![](/assets/Before Fluentd.png)
+
 After Fluentd：
 
 ![](/assets/After Fluentd.png)
