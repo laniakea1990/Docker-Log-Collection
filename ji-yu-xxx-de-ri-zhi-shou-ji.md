@@ -167,7 +167,7 @@ Connection: Keep-Alive
 Content-length: 0
 ```
 
-Now looking at the Fluentd service output we can see that only the event with `action `equal to “login” is matched. The `logout `_Event _was discarded:
+Now looking at the Fluentd service output we can see that only the event with `action`equal to “login” is matched. The `logout`Event was discarded:
 
 ## 参考
 
