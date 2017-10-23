@@ -58,13 +58,48 @@ We will use the [in\_http](https://docs.fluentd.org/v0.12/articles/in_http) and 
 </source>
 ```
 
-This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a  Matching  rule and a desired output that will just print the data that arrived on each incoming request to standard output:
+This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a  _Matching  _rule and a desired output that will just print the data that arrived on each incoming request to standard output:
 
 ```
 <match test.cycle>
   @type stdout
 </match>
 ```
+
+The _Match _directive sets a rule that matches each _Incoming _event that arrives with a **Tag **equal to_ test.cycle _will use the _Output _plugin type called _stdout_. At this point we have an _Input _type, a _Match _and an _Output_. Let’s test the setup using _curl_:
+
+```
+$ curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:9880/test.cycle
+HTTP/1.1 200 OK
+Content-type: text/plain
+Connection: Keep-Alive
+Content-length: 0
+```
+
+On the Fluentd server side the output should look like this:
+
+```
+$ bin/fluentd -c in_http.conf
+2015-01-19 12:37:41 -0600 [info]: reading config file path="in_http.conf"
+2015-01-19 12:37:41 -0600 [info]: starting fluentd-0.12.3
+2015-01-19 12:37:41 -0600 [info]: using configuration file: <ROOT>
+  <source>
+    @type http
+    bind 0.0.0.0
+    port 8888
+  </source>
+  <match test.cycle>
+    @type stdout
+  </match>
+</ROOT>
+2015-01-19 12:37:41 -0600 [info]: adding match pattern="test.cycle" type="stdout"
+2015-01-19 12:37:41 -0600 [info]: adding source type="http"
+2015-01-19 12:39:57 -0600 test.cycle: {"action":"login","user":2}
+```
+
+### Event structure
+
+
 
 ## 参考
 
