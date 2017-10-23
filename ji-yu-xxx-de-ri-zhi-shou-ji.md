@@ -53,6 +53,8 @@ What is Fluentd?：[https://www.fluentd.org/architecture](https://www.fluentd.or
 
 Why Use Fluentd?：[https://www.fluentd.org/why](https://www.fluentd.org/why)
 
+Unified Logging Layer: Turning Data into Action：[https://www.fluentd.org/blog/unified-logging-layer](https://www.fluentd.org/blog/unified-logging-layer)
+
 Quickstart Guide：[https://docs.fluentd.org/v0.12/articles/quickstart](https://docs.fluentd.org/v0.12/articles/quickstart)
 
 kubernetes Logging Architecture：[https://kubernetes.io/docs/concepts/cluster-ad](https://kubernetes.io/docs/concepts/cluster-ad)
