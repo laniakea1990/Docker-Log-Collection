@@ -130,7 +130,7 @@ Now we will expand the previous basic example and add more steps in our Setup to
 
 ---
 
-A _Filter _aims to behave like a rule to either accept or reject an event. The following configuration adds a _Filter _definition:
+A \_Filter \_aims to behave like a rule to either accept or reject an event. The following configuration adds a \_Filter \_definition:
 
 ```
 <source>
@@ -149,9 +149,9 @@ A _Filter _aims to behave like a rule to either accept or reject an event. The f
 </match>
 ```
 
-As you can see, the new _Filter _definition added will be a mandatory step before passing control to the _Match _section. The _Filter _basically accepts or rejects the _Event _based on it type and the defined rule. For our example we want to discard any user `logout `action, we only care about the `login `action. The way this is accomplished is by the _Filter _doing a `grep `that will exclude any message where the `action `key has the string value “logout”.
+As you can see, the new Filter definition added will be a mandatory step before passing control to the Match section. The Filter basically accepts or rejects the Event based on it type and the defined rule. For our example we want to discard any user `logout`action, we only care about the `login`action. The way this is accomplished is by the Filter doing a `grep`that will exclude any message where the `action`key has the string value “logout”.
 
-From a Terminal, run the following two curl commands \(please note that each one contains a different action value\):
+From a Terminal, run the following two `curl `commands \(please note that each one contains a different `action `value\):
 
 ## 参考
 
