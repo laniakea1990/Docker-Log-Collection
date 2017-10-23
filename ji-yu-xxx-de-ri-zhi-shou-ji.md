@@ -18,7 +18,27 @@ After Fluentd：
 
 ### Unified Logging with JSON
 
-Fluentd tries to structure data as JSON as much as possible: this allows Fluentd to **unify **all facets of processing log data: collecting, filtering, buffering, and outputting logs across **multiple sources and destinations** \(Unified Logging Layer\). The downstream data processing is much easier with JSON, since it has enough structure to be accessible while retaining flexible schemas.
+Fluentd tries to structure data as JSON as much as possible: this allows Fluentd to **unify **all facets of processing log data: collecting, filtering, buffering, and outputting logs across **multiple sources and destinations** \([Unified Logging Layer](http://www.fluentd.org/blog/unified-logging-layer)\). The downstream data processing is much easier with JSON, since it has enough structure to be accessible while retaining flexible schemas.
+
+![](/assets/unified logging with json.png)
+
+### Pluggable Architecture
+
+Fluentd has a flexible plugin system that allows the community to extend its functionality. Our 500+ community-contributed plugins connect dozens of [data sources](https://www.fluentd.org/datasources) and [data outputs](https://www.fluentd.org/dataoutputs). By leveraging the plugins, you can start making better use of your logs right away.
+
+![](/assets/Pluggable Architecture.png)
+
+### Minimum Resources Required
+
+Fluentd is written in a combination of C language and Ruby, and requires very little system resource. The vanilla（简朴、平常） instance runs on 30-40MB of memory and can process 13,000 events/second/core. If you have more tighter memory requirement \(-450kb\), check out [Fluent Bit](http://fluentbit.io/), the lightweight forwarder for Fluentd.
+
+![](/assets/Minimum Resources Required.png)
+
+### Built-in Reliability
+
+Fluentd supports memory- and file-based buffering to prevent inter-node data loss. Fluentd also support robust failover and can be set up for high availability. [2,000+ data-driven companies](https://www.fluentd.org/testimonials) rely on Fluentd to differentiate their products and services through a better use and understanding of their log data.
+
+![](/assets/Built-in Reliability.png)
 
 ## 参考
 
