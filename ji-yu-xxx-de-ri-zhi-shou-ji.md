@@ -36,7 +36,7 @@ Fluentd is written in a combination of C language and Ruby, and requires very li
 
 ### Built-in Reliability
 
-Fluentd supports memory- and file-based buffering to prevent inter-node data loss. Fluentd also support robust failover and can be set up for high availability. [2,000+ data-driven companies](https://www.fluentd.org/testimonials) rely on Fluentd to differentiate their products and services through a better use and understanding of their log data.
+Fluentd supports memory and file-based buffering to prevent inter-node data loss. Fluentd also support robust failover and can be set up for high availability. [2,000+ data-driven companies](https://www.fluentd.org/testimonials) rely on Fluentd to differentiate their products and services through a better use and understanding of their log data.
 
 ![](/assets/Built-in Reliability.png)
 
