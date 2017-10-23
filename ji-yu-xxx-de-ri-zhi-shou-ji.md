@@ -130,7 +130,7 @@ Now we will expand the previous basic example and add more steps in our Setup to
 
 ---
 
-A \_Filter \_aims to behave like a rule to either accept or reject an event. The following configuration adds a \_Filter \_definition:
+A Filter aims to behave like a rule to either accept or reject an event. The following configuration adds a Filter definition:
 
 ```
 <source>
@@ -168,6 +168,32 @@ Content-length: 0
 ```
 
 Now looking at the Fluentd service output we can see that only the event with `action`equal to “login” is matched. The `logout`Event was discarded:
+
+```
+$ bin/fluentd -c in_http.conf
+2015-01-19 12:37:41 -0600 [info]: reading config file path="in_http.conf"
+2015-01-19 12:37:41 -0600 [info]: starting fluentd-0.12.4
+2015-01-19 12:37:41 -0600 [info]: using configuration file: <ROOT>
+<source>
+  @type http
+  bind 0.0.0.0
+  port 9880
+</source>
+<filter test.cycle>
+  @type grep
+  exclude1 action logout
+</filter>
+<match test.cycle>
+  @type stdout
+</match>
+</ROOT>
+2015-01-19 12:37:41 -0600 [info]: adding filter pattern="test.cycle" type="grep"
+2015-01-19 12:37:41 -0600 [info]: adding match pattern="test.cycle" type="stdout"
+2015-01-19 12:37:41 -0600 [info]: adding source type="http"
+2015-01-27 01:27:11 -0600 test.cycle: {"action":"login","user":2}
+```
+
+As you can see, the Events follow a step-by-step cycle where they are processed in order from top to bottom. The new engine on Fluentd allows integrating as many Filters as needed. Considering that the configuration file might grow and start getting a bit complex, a new feature called Labels has been added that aims to help manage this complexity.
 
 ## 参考
 
