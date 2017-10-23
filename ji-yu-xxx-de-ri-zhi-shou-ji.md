@@ -195,6 +195,60 @@ $ bin/fluentd -c in_http.conf
 
 As you can see, the Events follow a step-by-step cycle where they are processed in order from top to bottom. The new engine on Fluentd allows integrating as many Filters as needed. Considering that the configuration file might grow and start getting a bit complex, a new feature called Labels has been added that aims to help manage this complexity.
 
+#### Labels
+
+---
+
+The Labels implementation aims to reduce configuration file complexity and allows to define new Routing sections that do not follow the top to bottom order, instead acting like linked references. Using the previous example we will modify the setup as follows:
+
+```
+<source>
+  @type http
+  bind 0.0.0.0
+  port 8880
+  @label @STAGING
+</source>
+
+<filter test.cycle>
+  @type grep
+  exclude1 action login
+</filter>
+
+<label @STAGING>
+  <filter test.cycle>
+    @type grep
+    exclude1 action logout
+  </filter>
+
+  <match test.cycle>
+    @type stdout
+  </match>
+</label>
+```
+
+This new configuration contains a `@label` key on the `source `indicating that any further steps take place on the STAGING Label section. Every Event reported on the Source is routed by the Routing engine and continue processing on STAGING, skipping the old filter definition.
+
+#### Buffers
+
+---
+
+In this example, we use `stdout `non-buffered output, but in production buffered outputs are often necessary, e.g. `forward`, `mongodb`, `s3 `and etc. Buffered output plugins store received events into buffers and are then written out to a destination after meeting flush conditions. Using buffered output you don’t see recieved events immediately, unlike `stdout `non-buffered output.
+
+Buffers are important for reliability and throughput. See Output and Buffer articles.
+
+### Execution unit
+
+This section describes the internal implementation.
+
+Fluentd’s events are processed on input plugin thread by default. For example, if you have `in_tail -> filter_grep -> out_stdout` pipeline, this pipeline is executed on in\_tail’s thread. The important point is `filter_grep` and `out_stdout` plugins don’t have own thread for processing.
+
+For Buffered Output, output plugin has own threads for flushing buffer. For example, if you have `in_tail -> filter_grep -> out_forward` pipeline, this pipeline is executed on in\_tail’s thread and out\_forward’s flush thread. in\_tail’s thread processes events until events are written into buffer. Buffer flush and its error handling is the output responsibility. This de-couples the input/output and this model has merits, separate responsibilities, easy error handling, good performance.
+
+### Conclusion
+
+Once the events are reported by the Fluentd engine on the Source they can be processed step by step or inside a referenced Label, with any Event being filtered out at any moment. The new Routing engine behavior aims to provide more flexibility and simplifies the processing before events reach the Output plugin.  
+
+
 ## 参考
 
 Docker Logging via EFK \(Elasticsearch + Fluentd + Kibana\) Stack with Docker Compose  
