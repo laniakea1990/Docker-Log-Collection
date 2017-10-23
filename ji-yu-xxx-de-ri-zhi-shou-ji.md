@@ -52,6 +52,8 @@ Docker Logging：[https://www.fluentd.org/guides/recipes/docker-logging](https:/
 
 What is Fluentd?：[https://www.fluentd.org/architecture](https://www.fluentd.org/architecture)
 
+Why Use Fluentd?：[https://www.fluentd.org/why](https://www.fluentd.org/why)
+
 Quickstart Guide  
 ：[https://docs.fluentd.org/v0.12/articles/quickstart](https://docs.fluentd.org/v0.12/articles/quickstart)
 
