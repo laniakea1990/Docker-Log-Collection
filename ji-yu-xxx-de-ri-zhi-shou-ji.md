@@ -1,4 +1,4 @@
-## Fluentd Architecture Overview
+# Fluentd Architecture Overview
 
 Fluentd is an open source log collector, which lets you unify the data collection and consumption for a better use and understanding of data.
 
@@ -8,11 +8,11 @@ Fluentd’s scalability has been proven in the field: its largest user currently
 
 Fluentd是一个免费，而且完全开源的日志管理工具，简化了日志的收集、处理、和存储，你可以不需要再维护编写特殊的日志处理脚本。Fluentd的性能已经在各领域得到了证明：目前最大的用户从5000+服务器收集日志，每天5TB的数据量，在高峰时间处理50,000条信息每秒。
 
-Before Fluentd：
+**Before Fluentd：**
 
 ![](/assets/Before Fluentd.png)
 
-After Fluentd：
+**After Fluentd：**
 
 ### ![](/assets/After Fluentd.png)
 
@@ -39,6 +39,11 @@ Fluentd is written in a combination of C language and Ruby, and requires very li
 Fluentd supports memory- and file-based buffering to prevent inter-node data loss. Fluentd also support robust failover and can be set up for high availability. [2,000+ data-driven companies](https://www.fluentd.org/testimonials) rely on Fluentd to differentiate their products and services through a better use and understanding of their log data.
 
 ![](/assets/Built-in Reliability.png)
+
+# Life of a Fluentd event
+
+  
+
 
 ## 参考
 
