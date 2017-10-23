@@ -42,7 +42,32 @@ Fluentd supports memory- and file-based buffering to prevent inter-node data los
 
 # Life of a Fluentd event
 
-  
+The following content describe a global overview of how events are processed by Fluentd using examples. It covers the complete cycle including Setup, Inputs, Filters, Matches and Labels.
+
+### Basic Setup
+
+The configuration files is the fundamental piece to connect all things together, as it allows to define which _Inputs_or listeners [Fluentd](http://fluentd.org/) will have and set up common matching rules to route the _Event _data to a specific _Output_.
+
+We will use the [in\_http](https://docs.fluentd.org/v0.12/articles/in_http) and the [out\_stdout](https://docs.fluentd.org/v0.12/articles/out_stdout) plugins as examples to describe the events cycle. The following is a basic definition on the configuration file to specify an _http _input, for short: we will be listening for **HTTP Requests**:
+
+```
+<source>
+  @type http
+  port 8888
+  bind 0.0.0.0
+</source>
+```
+
+This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a _Matching _rule and a desired output that will just print the data that arrived on each incoming request to standard output:
+
+```
+<match test.cycle>
+  @type stdout
+</match>
+```
+
+
+
 
 
 ## 参考
