@@ -151,7 +151,23 @@ A \_Filter \_aims to behave like a rule to either accept or reject an event. The
 
 As you can see, the new Filter definition added will be a mandatory step before passing control to the Match section. The Filter basically accepts or rejects the Event based on it type and the defined rule. For our example we want to discard any user `logout`action, we only care about the `login`action. The way this is accomplished is by the Filter doing a `grep`that will exclude any message where the `action`key has the string value “logout”.
 
-From a Terminal, run the following two `curl `commands \(please note that each one contains a different `action `value\):
+From a Terminal, run the following two `curl`commands \(please note that each one contains a different `action`value\):
+
+```
+$ curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:8880/test.cycle
+HTTP/1.1 200 OK
+Content-type: text/plain
+Connection: Keep-Alive
+Content-length: 0
+
+$ curl -i -X POST -d 'json={"action":"logout","user":2}' http://localhost:8880/test.cycle
+HTTP/1.1 200 OK
+Content-type: text/plain
+Connection: Keep-Alive
+Content-length: 0
+```
+
+Now looking at the Fluentd service output we can see that only the event with `action `equal to “login” is matched. The `logout `_Event _was discarded:
 
 ## 参考
 
