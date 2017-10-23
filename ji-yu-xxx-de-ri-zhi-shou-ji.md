@@ -108,6 +108,27 @@ A Fluentd event consists of a tag, time and record.
 The input plugin is responsible for generating Fluentd events from specified data sources.  
 For example,`in_tail`generates events from text lines. If you have the following line in apache logs:
 
+```
+192.168.0.1 - - [28/Feb/2013:12:00:00 +0900] "GET / HTTP/1.1" 200 777
+```
+
+the following event is generated:
+
+```
+tag: apache.access # set by configuration
+time: 1362020400   # 28/Feb/2013:12:00:00 +0900
+record: {"user":"-","method":"GET","code":200,"size":777,"host":"192.168.0.1","path":"/"}
+```
+
+### Processing Events
+
+When a _Setup _is defined, the _Router Engine _already contains several rules to apply for different input data. Internally an _Event _will pass through a chain of procedures that may alter the _Events _cycle.
+
+Now we will expand the previous basic example and add more steps in our _Setup _to demonstrate how the _Events _cycle can be altered. We will do this through the new _Filters _implementation.
+
+  
+
+
 ## 参考
 
 Docker Logging via EFK \(Elasticsearch + Fluentd + Kibana\) Stack with Docker Compose  
