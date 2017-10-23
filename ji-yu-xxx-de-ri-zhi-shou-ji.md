@@ -122,12 +122,9 @@ record: {"user":"-","method":"GET","code":200,"size":777,"host":"192.168.0.1","p
 
 ### Processing Events
 
-When a _Setup _is defined, the _Router Engine _already contains several rules to apply for different input data. Internally an _Event _will pass through a chain of procedures that may alter the _Events _cycle.
+When a Setup is defined, the Router Engine already contains several rules to apply for different input data. Internally an Event will pass through a chain of procedures that may alter the Events cycle.
 
-Now we will expand the previous basic example and add more steps in our _Setup _to demonstrate how the _Events _cycle can be altered. We will do this through the new _Filters _implementation.
-
-  
-
+Now we will expand the previous basic example and add more steps in our Setup to demonstrate how the Events cycle can be altered. We will do this through the new Filters implementation.
 
 ## 参考
 
