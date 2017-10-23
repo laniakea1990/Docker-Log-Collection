@@ -58,7 +58,7 @@ We will use the [in\_http](https://docs.fluentd.org/v0.12/articles/in_http) and 
 </source>
 ```
 
-This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a  \_Matching  \_rule and a desired output that will just print the data that arrived on each incoming request to standard output:
+This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a  Matching  rule and a desired output that will just print the data that arrived on each incoming request to standard output:
 
 ```
 <match test.cycle>
@@ -66,7 +66,7 @@ This definition specifies that a HTTP server will be listening on TCP port 8888.
 </match>
 ```
 
-The _Match \_directive sets a rule that matches each \_Incoming \_event that arrives with a **Tag **equal to_ test.cycle _will use the \_Output \_plugin type called \_stdout_. At this point we have an _Input \_type, a \_Match \_and an \_Output_. Let’s test the setup using _curl_:
+The _Match directive sets a rule that matches each Incoming event that arrives with a **Tag **equal to_ test.cycle _will use the Output plugin type called stdout_. At this point we have an _Input type, a Match and an Output_. Let’s test the setup using _curl_:
 
 ```
 $ curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:9880/test.cycle
