@@ -226,13 +226,13 @@ The Labels implementation aims to reduce configuration file complexity and allow
 </label>
 ```
 
-This new configuration contains a `@label` key on the `source `indicating that any further steps take place on the STAGING Label section. Every Event reported on the Source is routed by the Routing engine and continue processing on STAGING, skipping the old filter definition.
+This new configuration contains a `@label` key on the `source`indicating that any further steps take place on the STAGING Label section. Every Event reported on the Source is routed by the Routing engine and continue processing on STAGING, skipping the old filter definition.
 
 #### Buffers
 
 ---
 
-In this example, we use `stdout `non-buffered output, but in production buffered outputs are often necessary, e.g. `forward`, `mongodb`, `s3 `and etc. Buffered output plugins store received events into buffers and are then written out to a destination after meeting flush conditions. Using buffered output you don’t see recieved events immediately, unlike `stdout `non-buffered output.
+In this example, we use `stdout`non-buffered output, but in production buffered outputs are often necessary, e.g. `forward`, `mongodb`, `s3`and etc. Buffered output plugins store received events into buffers and are then written out to a destination after meeting flush conditions. Using buffered output you don’t see recieved events immediately, unlike `stdout`non-buffered output.
 
 Buffers are important for reliability and throughput. See Output and Buffer articles.
 
@@ -246,10 +246,9 @@ For Buffered Output, output plugin has own threads for flushing buffer. For exam
 
 ### Conclusion
 
-Once the events are reported by the Fluentd engine on the Source they can be processed step by step or inside a referenced Label, with any Event being filtered out at any moment. The new Routing engine behavior aims to provide more flexibility and simplifies the processing before events reach the Output plugin.  
+Once the events are reported by the Fluentd engine on the Source they can be processed step by step or inside a referenced Label, with any Event being filtered out at any moment. The new Routing engine behavior aims to provide more flexibility and simplifies the processing before events reach the Output plugin.
 
-
-## 参考
+# 参考
 
 Docker Logging via EFK \(Elasticsearch + Fluentd + Kibana\) Stack with Docker Compose  
 ：[https://docs.fluentd.org/v0.12/articles/docker-logging-efk-compose](https://docs.fluentd.org/v0.12/articles/docker-logging-efk-compose)
