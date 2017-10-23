@@ -46,9 +46,9 @@ The following content describe a global overview of how events are processed by 
 
 ### Basic Setup
 
-The configuration files is the fundamental piece to connect all things together, as it allows to define which _Inputs_or listeners [Fluentd](http://fluentd.org/) will have and set up common matching rules to route the _Event _data to a specific _Output_.
+The configuration files is the fundamental piece to connect all things together, as it allows to define which _Inputs or listeners _[_Fluentd_](http://fluentd.org/)_ will have and set up common matching rules to route the  Event  data to a specific  Output_.
 
-We will use the [in\_http](https://docs.fluentd.org/v0.12/articles/in_http) and the [out\_stdout](https://docs.fluentd.org/v0.12/articles/out_stdout) plugins as examples to describe the events cycle. The following is a basic definition on the configuration file to specify an _http _input, for short: we will be listening for **HTTP Requests**:
+We will use the [in\_http](https://docs.fluentd.org/v0.12/articles/in_http) and the [out\_stdout](https://docs.fluentd.org/v0.12/articles/out_stdout) plugins as examples to describe the events cycle. The following is a basic definition on the configuration file to specify an http input, for short: we will be listening for **HTTP Requests**:
 
 ```
 <source>
@@ -58,17 +58,13 @@ We will use the [in\_http](https://docs.fluentd.org/v0.12/articles/in_http) and 
 </source>
 ```
 
-This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a _Matching _rule and a desired output that will just print the data that arrived on each incoming request to standard output:
+This definition specifies that a HTTP server will be listening on TCP port 8888. Now let’s define a \_Matching \_rule and a desired output that will just print the data that arrived on each incoming request to standard output:
 
 ```
 <match test.cycle>
   @type stdout
 </match>
 ```
-
-
-
-
 
 ## 参考
 
