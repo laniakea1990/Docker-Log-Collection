@@ -23,9 +23,7 @@ Having a framework is useful when comparing solutions. I’ve somewhat arbitrari
 
 ![](/assets/A seven-layer model for comparing monitoring solutions.png)
 
-
-
-* **Host Agents **– The host agent represents the “arms and legs” of the monitoring solution, extracting time-series data from various sources like APIs and log files. Agents are usually installed on each cluster host \(either on-premises or cloud-resident\) and are themselves often packaged as Docker containers for ease of deployment and management.
+* **Host Agents **– The host agent represents the “arms and legs” of the monitoring solution, extracting time-series data from various sources like APIs and log files. Agents are usually installed on each cluster host \(either on-premises or cloud-resident\) and are themselves often packaged as Docker containers for ease of deployment and management.
 * **Data gathering framework **– While single-host metrics are sometimes useful, administrators likely need a consolidated view of all hosts and applications. Monitoring solutions typically have some mechanism to gather data from each host and persist it in a shared data store.
 * **Datastore **– The datastore may be a traditional database, but more commonly it is some form of scalable, distributed database optimized for time-series data comprised of key-value pairs. Some solutions have native datastores while others leverage pluggable open-source datastores.
 * **Aggregation engine **– The problem with storing raw metrics from dozens of hosts is that the amount of data can become overwhelming. Monitoring frameworks often provide data aggregation capabilities, periodically crunching raw data into consolidated metrics \(like hourly or daily summaries\), purging old data that is no longer needed, or re-factoring data in some fashion to support anticipated queries and analysis.
@@ -33,7 +31,56 @@ Having a framework is useful when comparing solutions. I’ve somewhat arbitrari
 * **Visualization tier **– Monitoring tools usually have a visualization tier where users can interact with a web interface to generate charts, formulate queries and, in some cases, define alerting conditions. The visualization tier may be tightly coupled with the filtering and analysis functionality, or it may be separate depending on the solution.
 * **Alerting & Notification **– Few administrators have time to sit and monitor graphs all day. Another common feature of monitoring systems is an alerting subsystem that can provide notification if pre-defined thresholds are met or exceeded.
 
+Beyond understanding how each monitoring solution implements the basic capabilities above, users will be interested in other aspects of the monitoring solution as well:
+
+* Completeness of the solution
+* Ease of installation and configuration
+* Details about the web UI
+* Ability to forward alerts to external services
+* Level of community support and engagement \(for open-source projects\)
+* Availability in Rancher Catalog
+* Support for monitoring non-container environments and apps
+* Native Kubernetes support \(Pods, Services, Namespaces, etc.\)
+* Extensibility \(APIs, other interfaces\)
+* Deployment model \(self-hosted, cloud\)
+* Cost, if applicable
+
+# Comparing Our 10 Monitoring Solutions
+
+The diagram below shows a high-level view of how our 10 monitoring solutions map to our seven-layer model, which components implement the capabilities at each layer, and where the components reside. Each framework is complicated, and this is a simplification to be sure, but it provides a useful view of which component does what. Read on for additional detail.
+
+![](/assets/10 monitoring solutions at a glance.png)
+
+Additional attributes of each monitoring solution are presented in a summary fashion below. For some solutions, there are multiple deployment options, so the comparisons become a little more nuanced.
+
+![](/assets/Additional attributes of each monitoring solution.png)
+
+# Looking at Each Solution in More Depth
+
+### DOCKER STATS
+
+[https://www.docker.com/docker-community](https://www.docker.com/docker-community)
+
+At the most basic level, Docker provides built-in command monitoring for Docker hosts via the[`docker stats`](https://docs.docker.com/engine/reference/commandline/stats/)command. Administrators can query the Docker daemon and obtain detailed, real-time information about container resource consumption metrics, including CPU and memory usage, disk and network I/O, and the number of running processes. Docker stats leverages the[Docker Engine API](https://docs.docker.com/engine/api/)to retrieve this information. Docker stats has no notion of history, and it can only monitor a single host, but clever administrators can write scripts to gather metrics from multiple hosts.
+
+Docker stats is of limited use on its own, but`docker stats`data can be combined with other data sources like[Docker log files](https://docs.docker.com/engine/reference/commandline/logs/)and[`docker events`](https://docs.docker.com/engine/reference/commandline/events/)to feed higher level monitoring services. Docker only knows about metrics reported by a single host, so Docker stats is of limited use monitoring Kubernetes or Swarm clusters with multi-host application services. With no visualization interface, no aggregation, no datastore, and no ability to collect data from multiple hosts, Docker stats does not fare well against our seven-layer model. Because[Rancher](http://rancher.com/)runs on Docker, basic`docker stats`functionality is automatically available to Rancher users.
+
+### CADVISOR
+
+[https://github.com/google/cadvisor](https://github.com/google/cadvisor)
+
+cAdvisor \(container advisor\) is an [open-source project](https://github.com/google/cadvisor) that like Docker stats provides users with resource usage information about running containers. cAdvisor was originally developed by Google to manage its [lmctfy](https://en.wikipedia.org/wiki/Lmctfy) containers, but it now supports Docker as well. It is implemented as a daemon process that collects, aggregates, processes, and exports information about running containers.
+
+cAdvisor exposes a web interface and can generate multiple graphs but, like Docker stats, it monitors only a single Docker host. It can be installed on a Docker machine either as a container or natively on the Docker host itself.
+
+cAdvisor itself only retains information for 60 seconds. cAdvisor needs to be configured to log data to an external datastore. Datastores commonly used with cAdvisor data include [Prometheus](https://prometheus.io/) and [InfluxDB](https://github.com/influxdata/influxdb). While cAdvisor itself is not a complete monitoring solution, it is often a component of other monitoring solutions. Before Rancher version 1.2 \(late December\), Rancher embedded cAdvisor in the`rancher-agent`\(for internal use by Rancher\), but this is no longer the case. More recent versions of Rancher use Docker stats to gather information exposed through the Rancher UI because they can do so with less overhead.
+
+Administrators can easily deploy cAdvisor on Rancher, and it is part of several comprehensive monitoring stacks, but cAdvisor is no longer part of Rancher itself.  
+
+
   
+
+
   
 
 
