@@ -77,22 +77,6 @@ cAdvisor itself only retains information for 60 seconds. cAdvisor needs to be co
 
 Administrators can easily deploy cAdvisor on Rancher, and it is part of several comprehensive monitoring stacks, but cAdvisor is no longer part of Rancher itself.
 
-### SCOUT
-
-[http://scoutapp.com](http://scoutapp.com/)
-
-[Scout](http://scoutapp.com/) is a Colorado-based company that provides a cloud-based application and database-monitoring service aimed mainly at Ruby and Elixir environments. One of many use cases it supports is monitoring Docker containers leveraging its existing monitoring and alerting framework.
-
-We mention Scout because it was covered in previous comparisons as a solution for monitoring Docker. Scout provides comprehensive data gathering, filtering, and monitoring functionality with flexible alerts and integrations to third-party alerting services.
-
-The team at Scout provides guidance on how to write scripts using Ruby and [StatsD](https://github.com/etsy/statsd/wiki) to tap the [Docker Stats API](http://blog.scoutapp.com/articles/2015/06/22/monitoring-docker-containers-from-scratch) \(above\), the Docker Event API, and relay metrics to Scout for monitoring.  They’ve also packaged a`docker-scout`container, available on Docker Hub \([`scoutapp/docker-scout`](https://hub.docker.com/r/scoutapp/docker-scout/)\), that makes installing and configuring the scout agent simple. The ease of use will depend on whether users configure the StatsD agent themselves or leverage the packaged`docker-scout`container.
-
-As a hosted cloud service, ScoutApp can save a lot of headaches when it comes to getting a container-monitoring solution up and running quickly. If you’re deploying Ruby apps or running the database environments supported by Scout, it probably makes good sense to consolidate your Docker, application, and database-level monitoring and use the Scout solution.
-
-Users might want to watch out for a few things, however. At most service levels, the platform only allows for 30 days of data retention, and rather than being priced month per monitored host, standard packages are priced per transaction ranging from $99 to $299 per month. The solution out of the box is not Kubernetes-aware, and extracts and relays a limited set of metrics. Also, while`docker-scout`is available on Docker Hub, development is by Pingdom, and there have been only minor updates in the last two years to the agent component.
-
-Scout is not natively supported in Rancher but, because it is a cloud service, it is easy to deploy and use, particularly when the container-based agent is used. At present, the`docker-scout`agent is not in the Rancher Catalog.
-
 ### PROMETHEUS
 
 [http://prometheus.io](https://prometheus.io/)
@@ -109,7 +93,23 @@ Because Prometheus is comprised of many components, and exporters need to be sel
 
 While not quite as refined as tools like Datadog or Sysdig, Prometheus offers similar functionality, extensive third-party software integrations, and best-in-class cloud monitoring solutions. Prometheus is aware of Kubernetes and other container management frameworks. An entry in the Rancher Catalog developed by [Infinityworks](https://www.infinityworks.com/) makes getting started with Prometheus easier when Cattle is used as the Rancher orchestrator but, because of the wide variety of configuration options, administrators need to spend some time to get it properly installed and configured.
 
-Infinityworks have contributed useful add-ons including the[`prometheus-rancher-exporter`](https://github.com/infinityworks/prometheus-rancher-exporter) that exposes the health of Rancher stacks and hosts obtained from the Rancher API to a Prometheus compatible endpoint. For administrators who don’t mind going to a little more effort, Prometheus is one of the most capable monitoring solutions and should be on your shortlist for consideration.
+Infinityworks have contributed useful add-ons including the[`prometheus-rancher-exporter`](https://github.com/infinityworks/prometheus-rancher-exporter) that exposes the health of Rancher stacks and hosts obtained from the Rancher API to a Prometheus compatible endpoint. For administrators who don’t mind going to a little more effort, Prometheus is one of the most capable monitoring solutions and should be on your shortlist for consideration.
 
+### HEAPSTER
 
+[https://github.com/kubernetes/heapster](https://github.com/kubernetes/heapster)
+
+Heapster is another solution that often comes up related to monitoring-container environments. Heapster is a project under the Kubernetes umbrella that helps enable container-cluster monitoring and performance analysis. Heapster specifically supports Kubernetes and OpenShift and is most relevant for Rancher users running Kuberenetes as their orchestrator. It is not typically be used with Cattle or Swarm.
+
+People often describe Heapster as a monitoring solution, but it is more precisely a “cluster-wide aggregator of monitoring and event data.” Heapster is never deployed alone; rather, it is a part of a stack of open-source components. The Heapster monitoring stack is typically comprised of:
+
+* **A data gathering tier **– e.g., cAdvisor accessed with the`kubelet`on each cluster host
+* **Pluggable storage backends **– e.g., ElasticSearch, InfluxDB, Kafka, Graphite, or roughly [a dozen others](https://github.com/kubernetes/heapster/blob/master/docs/sink-owners.md)
+* **A data visualization component **– Grafana or Google Cloud Monitoring
+
+A popular stack is comprised of Heapster, InfluxDB, and Grafana, and this combination is installed by default on Rancher when users choose to deploy Kubernetes. Note that these components are considered add-ons to Kubernetes, so they may not be automatically deployed with all Kubernetes distributions.
+
+One of the reasons that InfluxDB is popular is that it is one of the few data backends that supports both Kubernetes events and metrics, allowing for more comprehensive monitoring of Kubernetes.
+
+Note that Heapster does not natively support alerting or services related to Application Performance Management \(APM\) found in commercial cloud-based solutions or Prometheus. Users that need monitoring services can supplement their Heapster installation using [Hawkular](https://github.com/hawkular), but this is not automatically configured as part of the Rancher deployment and will require extra user effort.
 
