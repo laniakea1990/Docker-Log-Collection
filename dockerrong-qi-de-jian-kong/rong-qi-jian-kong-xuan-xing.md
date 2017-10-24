@@ -47,7 +47,7 @@ Beyond understanding how each monitoring solution implements the basic capabilit
 
 # Comparing Our 10 Monitoring Solutions
 
-The diagram below shows a high-level view of how our 10 monitoring solutions map to our seven-layer model, which components implement the capabilities at each layer, and where the components reside. Each framework is complicated, and this is a simplification to be sure, but it provides a useful view of which component does what. Read on for additional detail.
+The diagram below shows a high-level view of how our 10 monitoring solutions map to our seven-layer model, which components implement the capabilities at each layer, and where the components reside. Each framework is complicated, and this is a simplification to be sure, but it provides a useful view of which component does what. Read on for additional detail.
 
 ![](/assets/10 monitoring solutions at a glance.png)
 
@@ -61,9 +61,9 @@ Additional attributes of each monitoring solution are presented in a summary fas
 
 [https://www.docker.com/docker-community](https://www.docker.com/docker-community)
 
-At the most basic level, Docker provides built-in command monitoring for Docker hosts via the[`docker stats`](https://docs.docker.com/engine/reference/commandline/stats/)command. Administrators can query the Docker daemon and obtain detailed, real-time information about container resource consumption metrics, including CPU and memory usage, disk and network I/O, and the number of running processes. Docker stats leverages the[Docker Engine API](https://docs.docker.com/engine/api/)to retrieve this information. Docker stats has no notion of history, and it can only monitor a single host, but clever administrators can write scripts to gather metrics from multiple hosts.
+At the most basic level, Docker provides built-in command monitoring for Docker hosts via the[`docker stats`](https://docs.docker.com/engine/reference/commandline/stats/)command. Administrators can query the Docker daemon and obtain detailed, real-time information about container resource consumption metrics, including CPU and memory usage, disk and network I/O, and the number of running processes. Docker stats leverages the [Docker Engine API](https://docs.docker.com/engine/api/) to retrieve this information. Docker stats has no notion of history, and it can only monitor a single host, but clever administrators can write scripts to gather metrics from multiple hosts.
 
-Docker stats is of limited use on its own, but`docker stats`data can be combined with other data sources like[Docker log files](https://docs.docker.com/engine/reference/commandline/logs/)and[`docker events`](https://docs.docker.com/engine/reference/commandline/events/)to feed higher level monitoring services. Docker only knows about metrics reported by a single host, so Docker stats is of limited use monitoring Kubernetes or Swarm clusters with multi-host application services. With no visualization interface, no aggregation, no datastore, and no ability to collect data from multiple hosts, Docker stats does not fare well against our seven-layer model. Because[Rancher](http://rancher.com/)runs on Docker, basic`docker stats`functionality is automatically available to Rancher users.
+Docker stats is of limited use on its own, but`docker stats`data can be combined with other data sources like [Docker log files](https://docs.docker.com/engine/reference/commandline/logs/) and[`docker events`](https://docs.docker.com/engine/reference/commandline/events/)to feed higher level monitoring services. Docker only knows about metrics reported by a single host, so Docker stats is of limited use monitoring Kubernetes or Swarm clusters with multi-host application services. With no visualization interface, no aggregation, no datastore, and no ability to collect data from multiple hosts, Docker stats does not fare well against our seven-layer model. Because [Rancher](http://rancher.com/) runs on Docker, basic`docker stats`functionality is automatically available to Rancher users.
 
 ### CADVISOR
 
@@ -75,16 +75,26 @@ cAdvisor exposes a web interface and can generate multiple graphs but, like Dock
 
 cAdvisor itself only retains information for 60 seconds. cAdvisor needs to be configured to log data to an external datastore. Datastores commonly used with cAdvisor data include [Prometheus](https://prometheus.io/) and [InfluxDB](https://github.com/influxdata/influxdb). While cAdvisor itself is not a complete monitoring solution, it is often a component of other monitoring solutions. Before Rancher version 1.2 \(late December\), Rancher embedded cAdvisor in the`rancher-agent`\(for internal use by Rancher\), but this is no longer the case. More recent versions of Rancher use Docker stats to gather information exposed through the Rancher UI because they can do so with less overhead.
 
-Administrators can easily deploy cAdvisor on Rancher, and it is part of several comprehensive monitoring stacks, but cAdvisor is no longer part of Rancher itself.  
+Administrators can easily deploy cAdvisor on Rancher, and it is part of several comprehensive monitoring stacks, but cAdvisor is no longer part of Rancher itself.
 
+### SCOUT
+
+[http://scoutapp.com](http://scoutapp.com/)
+
+[Scout](http://scoutapp.com/) is a Colorado-based company that provides a cloud-based application and database-monitoring service aimed mainly at Ruby and Elixir environments. One of many use cases it supports is monitoring Docker containers leveraging its existing monitoring and alerting framework.
+
+We mention Scout because it was covered in previous comparisons as a solution for monitoring Docker. Scout provides comprehensive data gathering, filtering, and monitoring functionality with flexible alerts and integrations to third-party alerting services.
+
+The team at Scout provides guidance on how to write scripts using Ruby and [StatsD](https://github.com/etsy/statsd/wiki) to tap the [Docker Stats API](http://blog.scoutapp.com/articles/2015/06/22/monitoring-docker-containers-from-scratch) \(above\), the Docker Event API, and relay metrics to Scout for monitoring.  They’ve also packaged a`docker-scout`container, available on Docker Hub \([`scoutapp/docker-scout`](https://hub.docker.com/r/scoutapp/docker-scout/)\), that makes installing and configuring the scout agent simple. The ease of use will depend on whether users configure the StatsD agent themselves or leverage the packaged`docker-scout`container.
+
+As a hosted cloud service, ScoutApp can save a lot of headaches when it comes to getting a container-monitoring solution up and running quickly. If you’re deploying Ruby apps or running the database environments supported by Scout, it probably makes good sense to consolidate your Docker, application, and database-level monitoring and use the Scout solution.
+
+Users might want to watch out for a few things, however. At most service levels, the platform only allows for 30 days of data retention, and rather than being priced month per monitored host, standard packages are priced per transaction ranging from $99 to $299 per month. The solution out of the box is not Kubernetes-aware, and extracts and relays a limited set of metrics. Also, while`docker-scout`is available on Docker Hub, development is by Pingdom, and there have been only minor updates in the last two years to the agent component.
+
+Scout is not natively supported in Rancher but, because it is a cloud service, it is easy to deploy and use, particularly when the container-based agent is used. At present, the`docker-scout`agent is not in the Rancher Catalog.
 
   
 
-
-  
-
-
-# 
 
 
 
