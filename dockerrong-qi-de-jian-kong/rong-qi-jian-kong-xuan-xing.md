@@ -85,16 +85,31 @@ Administrators can easily deploy cAdvisor on Rancher, and it is part of several 
 
 We mention Scout because it was covered in previous comparisons as a solution for monitoring Docker. Scout provides comprehensive data gathering, filtering, and monitoring functionality with flexible alerts and integrations to third-party alerting services.
 
-The team at Scout provides guidance on how to write scripts using Ruby and [StatsD](https://github.com/etsy/statsd/wiki) to tap the [Docker Stats API](http://blog.scoutapp.com/articles/2015/06/22/monitoring-docker-containers-from-scratch) \(above\), the Docker Event API, and relay metrics to Scout for monitoring.  They’ve also packaged a`docker-scout`container, available on Docker Hub \([`scoutapp/docker-scout`](https://hub.docker.com/r/scoutapp/docker-scout/)\), that makes installing and configuring the scout agent simple. The ease of use will depend on whether users configure the StatsD agent themselves or leverage the packaged`docker-scout`container.
+The team at Scout provides guidance on how to write scripts using Ruby and [StatsD](https://github.com/etsy/statsd/wiki) to tap the [Docker Stats API](http://blog.scoutapp.com/articles/2015/06/22/monitoring-docker-containers-from-scratch) \(above\), the Docker Event API, and relay metrics to Scout for monitoring.  They’ve also packaged a`docker-scout`container, available on Docker Hub \([`scoutapp/docker-scout`](https://hub.docker.com/r/scoutapp/docker-scout/)\), that makes installing and configuring the scout agent simple. The ease of use will depend on whether users configure the StatsD agent themselves or leverage the packaged`docker-scout`container.
 
 As a hosted cloud service, ScoutApp can save a lot of headaches when it comes to getting a container-monitoring solution up and running quickly. If you’re deploying Ruby apps or running the database environments supported by Scout, it probably makes good sense to consolidate your Docker, application, and database-level monitoring and use the Scout solution.
 
-Users might want to watch out for a few things, however. At most service levels, the platform only allows for 30 days of data retention, and rather than being priced month per monitored host, standard packages are priced per transaction ranging from $99 to $299 per month. The solution out of the box is not Kubernetes-aware, and extracts and relays a limited set of metrics. Also, while`docker-scout`is available on Docker Hub, development is by Pingdom, and there have been only minor updates in the last two years to the agent component.
+Users might want to watch out for a few things, however. At most service levels, the platform only allows for 30 days of data retention, and rather than being priced month per monitored host, standard packages are priced per transaction ranging from $99 to $299 per month. The solution out of the box is not Kubernetes-aware, and extracts and relays a limited set of metrics. Also, while`docker-scout`is available on Docker Hub, development is by Pingdom, and there have been only minor updates in the last two years to the agent component.
 
 Scout is not natively supported in Rancher but, because it is a cloud service, it is easy to deploy and use, particularly when the container-based agent is used. At present, the`docker-scout`agent is not in the Rancher Catalog.
 
-  
+### PROMETHEUS
 
+[http://prometheus.io](https://prometheus.io/)
+
+Prometheus is a popular, open-source monitoring and alerting toolkit originally built at SoundCloud. It is now a CNCF project, the company’s second hosted project after Kubernetes. As a toolkit, it is substantially different from monitoring solutions described thus far. A first major difference is that rather being offered as a cloud service, Prometheus is modular and self-hosted, meaning that users deploy Prometheus on their clusters whether on-premises or cloud-resident.
+
+Rather than pushing data to a cloud service, Prometheus installs on each Docker host and pulls or “scrapes” data from an extensive variety of [exporters](https://prometheus.io/docs/instrumenting/exporters/) available to Prometheus via HTTP. Some exporters are officially maintained as a part of the Prometheus GitHub project, while others are external contributions. Some projects expose Prometheus metrics natively so that exporters are not needed. Prometheus is highly extensible. Users need to mind the number of exporters and configure polling intervals appropriately depending on the amount of data they are collecting.
+
+The Prometheus server retrieves time-series data from various sources and stores data in its internal datastore. Prometheus provides features like service discovery, a separate push gateway for specific types of metrics and has an embedded query language \(PromQL\) that excels at querying multidimensional data. It also has an embedded web UI and API. The web UI in Prometheus provides good functionality but relies on users knowing PromQL, so some sites prefer to use Grafana as an interface for charting and viewing cluster-related metrics.
+
+Prometheus has a discrete Alert Manager with a distinct UI that can work with data stored in Prometheus. Like other alert managers, it works with a variety of external alerting services including email, Hipchat, Pagerduty, \#Slack, OpsGenie, VictorOps, and others.
+
+Because Prometheus is comprised of many components, and exporters need to be selected and installed depending on the services monitored, it is more difficult to install; but as a free offering, the price is right.
+
+While not quite as refined as tools like Datadog or Sysdig, Prometheus offers similar functionality, extensive third-party software integrations, and best-in-class cloud monitoring solutions. Prometheus is aware of Kubernetes and other container management frameworks. An entry in the Rancher Catalog developed by [Infinityworks](https://www.infinityworks.com/) makes getting started with Prometheus easier when Cattle is used as the Rancher orchestrator but, because of the wide variety of configuration options, administrators need to spend some time to get it properly installed and configured.
+
+Infinityworks have contributed useful add-ons including the[`prometheus-rancher-exporter`](https://github.com/infinityworks/prometheus-rancher-exporter) that exposes the health of Rancher stacks and hosts obtained from the Rancher API to a Prometheus compatible endpoint. For administrators who don’t mind going to a little more effort, Prometheus is one of the most capable monitoring solutions and should be on your shortlist for consideration.
 
 
 
