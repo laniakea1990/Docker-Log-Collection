@@ -65,6 +65,10 @@ At the most basic level, Docker provides built-in command monitoring for Docker 
 
 Docker stats is of limited use on its own, but`docker stats`data can be combined with other data sources like [Docker log files](https://docs.docker.com/engine/reference/commandline/logs/) and[`docker events`](https://docs.docker.com/engine/reference/commandline/events/)to feed higher level monitoring services. Docker only knows about metrics reported by a single host, so Docker stats is of limited use monitoring Kubernetes or Swarm clusters with multi-host application services. With no visualization interface, no aggregation, no datastore, and no ability to collect data from multiple hosts, Docker stats does not fare well against our seven-layer model. Because [Rancher](http://rancher.com/) runs on Docker, basic`docker stats`functionality is automatically available to Rancher users.
 
+我将讨论的第一个工具是Docker本身。你可能不知道Docker客户端已经提供了基本的命令行工具来检查容器的资源消耗。想要查看容器统计信息只需运行`docker stats [CONTAINER_NAME]`。这样就可以查看每个容器的CPU利用率、内存的使用量以及可用内存总量。请注意，如果你没有限制容器内存，那么该命令将显示您的主机的内存总量。但它并不意味着你的每个容器都能访问那么多的内存。另外，还可以看容器通过网络发送和接收的数据总量。
+
+![](/assets/docker-stats.png)
+
 ### CADVISOR
 
 [https://github.com/google/cadvisor](https://github.com/google/cadvisor)
