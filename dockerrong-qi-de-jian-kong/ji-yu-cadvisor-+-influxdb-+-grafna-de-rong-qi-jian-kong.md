@@ -6,5 +6,11 @@ cAdivsor虽然能采集到监控数据，也有很好的界面展示，但是并
 
 ![](/assets/CAdvisor_Influxdb_Grafana.png)
 
+这三个工具的安装也非常简单，可以直接启动三个容器快速安装。如下所示：  
+![](/assets/install_CAdvisor_influxdb_grafana.png)
+
+在上面的安装步骤中，先是启动influxdb容器，然后进行到容器内部配置一个数据库给cadvisor专用，然后再启动cadvisor容器，容器启动的时候指定把数据存储到influxdb中，最后启动grafana容器，在展示页面里配置grafana的数据源为influxdb，再定制要展示的数据，一个简单的跨多主机的监控系统就构建成功了。下图为Grafana的界面：
+
+![](/assets/Grafana_CAdvisor.png)  
 
 
