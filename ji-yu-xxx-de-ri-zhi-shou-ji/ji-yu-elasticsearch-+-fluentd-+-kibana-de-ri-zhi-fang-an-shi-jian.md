@@ -57,7 +57,17 @@ services:
 
 `logging`section \(check [Docker Compose documentation](https://docs.docker.com/compose/compose-file/#/logging) \) of`web`container specifies [Docker Fluentd Logging Driver](https://docs.docker.com/engine/admin/logging/fluentd/) as a default  container logging driver. All of the logs from`web`container will be automatically forwarded to host:port specified by`fluentd-address`.
 
+## Step 1: Prepare Fluentd image with your Config + Plugin
+
+Then, please prepare`fluentd/Dockerfile`with the following content, to use Fluentd’s [official Docker image](https://hub.docker.com/r/fluent/fluentd/) and additionally install Elasticsearch plugin.
+
+```
+# fluentd/Dockerfile
+FROM fluent/fluentd:v0.12-debian
+RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-rdoc", "--no-ri", "--version", "1.9.2"]
+```
+
+
+
 .
-
-
 
