@@ -15,6 +15,7 @@ influxdb有一些重要概念：database，timestamp，field key， field value�
 * database：数据库，如之前创建的数据库 cadvisor。InfluxDB不是CRUD数据库，更像是一个CR-ud数据库，它优先考虑的是增加和读取数据而不是更新删除数据的性能。
 * timestamp：时间戳，因为InfluxDB是时序数据库，它的数据里面都有一列名为time的列，存储记录生成时间。如 rx\_bytes 中的 time 列，存储的就是时间戳。
 * fields: 包括field key，field value和field set几个概念。field key是字段名，在rx\_bytes表中，字段名为 value。field value是字段值，如 `17858781633`，`1359398`等。而field set是字段集合，由field key和field value构成，如rx\_bytes中的字段集合如下：
+
   ```
   value = 17858781633
   value = 1359398
@@ -24,14 +25,9 @@ influxdb有一些重要概念：database，timestamp，field key， field value�
 
 * tags：包括tag key， tag value， tag set几个概念。tag key是标签名，在rx\_bytes表中，`container_name`, `game`, `machine`, `namespace`，`type`都是标签。tag value就是标签的值了。tag set就是标签集合，由tag key和tag value构成。**InfluxDB中标签是可选的，不过标签是有索引的**。如果查询中经常用的字段，建议设置为标签而不是字段。标签相当于传统数据库中有索引的列。
 
-* 
-
-
-
+* retention policy: 数据保留策略，cadvisor的保留策略为`cadvisor_retention`，存储30天，副本为1。一个数据库可以有多个保留策略。
 
 ### 基于docker-compose.yml文件安装**InfluxDB、influxDB、Grafana**
 
 InfluxDB是一个开源的分布式时序数据库，使用GO语言开发。特别适合用于时序类型数据存储，CAdvisor搜集的容器监控数据用InfluxDB存储就很合适，而且CAdvisor本身就提供了InfluxDB的支持，集成起来非常方便。
-
-
 
