@@ -10,6 +10,7 @@
     * [Journald logging driver](ji-zhu-xuan-xing/journald-logging-driver.md)
     * [Other online logging driver](ji-zhu-xuan-xing/other-online-logging-driver.md)
   * [基于fluentd的日志收集](ji-yu-xxx-de-ri-zhi-shou-ji.md)
+    * [基于ElasticSearch+Fluentd+Kibana的日志方案实践](ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.md)
 * [Docker容器的监控](dockerrong-qi-de-jian-kong.md)
   * [容器监控选型](dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.md)
   * [基于CAdvisor的容器监控](dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.md)
