@@ -43,5 +43,63 @@ InfluxDB作为时序数据库，相比传统数据库它有很多特色功能，
 
 ### 基于docker-compose.yml文件安装**InfluxDB、influxDB、Grafana**
 
+基于下面的docker-compose.yml文件安装这三个组件：
+
+```
+version: '2'
+
+services:
+ influxdbData:
+  image: busybox
+  volumes:
+    - /disk4/influxdb:/data
+
+ influxdb:
+  image: influxdb
+  restart: always
+  environment:
+    - PRE_CREATE_DB=cadvisor
+  ports:
+    - "8083:8083"
+    - "8086:8086"
+  expose:
+    - "8090"
+    - "8099"
+  volumes_from:
+    - "influxdbData"
+
+ cadvisor:
+  image: google/cadvisor
+  links:
+    - influxdb:influxsrv
+  command: -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influxsrv:8086
+  restart: always
+  ports:
+    - "8080:8080"
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+
+ grafana:
+  image: grafana/grafana
+  restart: always
+  links:
+    - influxdb:influxsrv
+  ports:
+    - "3001:3000"
+  environment:
+    - HTTP_USER=admin
+    - HTTP_PASS=admin
+    - INFLUXDB_HOST=influxsrv
+    - INFLUXDB_PORT=8086
+    - INFLUXDB_NAME=cadvisor
+    - INFLUXDB_USER=root
+    - INFLUXDB_PASS=root
+```
+
+
+
 
 
