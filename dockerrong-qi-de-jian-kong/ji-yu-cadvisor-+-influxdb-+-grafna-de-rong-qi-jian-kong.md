@@ -153,9 +153,5 @@ time                Description Vendor Version com.docker.compose.config-hash   
 
 接下来需要做的就是在Grafana中配置InfluxDB数据源，登录[http://localhost:3001](http://localhost:3001) ：
 
-![](/assets/Grafana-InfluxDB.png)
-
-
-
-
+![](/assets/Grafana-InfluxDB.png)InfluxDB数据源配置完成后，创建dashboard，选择上面创建的数据源，配置相应的指标监控panel。
 
