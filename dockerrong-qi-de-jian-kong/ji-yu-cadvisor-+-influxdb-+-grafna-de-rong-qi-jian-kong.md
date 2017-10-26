@@ -10,7 +10,7 @@ cAdivsor虽然能采集到监控数据，也有很好的界面展示，但是并
 
 ### InfluxDB重要概念
 
-influxdb有一些重要概念：database，timestamp，field key， field value， field set，tag key，tag value，tag set，measurement， retention policy ，series，point，下面简要说明一下：
+InfluxDB是一个开源的分布式时序数据库，使用GO语言开发。特别适合用于时序类型数据存储，CAdvisor搜集的容器监控数据用InfluxDB存储就很合适，而且CAdvisor本身就提供了InfluxDB的支持，集成起来非常方便。influxdb有一些重要概念：database，timestamp，field key， field value， field set，tag key，tag value，tag set，measurement， retention policy ，series，point，下面简要说明一下：
 
 * database：数据库，如之前创建的数据库 cadvisor。InfluxDB不是CRUD数据库，更像是一个CR-ud数据库，它优先考虑的是增加和读取数据而不是更新删除数据的性能。
 * timestamp：时间戳，因为InfluxDB是时序数据库，它的数据里面都有一列名为time的列，存储记录生成时间。如 rx\_bytes 中的 time 列，存储的就是时间戳。
@@ -27,7 +27,21 @@ influxdb有一些重要概念：database，timestamp，field key， field value�
 
 * retention policy: 数据保留策略，cadvisor的保留策略为`cadvisor_retention`，存储30天，副本为1。一个数据库可以有多个保留策略。
 
+* measurement：类似传统数据看的表，是字段，标签以及time列的集合。
+
+* series：共享同一个retention policy，measurement以及tag set的数据集合。
+
+* point：同一个series中具有相同时间的字段集合，相当于SQL中的数据行。
+
+### InfluxDB的特色功能
+
+InfluxDB作为时序数据库，相比传统数据库它有很多特色功能，比如独有的一些特色函数和连续查询功能。关于InfluxDB的更多详细内容可以参见[官方文档](https://docs.influxdata.com/influxdb/v1.3/)。
+
+* 特色函数：有一些聚合类函数如FILL\(\)用于填充数据, INTEGRAL\(\)计算字段所覆盖的曲面面积，SPREAD\(\)计算表中最大与最小值的差值， STDDEV\(\)计算字段标准差，MEAN\(\)计算平均值, MEDIAN\(\)计算中位数，SAMPLE\(\)函数用于随机取样以及DERIVATIVE\(\)计算数据变化比等。
+
+* 连续查询：InfluxDB独有的连续查询功能可以定期的缩小取样，就原数据库的数据缩小取样后存储到指定的新的数据库或者新的数据表中，在历史数据统计整理时特别有用。
+
 ### 基于docker-compose.yml文件安装**InfluxDB、influxDB、Grafana**
 
-InfluxDB是一个开源的分布式时序数据库，使用GO语言开发。特别适合用于时序类型数据存储，CAdvisor搜集的容器监控数据用InfluxDB存储就很合适，而且CAdvisor本身就提供了InfluxDB的支持，集成起来非常方便。
+
 
