@@ -4,7 +4,7 @@ CAdvisor是一个容器资源监控工具，包括容器的内存，CPU，网络
 
 cAdivsor虽然能采集到监控数据，也有很好的界面展示，但是并不能显示跨主机的监控数据，当主机多的情况，需要有一种集中式的管理方法将数据进行汇总展示，最经典的方案就是 cAdvisor+ Influxdb+grafana，可以在每台主机上运行一个cAdvisor容器负责数据采集，再将采集后的数据都存到时序型数据库influxdb中，再通过图形展示工具grafana定制展示面板。结构如下：
 
-![](/assets/CAdvisor_Influxdb_Grafana.png)
+![](/assets/CAdvisor-Grafana-InfluxDB.png)
 
 这三个工具的安装也非常简单，可以直接启动三个容器快速安装。
 
@@ -148,8 +148,12 @@ name: rx_bytes
 time                Description Vendor Version com.docker.compose.config-hash                                   com.docker.compose.container-number com.docker.compose.oneoff com.docker.compose.project com.docker.compose.service com.docker.compose.version com.docker.stack.namespace com.docker.swarm.node.id com.docker.swarm.service.id com.docker.swarm.service.name com.docker.swarm.task.id com.docker.swarm.task.name container_name                machine      maintainer value version
 ----                ----------- ------ ------- ------------------------------                                   ----------------------------------- ------------------------- -------------------------- -------------------------- -------------------------- -------------------------- ------------------------ --------------------------- ----------------------------- ------------------------ -------------------------- --------------                -------      ---------- ----- -------
 1509002311661632942                                                                                                                                                                                                                                                                                                                                                                                                              /system.slice/lightdm.service 2c8aeeb3c07c            0     
-1509002311538573198                            71cb7f4e7596e83e7e8cf7e44c2d14a44edc08e0f23161baa9dfaa582c4dfa81 1                                   False                     logcollectiondocker        web                        1.16.1                                                                                                                                                                                       logcollectiondocker_web_1     2c8aeeb3c07c            7803  
+1509002311538573198                            71cb7f4e7596e83e7e8cf7e44c2d14a44edc08e0f23161baa9dfaa582c4dfa81 1                                   False                     logcollectiondocker        web                        1.16.1                                                                                                                                                                                       logcollectiondocker_web_1     2c8aeeb3c07c            7803
 ```
+
+接下来需要做的就是在Grafana中配置InfluxDB数据源，登录[http://localhost:3001](http://localhost:3001) ：
+
+![](/assets/Grafana-InfluxDB.png)
 
 
 
