@@ -99,7 +99,22 @@ services:
     - INFLUXDB_PASS=root
 ```
 
+为了存储CAdvisor的数据，需要预先创建好数据库并配置用户名密码以及相关权限。InfluxDB提供了一套influx的CLI，跟mysql client很相似。另外，InfluxDB的数据库操作语言InfluxQL跟SQL语法也基本一致。进入InfluxDB容器，运行下面命令创建数据库和用户密码并授权。
 
+```
+root@ubuntu:~/workspace/docker-monitor/cadvisor-influxdb-grafana# docker exec -it c4d /bin/bash
+root@c4ddd2985191:/# influx
+Connected to http://localhost:8086 version 1.3.6
+InfluxDB shell version: 1.3.6
+> create database cadvisor  ## 创建数据库cadvisor
+> show databases           
+name: databases
+name
+----
+_internal
+cadvisor
+> CREATE USER testuser WITH PASSWORD 'testpwd' WITH ALL PRIVILEGES
+```
 
 
 
