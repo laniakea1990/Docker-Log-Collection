@@ -113,8 +113,45 @@ name
 ----
 _internal
 cadvisor
-> CREATE USER testuser WITH PASSWORD 'testpwd' WITH ALL PRIVILEGES
+> use cadvisor
+> CREATE USER 'root' WITH PASSWORD 'root' WITH ALL PRIVILEGES
 ```
+
+配置成功后，可以看到CAdvisor会通过InfluxDB的HTTP API自动创建好数据表，并将数据发送到InfluxDB存储起来。
+
+```
+root@c4ddd2985191:/# influx
+Connected to http://localhost:8086 version 1.3.6
+InfluxDB shell version: 1.3.6
+> use cadvisor
+Using database cadvisor
+> show measurements # 显示数据表与SQL略有不同，用的是关键字measurements
+name: measurements
+name
+----
+cpu_usage_per_cpu
+cpu_usage_system
+cpu_usage_total
+cpu_usage_user
+fs_limit
+fs_usage
+load_average
+memory_usage
+memory_working_set
+rx_bytes
+rx_errors
+tx_bytes
+tx_errors
+
+> select * from rx_bytes order by time desc limit 2
+name: rx_bytes
+time                Description Vendor Version com.docker.compose.config-hash                                   com.docker.compose.container-number com.docker.compose.oneoff com.docker.compose.project com.docker.compose.service com.docker.compose.version com.docker.stack.namespace com.docker.swarm.node.id com.docker.swarm.service.id com.docker.swarm.service.name com.docker.swarm.task.id com.docker.swarm.task.name container_name                machine      maintainer value version
+----                ----------- ------ ------- ------------------------------                                   ----------------------------------- ------------------------- -------------------------- -------------------------- -------------------------- -------------------------- ------------------------ --------------------------- ----------------------------- ------------------------ -------------------------- --------------                -------      ---------- ----- -------
+1509002311661632942                                                                                                                                                                                                                                                                                                                                                                                                              /system.slice/lightdm.service 2c8aeeb3c07c            0     
+1509002311538573198                            71cb7f4e7596e83e7e8cf7e44c2d14a44edc08e0f23161baa9dfaa582c4dfa81 1                                   False                     logcollectiondocker        web                        1.16.1                                                                                                                                                                                       logcollectiondocker_web_1     2c8aeeb3c07c            7803  
+```
+
+
 
 
 
