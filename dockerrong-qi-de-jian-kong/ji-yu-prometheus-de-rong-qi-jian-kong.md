@@ -25,3 +25,11 @@ The Prometheus ecosystem consists of multiple components, many of which are opti
 
 Most Prometheus components are written in [Go](https://golang.org/), making them easy to build and deploy as static binaries.
 
+## Architecture
+
+This diagram illustrates the architecture of Prometheus and some of its ecosystem components:
+
+
+
+
+
