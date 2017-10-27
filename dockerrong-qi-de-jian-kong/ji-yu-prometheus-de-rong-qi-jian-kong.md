@@ -23,7 +23,5 @@ The Prometheus ecosystem consists of multiple components, many of which are opti
 * an [alertmanager](https://github.com/prometheus/alertmanager) to handle alerts
 * various support tools
 
-Most Prometheus components are written in[Go](https://golang.org/), making them easy to build and deploy as static binaries.
-
-
+Most Prometheus components are written in [Go](https://golang.org/), making them easy to build and deploy as static binaries.
 
