@@ -44,7 +44,7 @@ push gateway 用来支持 short-lived jobs
 
 ## 多维数据模型
 
-本节讨论 Prometheus 的核心，多维数据模型。我们先来看一个例子。
+本节讨论 Prometheus 的核心，多维数据模型。我们先来看一个例子。
 
 比如要监控容器`webapp1`的内存使用情况，最传统和典型的方法是定义一个指标`container_memory_usage_bytes_webapp1`来记录`webapp1`的内存使用数据。假如每1分钟取一次样，那么在数据库里就会有类似下面的记录。
 
@@ -68,8 +68,7 @@ Prometheus 只需要定义一个全局的指标`container_memory_usage_bytes`，
 
 比如对于前面 webapp1 的三条取样数据，转换成 Prometheus 多维数据将变成：
 
-![](/assets/webapp1-2.png)后面三列`container_name`、`image`、`env`就是数据的三个维度。想象一下，如果不同`env`（prod、test、dev），不同`image`（mycom/webapp:1.2、mycom/webapp:1.3）的容器，它们的内存使用数据中标注了这三个维度信息，那么将能满足很多业务需求，比如：  
-
+![](/assets/webapp1-2.png)后面三列`container_name`、`image`、`env`就是数据的三个维度。想象一下，如果不同`env`（prod、test、dev），不同`image`（mycom/webapp:1.2、mycom/webapp:1.3）的容器，它们的内存使用数据中标注了这三个维度信息，那么将能满足很多业务需求，比如：
 
 1. 计算 webapp2 的平均内存使用情况：avg\(container\_memory\_usage\_bytes{container\_name=“webapp2”}\)
 
@@ -85,7 +84,83 @@ Prometheus 只需要定义一个全局的指标`container_memory_usage_bytes`，
 
 ## 基于Prometheus的容器监控部署
 
+基于CAdvisor的exporter，Prometheus的部署使用docker-compose.yml文件将多个容器统一部署：
 
+```
+version: '2'
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - ./data/prometheus:/prometheus
+    command:
+      - '-config.file=/etc/prometheus/prometheus.yml'
+      - '-storage.local.path=/prometheus'
+      - '-alertmanager.url=http://alertmanager:9093'
+      - '-web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '-web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    links:
+      - cadvisor:cadvisor
+      - alertmanager:alertmanager
+    depends_on:
+      - cadvisor
+    restart: always
+
+  node-exporter:
+    image: prom/node-exporter
+    volumes:
+      -  /proc:/host/proc
+      -  /sys:/host/sys
+      -  /:/rootfs
+    command: 
+      - '--path.procfs=/host/proc' 
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    ports:
+      - 9100:9100
+    restart: always
+
+  alertmanager:
+    image: prom/alertmanager
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    restart: always
+    command:
+      - '-config.file=/etc/alertmanager/config.yml'
+      - '-storage.path=/alertmanager'
+  cadvisor:
+    image: google/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8011:8080
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3009:3000
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    env_file:
+      - config.monitoring
+```
+
+执行docker-compose up -d ，该方案采用的也是使用grafana作为可视化组件，可以在浏览器中通过访问[http://localhost:3009](http://localhost:3009/) 进入Grafana主页,  然后配置Prometheus的数据源，并导入一个docker-dashboard.json的dashboard模板，可以看到如下图的监控效果图：
+
+![](/assets/432.png)![](/assets/32.png)
 
 ## Components
 
