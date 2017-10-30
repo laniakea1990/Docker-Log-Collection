@@ -44,6 +44,47 @@ push gateway 用来支持 short-lived jobs
 
 ## 多维数据模型
 
+本节讨论 Prometheus 的核心，多维数据模型。我们先来看一个例子。
+
+比如要监控容器`webapp1`的内存使用情况，最传统和典型的方法是定义一个指标`container_memory_usage_bytes_webapp1`来记录`webapp1`的内存使用数据。假如每1分钟取一次样，那么在数据库里就会有类似下面的记录。
+
+![](/assets/webapp1-1.png)如果现在需求发生了点变化，我们需要知道所有 webapp 容器的内存使用情况。如果还是采用前面的方法，就不得不增加新的指标`container_memory_usage_bytes_webapp2`、`container_memory_usage_bytes_webapp3`…
+
+像 Graphite 这类监控方案采用了更为优雅的层次化数据模型。为了满足上面的需求，Graphite 会定义指标`container.memory_usage_bytes.webapp1`、`container.memory_usage_bytes.webapp2`、`container.memory_usage_bytes.webapp3`…
+
+然后就可以用`container.memory_usage_bytes.webapp*`获取所有的 webapp 的内存使用数据。
+
+此外，Graphite 还支持`sum()`等函数对指标进行计算和处理，比如`sum(container.memory_usage_bytes.webapp*)`可以得到所有 webapp 容器占用的总内存量。
+
+目前为止问题处理得都很好。但客户总是会提出更多的需求：现在不仅要按容器名字统计内存使用量，还要按镜像来统计；或者想对比一下某一组容器在生产环境和测试环境中对内存使用的不同情况。
+
+当然你可以说：只要定义更多的指标就能满足这些需求。比 如`container.memory_usage_bytes.image1.webapp1`、`container.memory_usage_bytes.webapp1.prod`等。
+
+但问题在于我们没办法提前预知客户要用这些数据回答怎样的问题，所以我们没办法提前定义好所有的指标。
+
+下面来看看 Prometheus 的解决方案。
+
+Prometheus 只需要定义一个全局的指标`container_memory_usage_bytes`，然后通过添加不同的维度数据来满足不同的业务需求。
+
+比如对于前面 webapp1 的三条取样数据，转换成 Prometheus 多维数据将变成：
+
+![](/assets/webapp1-2.png)后面三列`container_name`、`image`、`env`就是数据的三个维度。想象一下，如果不同`env`（prod、test、dev），不同`image`（mycom/webapp:1.2、mycom/webapp:1.3）的容器，它们的内存使用数据中标注了这三个维度信息，那么将能满足很多业务需求，比如：  
+
+
+1. 计算 webapp2 的平均内存使用情况：avg\(container\_memory\_usage\_bytes{container\_name=“webapp2”}\)
+
+2. 计算运行 mycom/webapp:1.3 镜像的所有容器内存使用总量：sum\(container\_memory\_usage\_bytes{image=“mycom/webapp:1.3”}\)
+
+3. 统计不同运行环境中 webapp 容器内存使用总量：sum\(container\_memory\_usage\_bytes{container\_name=~“webapp”}\) by \(env\)
+
+这里只列了几个例子，不过已经能够说明 Prometheus 数据模型的优势了：
+
+1. 通过维度对数据进行说明，附加更多的业务信息，进而满足不同业务的需求。同时维度是可以动态添加的，比如再给数据加上一个`user`维度，就可以按用户来统计容器内存使用量了。
+
+2. Prometheus 丰富的查询语言能够灵活、充分地挖掘数据的价值。前面示例中的 avg、sum、by 只是查询语言中很小的一部分功能，已经为我们展现了 Prometheus 对多维数据进行分片、聚合的强大能力。
+
+## 基于Prometheus的容器监控部署
+
 
 
 ## Components
