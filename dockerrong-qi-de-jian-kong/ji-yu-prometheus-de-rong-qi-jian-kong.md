@@ -42,6 +42,10 @@ push gateway 用来支持 short-lived jobs
 
 也许一些熟悉其他监控方案的同学看了 Prometheus 的架构会不以为然，“这些功能 Zabbix、Graphite、Nagios 这类监控系统也都有，没什么特别的啊！”。Prometheus 最大的亮点和先进性是它的多维数据模型，下面将做介绍。
 
+## 多维数据模型
+
+
+
 ## Components
 
 The Prometheus ecosystem consists of multiple components, many of which are optional:
