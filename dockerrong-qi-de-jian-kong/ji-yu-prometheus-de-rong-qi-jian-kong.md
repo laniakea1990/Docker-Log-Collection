@@ -1,4 +1,4 @@
-Prometheus是一款开源的系统监控和告警工具，最初由SoundCloud推出。自2012成立以来，许多公司和组织都采用了prometheus，项目有一个非常活跃的开发者和用户社区。Prometheus现在是一个独立的开源项目，它的维护独立于任何公司。2016年，Prometheus在Kubernetes之后第二个加入到 [Cloud Native Computing Foundation](https://cncf.io/) 项目。
+Prometheus是一款开源的系统监控和告警工具，最初由SoundCloud推出。自2012成立以来，许多公司和组织都采用了prometheus，项目有一个非常活跃的开发者和用户社区。Prometheus现在是一个独立的开源项目，它的维护独立于任何公司，2016年，Prometheus在Kubernetes之后第二个加入到 [Cloud Native Computing Foundation](https://cncf.io/) 项目。
 
 ## Features
 
@@ -33,8 +33,6 @@ This diagram illustrates the architecture of Prometheus and some of its ecosyste
 
 Prometheus scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts. [Grafana](https://grafana.com/) or other API consumers can be used to visualize the collected data.
 
-
-
 ## 参考资料
 
 [https://grafana.com/dashboards/179](https://grafana.com/dashboards/179)
@@ -44,6 +42,4 @@ Prometheus scrapes metrics from instrumented jobs, either directly or via an int
 [https://grafana.com/dashboards?dataSource=prometheus&search=docker](https://grafana.com/dashboards?dataSource=prometheus&search=docker)
 
 [https://github.com/vegasbrianc/prometheus/tree/version-2](https://github.com/vegasbrianc/prometheus/tree/version-2)
-
-
 
