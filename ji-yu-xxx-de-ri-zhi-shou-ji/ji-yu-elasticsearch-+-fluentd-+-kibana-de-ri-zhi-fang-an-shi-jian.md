@@ -67,7 +67,7 @@ FROM fluent/fluentd:v0.12-debian
 RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-rdoc", "--no-ri", "--version", "1.9.2"]
 ```
 
-.Then, please prepare Fluentd’s configuration file`fluentd/conf/fluent.conf`. [in\_forward](https://docs.fluentd.org/v0.12/articles/in_forward) plugin is used for receive logs from Docker logging driver, and out\_elasticsearch is for forwarding logs to Elasticsearch.
+Then, please prepare Fluentd’s configuration file`fluentd/conf/fluent.conf`. [in\_forward](https://docs.fluentd.org/v0.12/articles/in_forward) plugin is used for receive logs from Docker logging driver, and out\_elasticsearch is for forwarding logs to Elasticsearch.
 
 ```
 # fluentd/conf/fluent.conf
