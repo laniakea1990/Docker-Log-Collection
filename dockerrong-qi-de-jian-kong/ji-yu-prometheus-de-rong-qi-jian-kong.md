@@ -20,6 +20,28 @@ This diagram illustrates the architecture of Prometheus and some of its ecosyste
 
 Prometheus scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts. [Grafana](https://grafana.com/) or other API consumers can be used to visualize the collected data.
 
+**Prometheus Server**
+
+Prometheus Server 负责从 Exporter 拉取和存储监控数据，并提供一套灵活的查询语言（PromQL）供用户使用。
+
+**Exporter**
+
+Exporter 负责收集目标对象（host, container…）的性能数据，并通过 HTTP 接口供 Prometheus Server 获取。
+
+**Push gateway**
+
+[push gateway](https://github.com/prometheus/pushgateway) 用来支持 short-lived jobs
+
+**可视化组件**
+
+监控数据的可视化展现对于监控方案至关重要。以前 Prometheus 自己开发了一套工具，不过后来废弃了，因为开源社区出现了更为优秀的产品 Grafana。Grafana 能够与 Prometheus 无缝集成，提供完美的数据展示能力。
+
+**Alertmanager**
+
+用户可以定义基于监控数据的告警规则，规则会触发告警。一旦 Alermanager 收到告警，会通过预定义的方式发出告警通知。支持的方式包括 Email、PagerDuty、Webhook 等.
+
+也许一些熟悉其他监控方案的同学看了 Prometheus 的架构会不以为然，“这些功能 Zabbix、Graphite、Nagios 这类监控系统也都有，没什么特别的啊！”。Prometheus 最大的亮点和先进性是它的多维数据模型，下面将做介绍。
+
 ## Components
 
 The Prometheus ecosystem consists of multiple components, many of which are optional:
@@ -32,6 +54,8 @@ The Prometheus ecosystem consists of multiple components, many of which are opti
 * various support tools
 
 Most Prometheus components are written in [Go](https://golang.org/), making them easy to build and deploy as static binaries.
+
+
 
 ## 参考资料
 
