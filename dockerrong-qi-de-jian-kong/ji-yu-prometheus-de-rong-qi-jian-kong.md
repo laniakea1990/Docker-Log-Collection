@@ -12,6 +12,14 @@ Prometheus的主要特性有：
 * 监控目标的发现是通过服务发现或静态配置\( targets are discovered via service discovery or static configuration \)
 * 多种数据展示面板支持，例如grafana \( multiple modes of graphing and dashboarding support \)
 
+## Architecture
+
+This diagram illustrates the architecture of Prometheus and some of its ecosystem components:
+
+![](/assets/Architecture-Prometheus.png)
+
+Prometheus scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts. [Grafana](https://grafana.com/) or other API consumers can be used to visualize the collected data.
+
 ## Components
 
 The Prometheus ecosystem consists of multiple components, many of which are optional:
@@ -24,14 +32,6 @@ The Prometheus ecosystem consists of multiple components, many of which are opti
 * various support tools
 
 Most Prometheus components are written in [Go](https://golang.org/), making them easy to build and deploy as static binaries.
-
-## Architecture
-
-This diagram illustrates the architecture of Prometheus and some of its ecosystem components:
-
-![](/assets/Prometheus-Architecture.png)
-
-Prometheus scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts. [Grafana](https://grafana.com/) or other API consumers can be used to visualize the collected data.
 
 ## 参考资料
 
