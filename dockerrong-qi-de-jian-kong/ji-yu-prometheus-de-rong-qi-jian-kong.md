@@ -30,7 +30,7 @@ Exporter 负责收集目标对象（host, container…）的性能数据，并�
 
 **Push gateway**
 
-[push gateway](https://github.com/prometheus/pushgateway) 用来支持 short-lived jobs
+push gateway 用来支持 short-lived jobs
 
 **可视化组件**
 
@@ -54,8 +54,6 @@ The Prometheus ecosystem consists of multiple components, many of which are opti
 * various support tools
 
 Most Prometheus components are written in [Go](https://golang.org/), making them easy to build and deploy as static binaries.
-
-
 
 ## 参考资料
 
