@@ -1,0 +1,680 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>基于fluentd的日志收集 · Implement CI/CD with Docker and Jenkins</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="jrr">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-emphasize/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-sectionx/sectionx.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html" />
+    
+    
+    <link rel="prev" href="ji-zhu-xuan-xing/other-online-logging-driver.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                <a href="dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Docker容器内应用日志收集方案
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="ji-zhu-xuan-xing.html">
+            
+                <a href="ji-zhu-xuan-xing.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    技术选型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                <a href="ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    JSON File logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                <a href="ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    Graylog Extended Format(GELF)logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                <a href="ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    Syslog logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                <a href="ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                    
+                        <b>1.2.1.4.</b>
+                    
+                    Fluentd logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                <a href="ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                    
+                        <b>1.2.1.5.</b>
+                    
+                    Journald logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                <a href="ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                    
+                        <b>1.2.1.6.</b>
+                    
+                    Other online logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                <a href="ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    基于fluentd的日志收集
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                <a href="ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                    
+                        <b>1.2.2.1.</b>
+                    
+                    基于ElasticSearch+Fluentd+Kibana的日志方案实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="dockerrong-qi-de-jian-kong.html">
+            
+                <a href="dockerrong-qi-de-jian-kong.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker容器的监控
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                <a href="dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    容器监控选型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                <a href="dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    基于CAdvisor的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                <a href="dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    基于Cadvisor+InfluxDB+Grafna的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                <a href="dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    基于Prometheus的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >基于fluentd的日志收集</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#fluentd-architecture-overview"><b>1.2.2.1. </b>Fluentd Architecture Overview</a></li><li><span class="title-icon "></span><a href="#life-of-a-fluentd-event"><b>1.2.2.2. </b>Life of a Fluentd event</a></li><li><span class="title-icon "></span><a href="#&#x53C2;&#x8003;"><b>1.2.2.3. </b>&#x53C2;&#x8003;</a></li></ul></div><a href="#fluentd-architecture-overview" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="fluentd-architecture-overview"><a name="fluentd-architecture-overview" class="anchor-navigation-ex-anchor" href="#fluentd-architecture-overview"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2.1. Fluentd Architecture Overview</h1>
+<p>Fluentd is an open source log collector, which lets you unify the data collection and consumption for a better use and understanding of data.</p>
+<p>Fluentd treats logs as JSON, a popular machine-readable format. It is written primarily in C with a thin-Ruby wrapper that gives users flexibility.</p>
+<p>Fluentd&#x2019;s scalability has been proven in the field: its largest user currently collects logs from 500,000+ servers.</p>
+<p>Fluentd&#x662F;&#x4E00;&#x4E2A;&#x514D;&#x8D39;&#xFF0C;&#x800C;&#x4E14;&#x5B8C;&#x5168;&#x5F00;&#x6E90;&#x7684;&#x65E5;&#x5FD7;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#xFF0C;&#x7B80;&#x5316;&#x4E86;&#x65E5;&#x5FD7;&#x7684;&#x6536;&#x96C6;&#x3001;&#x5904;&#x7406;&#x3001;&#x548C;&#x5B58;&#x50A8;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4E0D;&#x9700;&#x8981;&#x518D;&#x7EF4;&#x62A4;&#x7F16;&#x5199;&#x7279;&#x6B8A;&#x7684;&#x65E5;&#x5FD7;&#x5904;&#x7406;&#x811A;&#x672C;&#x3002;Fluentd&#x7684;&#x6027;&#x80FD;&#x5DF2;&#x7ECF;&#x5728;&#x5404;&#x9886;&#x57DF;&#x5F97;&#x5230;&#x4E86;&#x8BC1;&#x660E;&#xFF1A;&#x76EE;&#x524D;&#x6700;&#x5927;&#x7684;&#x7528;&#x6237;&#x4ECE;5000+&#x670D;&#x52A1;&#x5668;&#x6536;&#x96C6;&#x65E5;&#x5FD7;&#xFF0C;&#x6BCF;&#x5929;5TB&#x7684;&#x6570;&#x636E;&#x91CF;&#xFF0C;&#x5728;&#x9AD8;&#x5CF0;&#x65F6;&#x95F4;&#x5904;&#x7406;50,000&#x6761;&#x4FE1;&#x606F;&#x6BCF;&#x79D2;&#x3002;</p>
+<p><strong>Before Fluentd&#xFF1A;</strong></p>
+<p><img src="assets/Before Fluentd.png" alt=""></p>
+<p><strong>After Fluentd&#xFF1A;</strong></p>
+<h3 id=""><a name="" class="plugin-anchor" href="#"><i class="fa fa-link" aria-hidden="true"></i></a><img src="assets/After Fluentd.png" alt=""></h3>
+<h3 id="unified-logging-with-json"><a name="unified-logging-with-json" class="anchor-navigation-ex-anchor" href="#unified-logging-with-json"><i class="fa fa-link" aria-hidden="true"></i></a><a name="unified-logging-with-json" class="plugin-anchor" href="#unified-logging-with-json"><i class="fa fa-link" aria-hidden="true"></i></a>Unified Logging with JSON</h3>
+<p>Fluentd tries to structure data as JSON as much as possible: this allows Fluentd to <strong>unify </strong>all facets of processing log data: collecting, filtering, buffering, and outputting logs across <strong>multiple sources and destinations</strong> (<a href="http://www.fluentd.org/blog/unified-logging-layer" target="_blank">Unified Logging Layer</a>). The downstream data processing is much easier with JSON, since it has enough structure to be accessible while retaining flexible schemas.</p>
+<p><img src="assets/unified logging with json.png" alt=""></p>
+<h3 id="pluggable-architecture"><a name="pluggable-architecture" class="anchor-navigation-ex-anchor" href="#pluggable-architecture"><i class="fa fa-link" aria-hidden="true"></i></a><a name="pluggable-architecture" class="plugin-anchor" href="#pluggable-architecture"><i class="fa fa-link" aria-hidden="true"></i></a>Pluggable Architecture</h3>
+<p>Fluentd has a flexible plugin system that allows the community to extend its functionality. Our 500+ community-contributed plugins connect dozens of <a href="https://www.fluentd.org/datasources" target="_blank">data sources</a> and <a href="https://www.fluentd.org/dataoutputs" target="_blank">data outputs</a>. By leveraging the plugins, you can start making better use of your logs right away.</p>
+<p><img src="assets/Pluggable Architecture.png" alt=""></p>
+<h3 id="minimum-resources-required"><a name="minimum-resources-required" class="anchor-navigation-ex-anchor" href="#minimum-resources-required"><i class="fa fa-link" aria-hidden="true"></i></a><a name="minimum-resources-required" class="plugin-anchor" href="#minimum-resources-required"><i class="fa fa-link" aria-hidden="true"></i></a>Minimum Resources Required</h3>
+<p>Fluentd is written in a combination of C language and Ruby, and requires very little system resource. The vanilla&#xFF08;&#x7B80;&#x6734;&#x3001;&#x5E73;&#x5E38;&#xFF09; instance runs on 30-40MB of memory and can process 13,000 events/second/core. If you have more tighter memory requirement (-450kb), check out <a href="http://fluentbit.io/" target="_blank">Fluent Bit</a>, the lightweight forwarder for Fluentd.</p>
+<p><img src="assets/Minimum Resources Required.png" alt=""></p>
+<h3 id="built-in-reliability"><a name="built-in-reliability" class="anchor-navigation-ex-anchor" href="#built-in-reliability"><i class="fa fa-link" aria-hidden="true"></i></a><a name="built-in-reliability" class="plugin-anchor" href="#built-in-reliability"><i class="fa fa-link" aria-hidden="true"></i></a>Built-in Reliability</h3>
+<p>Fluentd supports memory and file-based buffering to prevent inter-node data loss. Fluentd also support robust failover and can be set up for high availability. <a href="https://www.fluentd.org/testimonials" target="_blank">2,000+ data-driven companies</a> rely on Fluentd to differentiate their products and services through a better use and understanding of their log data.</p>
+<p><img src="assets/Built-in Reliability.png" alt=""></p>
+<h1 id="life-of-a-fluentd-event"><a name="life-of-a-fluentd-event" class="anchor-navigation-ex-anchor" href="#life-of-a-fluentd-event"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2.2. Life of a Fluentd event</h1>
+<p>The following content describe a global overview of how events are processed by Fluentd using examples. It covers the complete cycle including Setup, Inputs, Filters, Matches and Labels.</p>
+<h3 id="basic-setup"><a name="basic-setup" class="anchor-navigation-ex-anchor" href="#basic-setup"><i class="fa fa-link" aria-hidden="true"></i></a><a name="basic-setup" class="plugin-anchor" href="#basic-setup"><i class="fa fa-link" aria-hidden="true"></i></a>Basic Setup</h3>
+<p>The configuration files is the fundamental piece to connect all things together, as it allows to define which <em>Inputs or listeners </em><a href="http://fluentd.org/" target="_blank"><em>Fluentd</em></a><em> will have and set up common matching rules to route the  Event  data to a specific  Output</em>.</p>
+<p>We will use the <a href="https://docs.fluentd.org/v0.12/articles/in_http" target="_blank">in_http</a> and the <a href="https://docs.fluentd.org/v0.12/articles/out_stdout" target="_blank">out_stdout</a> plugins as examples to describe the events cycle. The following is a basic definition on the configuration file to specify an http input, for short: we will be listening for <strong>HTTP Requests</strong>:</p>
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>
+  @type http
+  port 8888
+  bind 0.0.0.0
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p>This definition specifies that a HTTP server will be listening on TCP port 8888. Now let&#x2019;s define a  Matching  rule and a desired output that will just print the data that arrived on each incoming request to standard output:</p>
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>match</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+  @type stdout
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>match</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p>The <em>Match directive sets a rule that matches each Incoming event that arrives with a <strong>Tag </strong>equal to</em> test.cycle <em>will use the Output plugin type called stdout</em>. At this point we have an <em>Input type, a Match and an Output</em>. Let&#x2019;s test the setup using <em>curl</em>:</p>
+<pre class="language-"><code>$ curl -i -X POST -d &apos;json={&quot;action&quot;:&quot;login&quot;,&quot;user&quot;:2}&apos; http://localhost:9880/test.cycle
+HTTP/1.1 200 OK
+Content-type: text/plain
+Connection: Keep-Alive
+Content-length: 0
+</code></pre><p>On the Fluentd server side the output should look like this:</p>
+<pre class="language-"><code>$ bin/fluentd -c in_http.conf
+2015-01-19 12:37:41 -0600 [info]: reading config file path=&quot;in_http.conf&quot;
+2015-01-19 12:37:41 -0600 [info]: starting fluentd-0.12.3
+2015-01-19 12:37:41 -0600 [info]: using configuration file: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ROOT</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>
+    @type http
+    bind 0.0.0.0
+    port 8888
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>match</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+    @type stdout
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>match</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ROOT</span><span class="token punctuation">&gt;</span></span>
+2015-01-19 12:37:41 -0600 [info]: adding match pattern=&quot;test.cycle&quot; type=&quot;stdout&quot;
+2015-01-19 12:37:41 -0600 [info]: adding source type=&quot;http&quot;
+2015-01-19 12:39:57 -0600 test.cycle: {&quot;action&quot;:&quot;login&quot;,&quot;user&quot;:2}
+</code></pre><h3 id="event-structure"><a name="event-structure" class="anchor-navigation-ex-anchor" href="#event-structure"><i class="fa fa-link" aria-hidden="true"></i></a><a name="event-structure" class="plugin-anchor" href="#event-structure"><i class="fa fa-link" aria-hidden="true"></i></a>Event structure</h3>
+<p>A Fluentd event consists of a tag, time and record.</p>
+<ul>
+<li>tag: Where an event comes from. For message routing</li>
+<li>time: When an event happens. Epoch time</li>
+<li>record: Actual log content. JSON object</li>
+</ul>
+<p>The input plugin is responsible for generating Fluentd events from specified data sources.<br>For example,<code>in_tail</code>generates events from text lines. If you have the following line in apache logs:</p>
+<pre class="language-"><code>192.168.0.1 - - [28/Feb/2013:12:00:00 +0900] &quot;GET / HTTP/1.1&quot; 200 777
+</code></pre><p>the following event is generated:</p>
+<pre class="language-"><code>tag: apache.access # set by configuration
+time: 1362020400   # 28/Feb/2013:12:00:00 +0900
+record: {&quot;user&quot;:&quot;-&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;code&quot;:200,&quot;size&quot;:777,&quot;host&quot;:&quot;192.168.0.1&quot;,&quot;path&quot;:&quot;/&quot;}
+</code></pre><h3 id="processing-events"><a name="processing-events" class="anchor-navigation-ex-anchor" href="#processing-events"><i class="fa fa-link" aria-hidden="true"></i></a><a name="processing-events" class="plugin-anchor" href="#processing-events"><i class="fa fa-link" aria-hidden="true"></i></a>Processing Events</h3>
+<p>When a Setup is defined, the Router Engine already contains several rules to apply for different input data. Internally an Event will pass through a chain of procedures that may alter the Events cycle.</p>
+<p>Now we will expand the previous basic example and add more steps in our Setup to demonstrate how the Events cycle can be altered. We will do this through the new Filters implementation.</p>
+<h4 id="filters"><a name="filters" class="anchor-navigation-ex-anchor" href="#filters"><i class="fa fa-link" aria-hidden="true"></i></a><a name="filters" class="plugin-anchor" href="#filters"><i class="fa fa-link" aria-hidden="true"></i></a>Filters</h4>
+<hr>
+<p>A Filter aims to behave like a rule to either accept or reject an event. The following configuration adds a Filter definition:</p>
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>
+  @type http
+  port 8888
+  bind 0.0.0.0
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+  @type grep
+  exclude1 action logout
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>match</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+  @type stdout
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>match</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p>As you can see, the new Filter definition added will be a mandatory step before passing control to the Match section. The Filter basically accepts or rejects the Event based on it type and the defined rule. For our example we want to discard any user <code>logout</code>action, we only care about the <code>login</code>action. The way this is accomplished is by the Filter doing a <code>grep</code>that will exclude any message where the <code>action</code>key has the string value &#x201C;logout&#x201D;.</p>
+<p>From a Terminal, run the following two <code>curl</code>commands (please note that each one contains a different <code>action</code>value):</p>
+<pre class="language-"><code>$ curl -i -X POST -d &apos;json={&quot;action&quot;:&quot;login&quot;,&quot;user&quot;:2}&apos; http://localhost:8880/test.cycle
+HTTP/1.1 200 OK
+Content-type: text/plain
+Connection: Keep-Alive
+Content-length: 0
+
+$ curl -i -X POST -d &apos;json={&quot;action&quot;:&quot;logout&quot;,&quot;user&quot;:2}&apos; http://localhost:8880/test.cycle
+HTTP/1.1 200 OK
+Content-type: text/plain
+Connection: Keep-Alive
+Content-length: 0
+</code></pre><p>Now looking at the Fluentd service output we can see that only the event with <code>action</code>equal to &#x201C;login&#x201D; is matched. The <code>logout</code>Event was discarded:</p>
+<pre class="language-"><code>$ bin/fluentd -c in_http.conf
+2015-01-19 12:37:41 -0600 [info]: reading config file path=&quot;in_http.conf&quot;
+2015-01-19 12:37:41 -0600 [info]: starting fluentd-0.12.4
+2015-01-19 12:37:41 -0600 [info]: using configuration file: <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ROOT</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>
+  @type http
+  bind 0.0.0.0
+  port 9880
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+  @type grep
+  exclude1 action logout
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>match</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+  @type stdout
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>match</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ROOT</span><span class="token punctuation">&gt;</span></span>
+2015-01-19 12:37:41 -0600 [info]: adding filter pattern=&quot;test.cycle&quot; type=&quot;grep&quot;
+2015-01-19 12:37:41 -0600 [info]: adding match pattern=&quot;test.cycle&quot; type=&quot;stdout&quot;
+2015-01-19 12:37:41 -0600 [info]: adding source type=&quot;http&quot;
+2015-01-27 01:27:11 -0600 test.cycle: {&quot;action&quot;:&quot;login&quot;,&quot;user&quot;:2}
+</code></pre><p>As you can see, the Events follow a step-by-step cycle where they are processed in order from top to bottom. The new engine on Fluentd allows integrating as many Filters as needed. Considering that the configuration file might grow and start getting a bit complex, a new feature called Labels has been added that aims to help manage this complexity.</p>
+<h4 id="labels"><a name="labels" class="anchor-navigation-ex-anchor" href="#labels"><i class="fa fa-link" aria-hidden="true"></i></a><a name="labels" class="plugin-anchor" href="#labels"><i class="fa fa-link" aria-hidden="true"></i></a>Labels</h4>
+<hr>
+<p>The Labels implementation aims to reduce configuration file complexity and allows to define new Routing sections that do not follow the top to bottom order, instead acting like linked references. Using the previous example we will modify the setup as follows:</p>
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>
+  @type http
+  bind 0.0.0.0
+  port 8880
+  @label @STAGING
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+  @type grep
+  exclude1 action login
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">@STAGING</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+    @type grep
+    exclude1 action logout
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>match</span> <span class="token attr-name">test.cycle</span><span class="token punctuation">&gt;</span></span>
+    @type stdout
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>match</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p>This new configuration contains a <code>@label</code> key on the <code>source</code>indicating that any further steps take place on the STAGING Label section. Every Event reported on the Source is routed by the Routing engine and continue processing on STAGING, skipping the old filter definition.</p>
+<h4 id="buffers"><a name="buffers" class="anchor-navigation-ex-anchor" href="#buffers"><i class="fa fa-link" aria-hidden="true"></i></a><a name="buffers" class="plugin-anchor" href="#buffers"><i class="fa fa-link" aria-hidden="true"></i></a>Buffers</h4>
+<hr>
+<p>In this example, we use <code>stdout</code>non-buffered output, but in production buffered outputs are often necessary, e.g. <code>forward</code>, <code>mongodb</code>, <code>s3</code>and etc. Buffered output plugins store received events into buffers and are then written out to a destination after meeting flush conditions. Using buffered output you don&#x2019;t see recieved events immediately, unlike <code>stdout</code>non-buffered output.</p>
+<p>Buffers are important for reliability and throughput. See Output and Buffer articles.</p>
+<h3 id="execution-unit"><a name="execution-unit" class="anchor-navigation-ex-anchor" href="#execution-unit"><i class="fa fa-link" aria-hidden="true"></i></a><a name="execution-unit" class="plugin-anchor" href="#execution-unit"><i class="fa fa-link" aria-hidden="true"></i></a>Execution unit</h3>
+<p>This section describes the internal implementation.</p>
+<p>Fluentd&#x2019;s events are processed on input plugin thread by default. For example, if you have <code>in_tail -&gt; filter_grep -&gt; out_stdout</code> pipeline, this pipeline is executed on in_tail&#x2019;s thread. The important point is <code>filter_grep</code> and <code>out_stdout</code> plugins don&#x2019;t have own thread for processing.</p>
+<p>For Buffered Output, output plugin has own threads for flushing buffer. For example, if you have <code>in_tail -&gt; filter_grep -&gt; out_forward</code> pipeline, this pipeline is executed on in_tail&#x2019;s thread and out_forward&#x2019;s flush thread. in_tail&#x2019;s thread processes events until events are written into buffer. Buffer flush and its error handling is the output responsibility. This de-couples the input/output and this model has merits, separate responsibilities, easy error handling, good performance.</p>
+<h3 id="conclusion"><a name="conclusion" class="anchor-navigation-ex-anchor" href="#conclusion"><i class="fa fa-link" aria-hidden="true"></i></a><a name="conclusion" class="plugin-anchor" href="#conclusion"><i class="fa fa-link" aria-hidden="true"></i></a>Conclusion</h3>
+<p>Once the events are reported by the Fluentd engine on the Source they can be processed step by step or inside a referenced Label, with any Event being filtered out at any moment. The new Routing engine behavior aims to provide more flexibility and simplifies the processing before events reach the Output plugin.</p>
+<h1 id="&#x53C2;&#x8003;"><a name="&#x53C2;&#x8003;" class="anchor-navigation-ex-anchor" href="#&#x53C2;&#x8003;"><i class="fa fa-link" aria-hidden="true"></i></a>1.2.2.3. &#x53C2;&#x8003;</h1>
+<p>Docker Logging via EFK (Elasticsearch + Fluentd + Kibana) Stack with Docker Compose<br>&#xFF1A;<a href="https://docs.fluentd.org/v0.12/articles/docker-logging-efk-compose" target="_blank">https://docs.fluentd.org/v0.12/articles/docker-logging-efk-compose</a></p>
+<p>Docker Logging Driver and Fluentd&#xFF1A;<a href="https://docs.fluentd.org/v0.12/articles/docker-logging" target="_blank">https://docs.fluentd.org/v0.12/articles/docker-logging</a></p>
+<p>Docker Logging&#xFF1A;<a href="https://www.fluentd.org/guides/recipes/docker-logging" target="_blank">https://www.fluentd.org/guides/recipes/docker-logging</a></p>
+<p>What is Fluentd?&#xFF1A;<a href="https://www.fluentd.org/architecture" target="_blank">https://www.fluentd.org/architecture</a></p>
+<p>Why Use Fluentd?&#xFF1A;<a href="https://www.fluentd.org/why" target="_blank">https://www.fluentd.org/why</a></p>
+<p>Unified Logging Layer: Turning Data into Action&#xFF1A;<a href="https://www.fluentd.org/blog/unified-logging-layer" target="_blank">https://www.fluentd.org/blog/unified-logging-layer</a></p>
+<p>Quickstart Guide&#xFF1A;<a href="https://docs.fluentd.org/v0.12/articles/quickstart" target="_blank">https://docs.fluentd.org/v0.12/articles/quickstart</a></p>
+<p>kubernetes Logging Architecture&#xFF1A;<a href="https://kubernetes.io/docs/concepts/cluster-ad" target="_blank">https://kubernetes.io/docs/concepts/cluster-ad</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ji-zhu-xuan-xing/other-online-logging-driver.html" class="navigation navigation-prev " aria-label="Previous page: Other online logging driver">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html" class="navigation navigation-next " aria-label="Next page: 基于ElasticSearch+Fluentd+Kibana的日志方案实践">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"基于fluentd的日志收集","level":"1.2.2","depth":2,"next":{"title":"基于ElasticSearch+Fluentd+Kibana的日志方案实践","level":"1.2.2.1","depth":3,"path":"ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.md","ref":"ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.md","articles":[]},"previous":{"title":"Other online logging driver","level":"1.2.1.6","depth":3,"path":"ji-zhu-xuan-xing/other-online-logging-driver.md","ref":"ji-zhu-xuan-xing/other-online-logging-driver.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","prism","prism-themes","anchors","-include-codeblock","emphasize","splitter","sectionx","anchor-navigation-ex","todo","-disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"shortName":"laniakea"},"emphasize":{},"todo":{},"splitter":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{"tag":"b"},"anchor-navigation-ex":{"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"isRewritePageTitle":false,"showLevel":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right","printLog":false,"multipleH1":true,"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false}},"prism-themes":{},"include-codeblock":{"template":"ace","unindent":true,"edit":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"jrr","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Implement CI/CD with Docker and Jenkins","language":"zh-hans","output.name":"site","gitbook":"*","description":"利用Docker及Jenkins Pipeline实现微服务的CI/CD"},"file":{"path":"ji-yu-xxx-de-ri-zhi-shou-ji.md","mtime":"2017-10-23T12:26:58.819Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-15T10:48:35.749Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sectionx/sectionx.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

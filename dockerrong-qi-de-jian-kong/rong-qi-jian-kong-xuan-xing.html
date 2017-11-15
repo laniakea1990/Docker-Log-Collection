@@ -1,0 +1,589 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>容器监控选型 · Implement CI/CD with Docker and Jenkins</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="jrr">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-emphasize/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sectionx/sectionx.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ji-yu-cadvisor-de-rong-qi-jian-kong.html" />
+    
+    
+    <link rel="prev" href="../dockerrong-qi-de-jian-kong.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                <a href="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Docker容器内应用日志收集方案
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ji-zhu-xuan-xing.html">
+            
+                <a href="../ji-zhu-xuan-xing.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    技术选型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    JSON File logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    Graylog Extended Format(GELF)logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    Syslog logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                    
+                        <b>1.2.1.4.</b>
+                    
+                    Fluentd logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="../ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                    
+                        <b>1.2.1.5.</b>
+                    
+                    Journald logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="../ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                    
+                        <b>1.2.1.6.</b>
+                    
+                    Other online logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    基于fluentd的日志收集
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                    
+                        <b>1.2.2.1.</b>
+                    
+                    基于ElasticSearch+Fluentd+Kibana的日志方案实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../dockerrong-qi-de-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker容器的监控
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="rong-qi-jian-kong-xuan-xing.html">
+            
+                <a href="rong-qi-jian-kong-xuan-xing.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    容器监控选型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                <a href="ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    基于CAdvisor的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                <a href="ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    基于Cadvisor+InfluxDB+Grafna的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                <a href="ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    基于Prometheus的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >容器监控选型</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#a-framework-for-comparison"><b>1.3.1.1. </b>A Framework for Comparison</a></li><li><span class="title-icon "></span><a href="#comparing-our-10-monitoring-solutions"><b>1.3.1.2. </b>Comparing Our 10 Monitoring Solutions</a></li><li><span class="title-icon "></span><a href="#looking-at-each-solution-in-more-depth"><b>1.3.1.3. </b>Looking at Each Solution in More Depth</a></li></ul></div><a href="#a-framework-for-comparison" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><p>The number of monitoring solutions is daunting. New solutions are coming on the scene continuously, and existing solutions evolve in functionality. Rather than looking at each solution in depth, I&#x2019;ve taken the approach of drawing high-level comparisons. With this approach, readers can hopefully &#x201C;narrow the list&#x201D; and do more serious evaluations of solutions best suited to their own needs.</p>
+<p>The monitoring solutions covered here include:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/stats/" target="_blank">Native Docker</a></li>
+<li><a href="https://github.com/google/cadvisor" target="_blank">cAdvisor</a></li>
+<li><a href="http://scoutapp.com/" target="_blank">Scout</a></li>
+<li><a href="https://pingdom.com/" target="_blank">Pingdom</a></li>
+<li><a href="https://www.datadoghq.com/" target="_blank">Datadog</a></li>
+<li><a href="https://sysdig.com/" target="_blank">Sysdig</a></li>
+<li><a href="https://prometheus.io/" target="_blank">Prometheus</a></li>
+<li><a href="https://github.com/kubernetes/heapster" target="_blank">Heapster / Grafana</a></li>
+<li><a href="https://www.elastic.co/" target="_blank">ELK stack</a></li>
+<li><a href="http://sensuapp.org/" target="_blank">Sensu</a></li>
+</ul>
+<p>In the following sections, I suggest a framework for comparing monitoring solutions, present a high-level comparison of each, and then discuss each solution in more detail by addressing how each solution works with Rancher. I also cover a few additional solutions you may have come across that did not make my top 10.</p>
+<h1 id="a-framework-for-comparison"><a name="a-framework-for-comparison" class="anchor-navigation-ex-anchor" href="#a-framework-for-comparison"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1.1. A Framework for Comparison</h1>
+<p>A challenge with objectively comparing monitoring solutions is that architectures, capabilities, deployment models, and costs can vary widely. One solution may extract and graph Docker-related metrics from a single host while another aggregates data from many hosts, measures application response times, and sends automated alerts under particular conditions.</p>
+<p>Having a framework is useful when comparing solutions. I&#x2019;ve somewhat arbitrarily proposed the following tiers of functionality that most monitoring solutions have in common as a basis for my comparison. Like any self-respecting architectural stack, this one has seven layers.</p>
+<p><img src="../assets/A seven-layer model for comparing monitoring solutions.png" alt=""></p>
+<ul>
+<li><strong>Host Agents </strong>&#x2013; The host agent represents the &#x201C;arms and legs&#x201D; of the monitoring solution, extracting time-series data from various sources like APIs and log files. Agents are usually installed on each cluster host (either on-premises or cloud-resident) and are themselves often packaged as Docker containers for ease of deployment and management.</li>
+<li><strong>Data gathering framework </strong>&#x2013; While single-host metrics are sometimes useful, administrators likely need a consolidated view of all hosts and applications. Monitoring solutions typically have some mechanism to gather data from each host and persist it in a shared data store.</li>
+<li><strong>Datastore </strong>&#x2013; The datastore may be a traditional database, but more commonly it is some form of scalable, distributed database optimized for time-series data comprised of key-value pairs. Some solutions have native datastores while others leverage pluggable open-source datastores.</li>
+<li><strong>Aggregation engine </strong>&#x2013; The problem with storing raw metrics from dozens of hosts is that the amount of data can become overwhelming. Monitoring frameworks often provide data aggregation capabilities, periodically crunching raw data into consolidated metrics (like hourly or daily summaries), purging old data that is no longer needed, or re-factoring data in some fashion to support anticipated queries and analysis.</li>
+<li><strong>Filtering &amp; Analysis </strong>&#x2013; A monitoring solution is only as good as the insights you can gain from the data. Filtering and analysis capabilities vary widely. Some solutions support a few pre-packaged queries presented as simple time-series graphs, while others have customizable dashboards, embedded query languages, and sophisticated analytic functions.</li>
+<li><strong>Visualization tier </strong>&#x2013; Monitoring tools usually have a visualization tier where users can interact with a web interface to generate charts, formulate queries and, in some cases, define alerting conditions. The visualization tier may be tightly coupled with the filtering and analysis functionality, or it may be separate depending on the solution.</li>
+<li><strong>Alerting &amp; Notification </strong>&#x2013; Few administrators have time to sit and monitor graphs all day. Another common feature of monitoring systems is an alerting subsystem that can provide notification if pre-defined thresholds are met or exceeded.</li>
+</ul>
+<p>Beyond understanding how each monitoring solution implements the basic capabilities above, users will be interested in other aspects of the monitoring solution as well:</p>
+<ul>
+<li>Completeness of the solution</li>
+<li>Ease of installation and configuration</li>
+<li>Details about the web UI</li>
+<li>Ability to forward alerts to external services</li>
+<li>Level of community support and engagement (for open-source projects)</li>
+<li>Availability in Rancher Catalog</li>
+<li>Support for monitoring non-container environments and apps</li>
+<li>Native Kubernetes support (Pods, Services, Namespaces, etc.)</li>
+<li>Extensibility (APIs, other interfaces)</li>
+<li>Deployment model (self-hosted, cloud)</li>
+<li>Cost, if applicable</li>
+</ul>
+<h1 id="comparing-our-10-monitoring-solutions"><a name="comparing-our-10-monitoring-solutions" class="anchor-navigation-ex-anchor" href="#comparing-our-10-monitoring-solutions"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1.2. Comparing Our 10 Monitoring Solutions</h1>
+<p>The diagram below shows a high-level view of how our 10 monitoring solutions map to our seven-layer model, which components implement the capabilities at each layer, and where the components reside. Each framework is complicated, and this is a simplification to be sure, but it provides a useful view of which component does what. Read on for additional detail.</p>
+<p><img src="../assets/10 monitoring solutions at a glance.png" alt=""></p>
+<p>Additional attributes of each monitoring solution are presented in a summary fashion below. For some solutions, there are multiple deployment options, so the comparisons become a little more nuanced.</p>
+<p><img src="../assets/Additional attributes of each monitoring solution.png" alt=""></p>
+<h1 id="looking-at-each-solution-in-more-depth"><a name="looking-at-each-solution-in-more-depth" class="anchor-navigation-ex-anchor" href="#looking-at-each-solution-in-more-depth"><i class="fa fa-link" aria-hidden="true"></i></a>1.3.1.3. Looking at Each Solution in More Depth</h1>
+<h3 id="docker-stats"><a name="docker-stats" class="anchor-navigation-ex-anchor" href="#docker-stats"><i class="fa fa-link" aria-hidden="true"></i></a><a name="docker-stats" class="plugin-anchor" href="#docker-stats"><i class="fa fa-link" aria-hidden="true"></i></a>DOCKER STATS</h3>
+<p><a href="https://www.docker.com/docker-community" target="_blank">https://www.docker.com/docker-community</a></p>
+<p>At the most basic level, Docker provides built-in command monitoring for Docker hosts via the<a href="https://docs.docker.com/engine/reference/commandline/stats/" target="_blank"><code>docker stats</code></a>command. Administrators can query the Docker daemon and obtain detailed, real-time information about container resource consumption metrics, including CPU and memory usage, disk and network I/O, and the number of running processes. Docker stats leverages the <a href="https://docs.docker.com/engine/api/" target="_blank">Docker Engine API</a> to retrieve this information. Docker stats has no notion of history, and it can only monitor a single host, but clever administrators can write scripts to gather metrics from multiple hosts.</p>
+<p>Docker stats is of limited use on its own, but<code>docker stats</code>data can be combined with other data sources like <a href="https://docs.docker.com/engine/reference/commandline/logs/" target="_blank">Docker log files</a> and<a href="https://docs.docker.com/engine/reference/commandline/events/" target="_blank"><code>docker events</code></a>to feed higher level monitoring services. Docker only knows about metrics reported by a single host, so Docker stats is of limited use monitoring Kubernetes or Swarm clusters with multi-host application services. With no visualization interface, no aggregation, no datastore, and no ability to collect data from multiple hosts, Docker stats does not fare well against our seven-layer model. Because <a href="http://rancher.com/" target="_blank">Rancher</a> runs on Docker, basic<code>docker stats</code>functionality is automatically available to Rancher users.</p>
+<p>&#x6211;&#x5C06;&#x8BA8;&#x8BBA;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5DE5;&#x5177;&#x662F;Docker&#x672C;&#x8EAB;&#x3002;&#x4F60;&#x53EF;&#x80FD;&#x4E0D;&#x77E5;&#x9053;Docker&#x5BA2;&#x6237;&#x7AEF;&#x5DF2;&#x7ECF;&#x63D0;&#x4F9B;&#x4E86;&#x57FA;&#x672C;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#x6765;&#x68C0;&#x67E5;&#x5BB9;&#x5668;&#x7684;&#x8D44;&#x6E90;&#x6D88;&#x8017;&#x3002;&#x60F3;&#x8981;&#x67E5;&#x770B;&#x5BB9;&#x5668;&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;&#x53EA;&#x9700;&#x8FD0;&#x884C;<code>docker stats [CONTAINER_NAME]</code>&#x3002;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x6BCF;&#x4E2A;&#x5BB9;&#x5668;&#x7684;CPU&#x5229;&#x7528;&#x7387;&#x3001;&#x5185;&#x5B58;&#x7684;&#x4F7F;&#x7528;&#x91CF;&#x4EE5;&#x53CA;&#x53EF;&#x7528;&#x5185;&#x5B58;&#x603B;&#x91CF;&#x3002;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6CA1;&#x6709;&#x9650;&#x5236;&#x5BB9;&#x5668;&#x5185;&#x5B58;&#xFF0C;&#x90A3;&#x4E48;&#x8BE5;&#x547D;&#x4EE4;&#x5C06;&#x663E;&#x793A;&#x60A8;&#x7684;&#x4E3B;&#x673A;&#x7684;&#x5185;&#x5B58;&#x603B;&#x91CF;&#x3002;&#x4F46;&#x5B83;&#x5E76;&#x4E0D;&#x610F;&#x5473;&#x7740;&#x4F60;&#x7684;&#x6BCF;&#x4E2A;&#x5BB9;&#x5668;&#x90FD;&#x80FD;&#x8BBF;&#x95EE;&#x90A3;&#x4E48;&#x591A;&#x7684;&#x5185;&#x5B58;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x770B;&#x5BB9;&#x5668;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x53D1;&#x9001;&#x548C;&#x63A5;&#x6536;&#x7684;&#x6570;&#x636E;&#x603B;&#x91CF;&#x3002;</p>
+<p><img src="../assets/docker-stats.png" alt=""></p>
+<h3 id="cadvisor"><a name="cadvisor" class="anchor-navigation-ex-anchor" href="#cadvisor"><i class="fa fa-link" aria-hidden="true"></i></a><a name="cadvisor" class="plugin-anchor" href="#cadvisor"><i class="fa fa-link" aria-hidden="true"></i></a>CADVISOR</h3>
+<p><a href="https://github.com/google/cadvisor" target="_blank">https://github.com/google/cadvisor</a></p>
+<p>cAdvisor (container advisor) is an <a href="https://github.com/google/cadvisor" target="_blank">open-source project</a> that like Docker stats provides users with resource usage information about running containers. cAdvisor was originally developed by Google to manage its <a href="https://en.wikipedia.org/wiki/Lmctfy" target="_blank">lmctfy</a> containers, but it now supports Docker as well. It is implemented as a daemon process that collects, aggregates, processes, and exports information about running containers.</p>
+<p>cAdvisor exposes a web interface and can generate multiple graphs but, like Docker stats, it monitors only a single Docker host. It can be installed on a Docker machine either as a container or natively on the Docker host itself.</p>
+<p>cAdvisor itself only retains information for 60 seconds. cAdvisor needs to be configured to log data to an external datastore. Datastores commonly used with cAdvisor data include <a href="https://prometheus.io/" target="_blank">Prometheus</a> and <a href="https://github.com/influxdata/influxdb" target="_blank">InfluxDB</a>. While cAdvisor itself is not a complete monitoring solution, it is often a component of other monitoring solutions. Before Rancher version 1.2 (late December), Rancher embedded cAdvisor in the<code>rancher-agent</code>(for internal use by Rancher), but this is no longer the case. More recent versions of Rancher use Docker stats to gather information exposed through the Rancher UI because they can do so with less overhead.</p>
+<p>Administrators can easily deploy cAdvisor on Rancher, and it is part of several comprehensive monitoring stacks, but cAdvisor is no longer part of Rancher itself.</p>
+<h3 id="prometheus"><a name="prometheus" class="anchor-navigation-ex-anchor" href="#prometheus"><i class="fa fa-link" aria-hidden="true"></i></a><a name="prometheus" class="plugin-anchor" href="#prometheus"><i class="fa fa-link" aria-hidden="true"></i></a>PROMETHEUS</h3>
+<p><a href="https://prometheus.io/" target="_blank">http://prometheus.io</a></p>
+<p>Prometheus is a popular, open-source monitoring and alerting toolkit originally built at SoundCloud. It is now a CNCF project, the company&#x2019;s second hosted project after Kubernetes. As a toolkit, it is substantially different from monitoring solutions described thus far. A first major difference is that rather being offered as a cloud service, Prometheus is modular and self-hosted, meaning that users deploy Prometheus on their clusters whether on-premises or cloud-resident.</p>
+<p>Rather than pushing data to a cloud service, Prometheus installs on each Docker host and pulls or &#x201C;scrapes&#x201D; data from an extensive variety of <a href="https://prometheus.io/docs/instrumenting/exporters/" target="_blank">exporters</a> available to Prometheus via HTTP. Some exporters are officially maintained as a part of the Prometheus GitHub project, while others are external contributions. Some projects expose Prometheus metrics natively so that exporters are not needed. Prometheus is highly extensible. Users need to mind the number of exporters and configure polling intervals appropriately depending on the amount of data they are collecting.</p>
+<p>The Prometheus server retrieves time-series data from various sources and stores data in its internal datastore. Prometheus provides features like service discovery, a separate push gateway for specific types of metrics and has an embedded query language (PromQL) that excels at querying multidimensional data. It also has an embedded web UI and API. The web UI in Prometheus provides good functionality but relies on users knowing PromQL, so some sites prefer to use Grafana as an interface for charting and viewing cluster-related metrics.</p>
+<p>Prometheus has a discrete Alert Manager with a distinct UI that can work with data stored in Prometheus. Like other alert managers, it works with a variety of external alerting services including email, Hipchat, Pagerduty, #Slack, OpsGenie, VictorOps, and others.</p>
+<p>Because Prometheus is comprised of many components, and exporters need to be selected and installed depending on the services monitored, it is more difficult to install; but as a free offering, the price is right.</p>
+<p>While not quite as refined as tools like Datadog or Sysdig, Prometheus offers similar functionality, extensive third-party software integrations, and best-in-class cloud monitoring solutions. Prometheus is aware of Kubernetes and other container management frameworks. An entry in the Rancher Catalog developed by <a href="https://www.infinityworks.com/" target="_blank">Infinityworks</a> makes getting started with Prometheus easier when Cattle is used as the Rancher orchestrator but, because of the wide variety of configuration options, administrators need to spend some time to get it properly installed and configured.</p>
+<p>Infinityworks have contributed useful add-ons including the<a href="https://github.com/infinityworks/prometheus-rancher-exporter" target="_blank"><code>prometheus-rancher-exporter</code></a> that exposes the health of Rancher stacks and hosts obtained from the Rancher API to a Prometheus compatible endpoint. For administrators who don&#x2019;t mind going to a little more effort, Prometheus is one of the most capable monitoring solutions and should be on your shortlist for consideration.</p>
+<h3 id="heapster"><a name="heapster" class="anchor-navigation-ex-anchor" href="#heapster"><i class="fa fa-link" aria-hidden="true"></i></a><a name="heapster" class="plugin-anchor" href="#heapster"><i class="fa fa-link" aria-hidden="true"></i></a>HEAPSTER</h3>
+<p><a href="https://github.com/kubernetes/heapster" target="_blank">https://github.com/kubernetes/heapster</a></p>
+<p>Heapster is another solution that often comes up related to monitoring-container environments. Heapster is a project under the Kubernetes umbrella that helps enable container-cluster monitoring and performance analysis. Heapster specifically supports Kubernetes and OpenShift and is most relevant for Rancher users running Kuberenetes as their orchestrator. It is not typically be used with Cattle or Swarm.</p>
+<p>People often describe Heapster as a monitoring solution, but it is more precisely a &#x201C;cluster-wide aggregator of monitoring and event data.&#x201D; Heapster is never deployed alone; rather, it is a part of a stack of open-source components. The Heapster monitoring stack is typically comprised of:</p>
+<ul>
+<li><strong>A data gathering tier </strong>&#x2013; e.g., cAdvisor accessed with the<code>kubelet</code>on each cluster host</li>
+<li><strong>Pluggable storage backends </strong>&#x2013; e.g., ElasticSearch, InfluxDB, Kafka, Graphite, or roughly <a href="https://github.com/kubernetes/heapster/blob/master/docs/sink-owners.md" target="_blank">a dozen others</a></li>
+<li><strong>A data visualization component </strong>&#x2013; Grafana or Google Cloud Monitoring</li>
+</ul>
+<p>A popular stack is comprised of Heapster, InfluxDB, and Grafana, and this combination is installed by default on Rancher when users choose to deploy Kubernetes. Note that these components are considered add-ons to Kubernetes, so they may not be automatically deployed with all Kubernetes distributions.</p>
+<p>One of the reasons that InfluxDB is popular is that it is one of the few data backends that supports both Kubernetes events and metrics, allowing for more comprehensive monitoring of Kubernetes.</p>
+<p>Note that Heapster does not natively support alerting or services related to Application Performance Management (APM) found in commercial cloud-based solutions or Prometheus. Users that need monitoring services can supplement their Heapster installation using <a href="https://github.com/hawkular" target="_blank">Hawkular</a>, but this is not automatically configured as part of the Rancher deployment and will require extra user effort.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../dockerrong-qi-de-jian-kong.html" class="navigation navigation-prev " aria-label="Previous page: Docker容器的监控">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ji-yu-cadvisor-de-rong-qi-jian-kong.html" class="navigation navigation-next " aria-label="Next page: 基于CAdvisor的容器监控">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"容器监控选型","level":"1.3.1","depth":2,"next":{"title":"基于CAdvisor的容器监控","level":"1.3.2","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.md","articles":[]},"previous":{"title":"Docker容器的监控","level":"1.3","depth":1,"path":"dockerrong-qi-de-jian-kong.md","ref":"dockerrong-qi-de-jian-kong.md","articles":[{"title":"容器监控选型","level":"1.3.1","depth":2,"path":"dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.md","ref":"dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.md","articles":[]},{"title":"基于CAdvisor的容器监控","level":"1.3.2","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.md","articles":[]},{"title":"基于Cadvisor+InfluxDB+Grafna的容器监控","level":"1.3.3","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.md","articles":[]},{"title":"基于Prometheus的容器监控","level":"1.3.4","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","prism","prism-themes","anchors","-include-codeblock","emphasize","splitter","sectionx","anchor-navigation-ex","todo","-disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"shortName":"laniakea"},"emphasize":{},"todo":{},"splitter":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{"tag":"b"},"anchor-navigation-ex":{"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"isRewritePageTitle":false,"showLevel":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right","printLog":false,"multipleH1":true,"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false}},"prism-themes":{},"include-codeblock":{"template":"ace","unindent":true,"edit":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"jrr","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Implement CI/CD with Docker and Jenkins","language":"zh-hans","output.name":"site","gitbook":"*","description":"利用Docker及Jenkins Pipeline实现微服务的CI/CD"},"file":{"path":"dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.md","mtime":"2017-10-25T07:20:21.136Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-15T10:48:35.749Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sectionx/sectionx.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

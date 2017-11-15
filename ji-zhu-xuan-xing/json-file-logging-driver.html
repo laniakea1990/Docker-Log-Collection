@@ -1,0 +1,565 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>JSON File logging driver · Implement CI/CD with Docker and Jenkins</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="jrr">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-emphasize/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sectionx/sectionx.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="graylog-extended-formatgelflogging-driver.html" />
+    
+    
+    <link rel="prev" href="../ji-zhu-xuan-xing.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                <a href="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Docker容器内应用日志收集方案
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ji-zhu-xuan-xing.html">
+            
+                <a href="../ji-zhu-xuan-xing.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    技术选型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1.1" data-path="json-file-logging-driver.html">
+            
+                <a href="json-file-logging-driver.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    JSON File logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="graylog-extended-formatgelflogging-driver.html">
+            
+                <a href="graylog-extended-formatgelflogging-driver.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    Graylog Extended Format(GELF)logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="syslog-logging-driver.html">
+            
+                <a href="syslog-logging-driver.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    Syslog logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="fluentd-logging-driver.html">
+            
+                <a href="fluentd-logging-driver.html">
+            
+                    
+                        <b>1.2.1.4.</b>
+                    
+                    Fluentd logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="journald-logging-driver.html">
+            
+                <a href="journald-logging-driver.html">
+            
+                    
+                        <b>1.2.1.5.</b>
+                    
+                    Journald logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="other-online-logging-driver.html">
+            
+                <a href="other-online-logging-driver.html">
+            
+                    
+                        <b>1.2.1.6.</b>
+                    
+                    Other online logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    基于fluentd的日志收集
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                    
+                        <b>1.2.2.1.</b>
+                    
+                    基于ElasticSearch+Fluentd+Kibana的日志方案实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../dockerrong-qi-de-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker容器的监控
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    容器监控选型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    基于CAdvisor的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    基于Cadvisor+InfluxDB+Grafna的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    基于Prometheus的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >JSON File logging driver</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>By default, Docker captures the standard output (and standard error) of all your containers, and writes them in files using the JSON format&#xFF08;Docker &#x9ED8;&#x8BA4;&#x4E3A;&#x6240;&#x6709;&#x5BB9;&#x5668;&#x8BB0;&#x5F55;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x3001;&#x6807;&#x51C6;&#x9519;&#x8BEF;&#x8F93;&#x51FA;&#xFF0C;&#x4EE5;JSON&#x683C;&#x5F0F;&#xFF09;. The JSON format annotates each line with its origin (<code>stdout</code>or<code>stderr</code>) and its timestamp. Each log file contains information about only one container&#xFF08;&#x6BCF;&#x4E2A;log&#x6587;&#x4EF6;&#x53EA;&#x5305;&#x62EC;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x7684;log&#x4FE1;&#x606F;&#xFF09;.</p>
+<h2 id="usage"><a name="usage" class="anchor-navigation-ex-anchor" href="#usage"><i class="fa fa-link" aria-hidden="true"></i></a><a name="usage" class="plugin-anchor" href="#usage"><i class="fa fa-link" aria-hidden="true"></i></a>Usage</h2>
+<p>To use the<code>json-file</code>driver as the default logging driver, set the<code>log-driver</code>and<code>log-opt</code>keys to appropriate values in the<code>daemon.json</code>file, which is located in<code>/etc/docker/</code>on Linux hosts or<code>C:\ProgramData\docker\config\daemon.json</code>on Windows Server. For more about +configuring Docker using<code>daemon.json</code>, see +<a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank">daemon.json</a>.</p>
+<p>The following example sets the log driver to<code>json-file</code>and sets the<code>max-size</code>option.</p>
+<pre class="language-"><code>{
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;10m&quot;
+  }
+}
+</code></pre><p>Restart Docker for the changes to take effect for newly created containers. Existing containers will not use the new logging configuration.</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x914D;&#x7F6E;&#x751F;&#x6548;&#x540E;&#x5BF9;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x6240;&#x6709;&#x5BB9;&#x5668;&#x751F;&#x6548;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x53EA;&#x5BF9;&#x8BE5;&#x5BB9;&#x5668;&#x751F;&#x6548;&#xFF1A;</p>
+<p>You can set the logging driver for a specific container by using the<code>--log-driver</code>flag to<code>docker create</code>or<code>docker run</code>:</p>
+<pre class="language-"><code>$ docker run \
+      -&#x2013;log-driver json-file --log-opt max-size=10m \
+      alpine echo hello world
+</code></pre><h2 id="options"><a name="options" class="anchor-navigation-ex-anchor" href="#options"><i class="fa fa-link" aria-hidden="true"></i></a><a name="options" class="plugin-anchor" href="#options"><i class="fa fa-link" aria-hidden="true"></i></a>Options</h2>
+<p>The<code>json-file</code>logging driver supports the following logging options:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Option</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Example value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>max-size</code></td>
+<td style="text-align:left">The maximum size of the log before it is rolled. A positive integer plus a modifier representing the unit of measure (<code>k</code>,<code>m</code>, or<code>g</code>). Defaults to -1 (unlimited).</td>
+<td style="text-align:left"><code>--log-opt max-size=10m</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>max-file</code></td>
+<td style="text-align:left">The maximum number of log files that can be present. If rolling the logs creates excess files, the oldest file is removed.<strong>Only effective when</strong><code>max-size</code><strong>is also set.</strong>A positive integer. Defaults to 1.</td>
+<td style="text-align:left"><code>--log-opt max-file=3</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>labels</code></td>
+<td style="text-align:left">Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced<a href="https://docs.docker.com/engine/admin/logging/log_tags/" target="_blank">log tag options</a>.</td>
+<td style="text-align:left"><code>--log-opt labels=production_status,geo</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>env</code></td>
+<td style="text-align:left">Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced<a href="https://docs.docker.com/engine/admin/logging/log_tags/" target="_blank">log tag options</a>.</td>
+<td style="text-align:left"><code>--log-opt env=os,customer</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>env-regex</code></td>
+<td style="text-align:left">Similar to and compatible with<code>env</code>. A regular expression to match logging-related environment variables. Used for advanced<a href="https://docs.docker.com/engine/admin/logging/log_tags/" target="_blank">log tag options</a>.</td>
+<td style="text-align:left">--log-opt env-regex=^(os customer).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples"><a name="examples" class="anchor-navigation-ex-anchor" href="#examples"><i class="fa fa-link" aria-hidden="true"></i></a><a name="examples" class="plugin-anchor" href="#examples"><i class="fa fa-link" aria-hidden="true"></i></a>Examples</h2>
+<p>This example starts an<code>alpine</code>container which can have a maximum of 3 log files no larger than 10 megabytes each.</p>
+<pre class="language-"><code>$ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../ji-zhu-xuan-xing.html" class="navigation navigation-prev " aria-label="Previous page: 技术选型">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="graylog-extended-formatgelflogging-driver.html" class="navigation navigation-next " aria-label="Next page: Graylog Extended Format(GELF)logging driver">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"JSON File logging driver","level":"1.2.1.1","depth":3,"next":{"title":"Graylog Extended Format(GELF)logging driver","level":"1.2.1.2","depth":3,"path":"ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.md","ref":"ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.md","articles":[]},"previous":{"title":"技术选型","level":"1.2.1","depth":2,"path":"ji-zhu-xuan-xing.md","ref":"ji-zhu-xuan-xing.md","articles":[{"title":"JSON File logging driver","level":"1.2.1.1","depth":3,"path":"ji-zhu-xuan-xing/json-file-logging-driver.md","ref":"ji-zhu-xuan-xing/json-file-logging-driver.md","articles":[]},{"title":"Graylog Extended Format(GELF)logging driver","level":"1.2.1.2","depth":3,"path":"ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.md","ref":"ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.md","articles":[]},{"title":"Syslog logging driver","level":"1.2.1.3","depth":3,"path":"ji-zhu-xuan-xing/syslog-logging-driver.md","ref":"ji-zhu-xuan-xing/syslog-logging-driver.md","articles":[]},{"title":"Fluentd logging driver","level":"1.2.1.4","depth":3,"path":"ji-zhu-xuan-xing/fluentd-logging-driver.md","ref":"ji-zhu-xuan-xing/fluentd-logging-driver.md","articles":[]},{"title":"Journald logging driver","level":"1.2.1.5","depth":3,"path":"ji-zhu-xuan-xing/journald-logging-driver.md","ref":"ji-zhu-xuan-xing/journald-logging-driver.md","articles":[]},{"title":"Other online logging driver","level":"1.2.1.6","depth":3,"path":"ji-zhu-xuan-xing/other-online-logging-driver.md","ref":"ji-zhu-xuan-xing/other-online-logging-driver.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","prism","prism-themes","anchors","-include-codeblock","emphasize","splitter","sectionx","anchor-navigation-ex","todo","-disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"shortName":"laniakea"},"emphasize":{},"todo":{},"splitter":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{"tag":"b"},"anchor-navigation-ex":{"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"isRewritePageTitle":false,"showLevel":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right","printLog":false,"multipleH1":true,"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false}},"prism-themes":{},"include-codeblock":{"template":"ace","unindent":true,"edit":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"jrr","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Implement CI/CD with Docker and Jenkins","language":"zh-hans","output.name":"site","gitbook":"*","description":"利用Docker及Jenkins Pipeline实现微服务的CI/CD"},"file":{"path":"ji-zhu-xuan-xing/json-file-logging-driver.md","mtime":"2017-10-19T11:25:57.843Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-15T10:48:35.749Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sectionx/sectionx.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

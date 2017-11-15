@@ -1,0 +1,621 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>基于ElasticSearch+Fluentd+Kibana的日志方案实践 · Implement CI/CD with Docker and Jenkins</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="jrr">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-emphasize/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sectionx/sectionx.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../dockerrong-qi-de-jian-kong.html" />
+    
+    
+    <link rel="prev" href="../ji-yu-xxx-de-ri-zhi-shou-ji.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                <a href="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Docker容器内应用日志收集方案
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ji-zhu-xuan-xing.html">
+            
+                <a href="../ji-zhu-xuan-xing.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    技术选型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    JSON File logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    Graylog Extended Format(GELF)logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    Syslog logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                    
+                        <b>1.2.1.4.</b>
+                    
+                    Fluentd logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="../ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                    
+                        <b>1.2.1.5.</b>
+                    
+                    Journald logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="../ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                    
+                        <b>1.2.1.6.</b>
+                    
+                    Other online logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    基于fluentd的日志收集
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.2.1" data-path="ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                <a href="ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                    
+                        <b>1.2.2.1.</b>
+                    
+                    基于ElasticSearch+Fluentd+Kibana的日志方案实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../dockerrong-qi-de-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker容器的监控
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    容器监控选型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    基于CAdvisor的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    基于Cadvisor+InfluxDB+Grafna的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    基于Prometheus的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >基于ElasticSearch+Fluentd+Kibana的日志方案实践</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>Elasticsearch is an open source search engine known for its ease of use. Kibana is an open source Web UI that makes Elasticsearch user friendly for marketers, engineers and data scientists alike.</p>
+<p>By combining these three tools EFK (Elasticsearch + Fluentd + Kibana) we get a scalable, flexible, easy to use log collection and analytics pipeline. In this article, we will set up 4 containers, each includes:</p>
+<ul>
+<li><a href="https://hub.docker.com/_/httpd/" target="_blank">Apache HTTP Server</a></li>
+<li><a href="https://hub.docker.com/r/fluent/fluentd/" target="_blank">Fluentd</a></li>
+<li><a href="https://hub.docker.com/_/elasticsearch/" target="_blank">Elasticsearch</a></li>
+<li><a href="https://hub.docker.com/_/kibana/" target="_blank">Kibana</a></li>
+</ul>
+<p>All of <code>httpd</code>&#x2019;s logs will be ingested into Elasticsearch + Kibana, via Fluentd.</p>
+<h2 id="step-0-prepare-docker-composeyml"><a name="step-0-prepare-docker-composeyml" class="anchor-navigation-ex-anchor" href="#step-0-prepare-docker-composeyml"><i class="fa fa-link" aria-hidden="true"></i></a><a name="step-0-prepare-docker-composeyml" class="plugin-anchor" href="#step-0-prepare-docker-composeyml"><i class="fa fa-link" aria-hidden="true"></i></a>Step 0: prepare docker-compose.yml</h2>
+<p>First, please prepare docker-compose.yml for Docker Compose. Docker Compose is a tool for defining and running multi-container Docker applications.</p>
+<p>With the YAML file below, you can create and start all the services (in this case, Apache, Fluentd, Elasticsearch, Kibana) by one command.</p>
+<pre class="language-"><code>version: &apos;2&apos;
+services:
+  web:
+    image: httpd
+    ports:
+      - &quot;80:80&quot;
+    links:
+      - fluentd
+    logging:
+      driver: &quot;fluentd&quot;
+      options:
+        fluentd-address: localhost:24224
+        tag: httpd.access
+
+  fluentd:
+    build: ./fluentd
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+    links:
+      - &quot;elasticsearch&quot;
+    ports:
+      - &quot;24224:24224&quot;
+      - &quot;24224:24224/udp&quot;
+
+  elasticsearch:
+    image: elasticsearch
+    expose:
+      - 9200
+    ports:
+      - &quot;9200:9200&quot;
+
+  kibana:
+    image: kibana
+    links:
+      - &quot;elasticsearch&quot;
+    ports:
+      - &quot;5601:5601&quot;
+</code></pre><p><code>logging</code>section (check <a href="https://docs.docker.com/compose/compose-file/#/logging" target="_blank">Docker Compose documentation</a> ) of<code>web</code>container specifies <a href="https://docs.docker.com/engine/admin/logging/fluentd/" target="_blank">Docker Fluentd Logging Driver</a> as a default  container logging driver. All of the logs from<code>web</code>container will be automatically forwarded to host:port specified by<code>fluentd-address</code>.</p>
+<h2 id="step-1-prepare-fluentd-image-with-your-config--plugin"><a name="step-1-prepare-fluentd-image-with-your-config--plugin" class="anchor-navigation-ex-anchor" href="#step-1-prepare-fluentd-image-with-your-config--plugin"><i class="fa fa-link" aria-hidden="true"></i></a><a name="step-1-prepare-fluentd-image-with-your-config--plugin" class="plugin-anchor" href="#step-1-prepare-fluentd-image-with-your-config--plugin"><i class="fa fa-link" aria-hidden="true"></i></a>Step 1: Prepare Fluentd image with your Config + Plugin</h2>
+<p>Then, please prepare<code>fluentd/Dockerfile</code>with the following content, to use Fluentd&#x2019;s <a href="https://hub.docker.com/r/fluent/fluentd/" target="_blank">official Docker image</a> and additionally install Elasticsearch plugin.</p>
+<pre class="language-"><code># fluentd/Dockerfile
+FROM fluent/fluentd:v0.12-debian
+RUN [&quot;gem&quot;, &quot;install&quot;, &quot;fluent-plugin-elasticsearch&quot;, &quot;--no-rdoc&quot;, &quot;--no-ri&quot;, &quot;--version&quot;, &quot;1.9.2&quot;]
+</code></pre><p>Then, please prepare Fluentd&#x2019;s configuration file<code>fluentd/conf/fluent.conf</code>. <a href="https://docs.fluentd.org/v0.12/articles/in_forward" target="_blank">in_forward</a> plugin is used for receive logs from Docker logging driver, and out_elasticsearch is for forwarding logs to Elasticsearch.</p>
+<pre class="language-"><code># fluentd/conf/fluent.conf
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>
+  @type forward
+  port 24224
+  bind 0.0.0.0
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>match</span> <span class="token attr-name">*.**</span><span class="token punctuation">&gt;</span></span>
+  @type copy
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>store</span><span class="token punctuation">&gt;</span></span>
+    @type elasticsearch
+    host elasticsearch
+    port 9200
+    logstash_format true
+    logstash_prefix fluentd
+    logstash_dateformat %Y%m%d
+    include_tag_key true
+    type_name access_log
+    tag_key @log_name
+    flush_interval 1s
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>store</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>store</span><span class="token punctuation">&gt;</span></span>
+    @type stdout
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>store</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>match</span><span class="token punctuation">&gt;</span></span>
+</code></pre><h2 id="step-2-start-containers"><a name="step-2-start-containers" class="anchor-navigation-ex-anchor" href="#step-2-start-containers"><i class="fa fa-link" aria-hidden="true"></i></a><a name="step-2-start-containers" class="plugin-anchor" href="#step-2-start-containers"><i class="fa fa-link" aria-hidden="true"></i></a>Step 2: Start Containers</h2>
+<p>Let&#x2019;s start all of the containers, with just one command.</p>
+<pre class="language-"><code>$ docker-compose up
+</code></pre><p>You can check to see if 4 containers are running by<code>docker ps</code>command.</p>
+<pre class="language-"><code>$ docker ps
+CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                                                          NAMES
+2d28323d77a3        httpd                      &quot;httpd-foreground&quot;       About an hour ago   Up 43 seconds       0.0.0.0:80-&gt;80/tcp                                             dockercomposeefk_web_1
+a1b15a7210f6        dockercomposeefk_fluentd   &quot;/bin/sh -c &apos;exec ...&quot;   About an hour ago   Up 45 seconds       5140/tcp, 0.0.0.0:24224-&gt;24224/tcp, 0.0.0.0:24224-&gt;24224/udp   dockercomposeefk_fluentd_1
+01e43b191cc1        kibana                     &quot;/docker-entrypoin...&quot;   About an hour ago   Up 45 seconds       0.0.0.0:5601-&gt;5601/tcp                                         dockercomposeefk_kibana_1
+b7b439415898        elasticsearch              &quot;/docker-entrypoin...&quot;   About an hour ago   Up 50 seconds       0.0.0.0:9200-&gt;9200/tcp, 9300/tcp                               dockercomposeefk_elasticsearch_1
+</code></pre><h2 id="step-3-generate-httpd-access-logs"><a name="step-3-generate-httpd-access-logs" class="anchor-navigation-ex-anchor" href="#step-3-generate-httpd-access-logs"><i class="fa fa-link" aria-hidden="true"></i></a><a name="step-3-generate-httpd-access-logs" class="plugin-anchor" href="#step-3-generate-httpd-access-logs"><i class="fa fa-link" aria-hidden="true"></i></a>Step 3: Generate httpd Access Logs</h2>
+<p>Let&#x2019;s access to<code>httpd</code>to generate some access logs.<code>curl</code>command is always your friend.</p>
+<pre class="language-"><code>$ repeat 10 curl http://localhost:80/
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>It works!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre><h2 id="step-4-confirm-logs-from-kibana"><a name="step-4-confirm-logs-from-kibana" class="anchor-navigation-ex-anchor" href="#step-4-confirm-logs-from-kibana"><i class="fa fa-link" aria-hidden="true"></i></a><a name="step-4-confirm-logs-from-kibana" class="plugin-anchor" href="#step-4-confirm-logs-from-kibana"><i class="fa fa-link" aria-hidden="true"></i></a>Step 4: Confirm Logs from Kibana</h2>
+<p>Please go to<code>http://localhost:5601/</code>with your browser. Then, you need to set up the index name pattern for Kibana. Please specify<code>fluentd-*</code>to<code>Index name or pattern</code>and press<code>Create</code>button.</p>
+<p><img src="../assets/kibana.png" alt=""></p>
+<p>Then, go to<code>Discover</code>tab to seek for the logs. As you can see, logs are properly collected into Elasticsearch + Kibana, via Fluentd.</p>
+<p><img src="../assets/kibana2.png" alt=""></p>
+<h2 id="conclusion"><a name="conclusion" class="anchor-navigation-ex-anchor" href="#conclusion"><i class="fa fa-link" aria-hidden="true"></i></a><a name="conclusion" class="plugin-anchor" href="#conclusion"><i class="fa fa-link" aria-hidden="true"></i></a>Conclusion</h2>
+<p>This article explains how to collect logs from Apache to EFK (Elasticsearch + Fluentd + Kibana). The example code is available in this repository.</p>
+<ul>
+<li><a href="https://github.com/kzk/docker-compose-efk" target="_blank">https://github.com/kzk/docker-compose-efk</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji.html" class="navigation navigation-prev " aria-label="Previous page: 基于fluentd的日志收集">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../dockerrong-qi-de-jian-kong.html" class="navigation navigation-next " aria-label="Next page: Docker容器的监控">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"基于ElasticSearch+Fluentd+Kibana的日志方案实践","level":"1.2.2.1","depth":3,"next":{"title":"Docker容器的监控","level":"1.3","depth":1,"path":"dockerrong-qi-de-jian-kong.md","ref":"dockerrong-qi-de-jian-kong.md","articles":[{"title":"容器监控选型","level":"1.3.1","depth":2,"path":"dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.md","ref":"dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.md","articles":[]},{"title":"基于CAdvisor的容器监控","level":"1.3.2","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.md","articles":[]},{"title":"基于Cadvisor+InfluxDB+Grafna的容器监控","level":"1.3.3","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.md","articles":[]},{"title":"基于Prometheus的容器监控","level":"1.3.4","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.md","articles":[]}]},"previous":{"title":"基于fluentd的日志收集","level":"1.2.2","depth":2,"path":"ji-yu-xxx-de-ri-zhi-shou-ji.md","ref":"ji-yu-xxx-de-ri-zhi-shou-ji.md","articles":[{"title":"基于ElasticSearch+Fluentd+Kibana的日志方案实践","level":"1.2.2.1","depth":3,"path":"ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.md","ref":"ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","prism","prism-themes","anchors","-include-codeblock","emphasize","splitter","sectionx","anchor-navigation-ex","todo","-disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"shortName":"laniakea"},"emphasize":{},"todo":{},"splitter":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{"tag":"b"},"anchor-navigation-ex":{"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"isRewritePageTitle":false,"showLevel":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right","printLog":false,"multipleH1":true,"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false}},"prism-themes":{},"include-codeblock":{"template":"ace","unindent":true,"edit":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"jrr","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Implement CI/CD with Docker and Jenkins","language":"zh-hans","output.name":"site","gitbook":"*","description":"利用Docker及Jenkins Pipeline实现微服务的CI/CD"},"file":{"path":"ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.md","mtime":"2017-10-30T10:52:52.545Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-15T10:48:35.749Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sectionx/sectionx.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

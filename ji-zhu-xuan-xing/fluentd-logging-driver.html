@@ -1,0 +1,595 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Fluentd logging driver · Implement CI/CD with Docker and Jenkins</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="jrr">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-emphasize/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sectionx/sectionx.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="journald-logging-driver.html" />
+    
+    
+    <link rel="prev" href="syslog-logging-driver.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                <a href="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Docker容器内应用日志收集方案
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ji-zhu-xuan-xing.html">
+            
+                <a href="../ji-zhu-xuan-xing.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    技术选型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="json-file-logging-driver.html">
+            
+                <a href="json-file-logging-driver.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    JSON File logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="graylog-extended-formatgelflogging-driver.html">
+            
+                <a href="graylog-extended-formatgelflogging-driver.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    Graylog Extended Format(GELF)logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="syslog-logging-driver.html">
+            
+                <a href="syslog-logging-driver.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    Syslog logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.1.4" data-path="fluentd-logging-driver.html">
+            
+                <a href="fluentd-logging-driver.html">
+            
+                    
+                        <b>1.2.1.4.</b>
+                    
+                    Fluentd logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="journald-logging-driver.html">
+            
+                <a href="journald-logging-driver.html">
+            
+                    
+                        <b>1.2.1.5.</b>
+                    
+                    Journald logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="other-online-logging-driver.html">
+            
+                <a href="other-online-logging-driver.html">
+            
+                    
+                        <b>1.2.1.6.</b>
+                    
+                    Other online logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    基于fluentd的日志收集
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                    
+                        <b>1.2.2.1.</b>
+                    
+                    基于ElasticSearch+Fluentd+Kibana的日志方案实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../dockerrong-qi-de-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker容器的监控
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/rong-qi-jian-kong-xuan-xing.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    容器监控选型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    基于CAdvisor的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    基于Cadvisor+InfluxDB+Grafna的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    基于Prometheus的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Fluentd logging driver</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>The<code>fluentd</code>logging driver sends container logs to the <a href="http://www.fluentd.org/" target="_blank">Fluentd</a> collector as structured log data. Then, users can use any of the <a href="http://www.fluentd.org/plugins" target="_blank">various output plugins of Fluentd</a> to write these logs to various destinations.</p>
+<p><strong>In addition to</strong> the log message itself, the<code>fluentd</code>log driver <strong>sends the following metadata in the structured log message</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Field</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>container_id</code></td>
+<td style="text-align:left">The full 64-character container ID.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>container_name</code></td>
+<td style="text-align:left">The container name at the time it was started. If you use<code>docker rename</code>to rename a container, the new name is not reflected in the journal entries.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>source</code></td>
+<td style="text-align:left"><code>stdout</code>or<code>stderr</code></td>
+</tr>
+</tbody>
+</table>
+<p>The<code>docker logs</code>command is not available for this logging driver.</p>
+<h2 id="usage"><a name="usage" class="anchor-navigation-ex-anchor" href="#usage"><i class="fa fa-link" aria-hidden="true"></i></a><a name="usage" class="plugin-anchor" href="#usage"><i class="fa fa-link" aria-hidden="true"></i></a>Usage</h2>
+<p>Some options are supported by specifying<code>--log-opt</code>as many times as needed:</p>
+<ul>
+<li><code>fluentd-address</code>: specify a socket address to connect to the Fluentd daemon, ex<code>fluentdhost:24224</code>or<code>unix:///path/to/fluentd.sock</code></li>
+<li>tag: specify a tag for fluentd message, which interprets some markup</li>
+</ul>
+<p>To use the<code>fluentd</code>driver as the default logging driver, set the<code>log-driver</code>and<code>log-opt</code>keys to appropriate values in the<code>daemon.json</code>file, which is located in<code>/etc/docker/</code>on Linux hosts or<code>C:\ProgramData\docker\config\daemon.json</code>on Windows Server. For more about +configuring Docker using<code>daemon.json</code>, see +<a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank">daemon.json</a>.</p>
+<p>The following example sets the log driver to<code>fluentd</code>and sets the<code>fluentd-address</code>option.</p>
+<pre class="language-"><code>{
+   &quot;log-driver&quot;: &quot;fluentd&quot;,
+   &quot;log-opts&quot;: {
+     &quot;fluentd-address&quot;: &quot;fluentdhost:24224&quot;
+   }
+ }
+</code></pre><p>Restart Docker for the changes to take effect.</p>
+<p>To set the logging driver for a specific container, pass the<code>--log-driver</code>option to<code>docker run</code>:</p>
+<pre class="language-"><code>docker run --log-driver=fluentd ...
+</code></pre><p>Before using this logging driver, launch a Fluentd daemon. The logging driver connects to this daemon through<code>localhost:24224</code>by default. Use the<code>fluentd-address</code>option to connect to a different address.</p>
+<pre class="language-"><code>docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+</code></pre><p>If container cannot connect to the Fluentd daemon, the container stops immediately unless the<code>fluentd-async-connect</code>option is used.</p>
+<h2 id="options"><a name="options" class="anchor-navigation-ex-anchor" href="#options"><i class="fa fa-link" aria-hidden="true"></i></a><a name="options" class="plugin-anchor" href="#options"><i class="fa fa-link" aria-hidden="true"></i></a>Options</h2>
+<p>Users can use the<code>--log-opt NAME=VALUE</code>flag to specify additional Fluentd logging driver options.</p>
+<h3 id="fluentd-address"><a name="fluentd-address" class="anchor-navigation-ex-anchor" href="#fluentd-address"><i class="fa fa-link" aria-hidden="true"></i></a><a name="fluentd-address" class="plugin-anchor" href="#fluentd-address"><i class="fa fa-link" aria-hidden="true"></i></a>fluentd-address </h3>
+<p>By default, the logging driver connects to<code>localhost:24224</code>. Supply the<code>fluentd-address</code>option to connect to a different address.<code>tcp</code>(default) and<code>unix</code>sockets are supported.</p>
+<pre class="language-"><code>docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
+docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
+</code></pre><p>Two of the above specify the same address, because<code>tcp</code>is default.</p>
+<h3 id="tag"><a name="tag" class="anchor-navigation-ex-anchor" href="#tag"><i class="fa fa-link" aria-hidden="true"></i></a><a name="tag" class="plugin-anchor" href="#tag"><i class="fa fa-link" aria-hidden="true"></i></a>tag </h3>
+<p>By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the<a href="https://docs.docker.com/engine/admin/logging/log_tags/" target="_blank">log tag option documentation</a>for customizing the log tag format.</p>
+<h3 id="labels-env-and-env-regex"><a name="labels-env-and-env-regex" class="anchor-navigation-ex-anchor" href="#labels-env-and-env-regex"><i class="fa fa-link" aria-hidden="true"></i></a><a name="labels-env-and-env-regex" class="plugin-anchor" href="#labels-env-and-env-regex"><i class="fa fa-link" aria-hidden="true"></i></a>labels, env, and env-regex </h3>
+<p>The<code>labels</code>and<code>env</code>options each take a comma-separated list of keys. If there is collision between<code>label</code>and<code>env</code>keys, the value of the<code>env</code>takes precedence. Both options add additional fields to the extra attributes of a logging message.</p>
+<p>The<code>env-regex</code>option is similar to and compatible with<code>env</code>. Its value is a regular expression to match logging-related environment variables. It is used for advanced<a href="https://docs.docker.com/engine/admin/logging/log_tags/" target="_blank">log tag options</a>.</p>
+<h3 id="fluentd-async-connect"><a name="fluentd-async-connect" class="anchor-navigation-ex-anchor" href="#fluentd-async-connect"><i class="fa fa-link" aria-hidden="true"></i></a><a name="fluentd-async-connect" class="plugin-anchor" href="#fluentd-async-connect"><i class="fa fa-link" aria-hidden="true"></i></a>fluentd-async-connect </h3>
+<p>Docker connects to Fluentd in the background. Messages are buffered until the connection is established.</p>
+<h3 id="fluentd-buffer-limit"><a name="fluentd-buffer-limit" class="anchor-navigation-ex-anchor" href="#fluentd-buffer-limit"><i class="fa fa-link" aria-hidden="true"></i></a><a name="fluentd-buffer-limit" class="plugin-anchor" href="#fluentd-buffer-limit"><i class="fa fa-link" aria-hidden="true"></i></a>fluentd-buffer-limit </h3>
+<p>The amount of data to buffer before flushing to disk. Defaults to the amount of RAM available to the container.</p>
+<h3 id="fluentd-retry-wait"><a name="fluentd-retry-wait" class="anchor-navigation-ex-anchor" href="#fluentd-retry-wait"><i class="fa fa-link" aria-hidden="true"></i></a><a name="fluentd-retry-wait" class="plugin-anchor" href="#fluentd-retry-wait"><i class="fa fa-link" aria-hidden="true"></i></a>fluentd-retry-wait </h3>
+<p>How long to wait between retries. Defaults to 1 second.</p>
+<h3 id="fluentd-max-retries"><a name="fluentd-max-retries" class="anchor-navigation-ex-anchor" href="#fluentd-max-retries"><i class="fa fa-link" aria-hidden="true"></i></a><a name="fluentd-max-retries" class="plugin-anchor" href="#fluentd-max-retries"><i class="fa fa-link" aria-hidden="true"></i></a>fluentd-max-retries </h3>
+<p>The maximum number of retries. Defaults to 10.</p>
+<h2 id="fluentd-daemon-management-with-docker"><a name="fluentd-daemon-management-with-docker" class="anchor-navigation-ex-anchor" href="#fluentd-daemon-management-with-docker"><i class="fa fa-link" aria-hidden="true"></i></a><a name="fluentd-daemon-management-with-docker" class="plugin-anchor" href="#fluentd-daemon-management-with-docker"><i class="fa fa-link" aria-hidden="true"></i></a>Fluentd daemon management with Docker </h2>
+<p>About<code>Fluentd</code>itself, see<a href="http://www.fluentd.org/" target="_blank">the project webpage</a>and<a href="http://docs.fluentd.org/" target="_blank">its documents</a>.</p>
+<p>To use this logging driver, start the<code>fluentd</code>daemon on a host. We recommend that you use<a href="https://hub.docker.com/r/fluent/fluentd/" target="_blank">the Fluentd docker image</a>. This image is especially useful if you want to aggregate multiple container logs on each host then, later, transfer the logs to another Fluentd node to create an aggregate store.</p>
+<h3 id="test-container-loggers"><a name="test-container-loggers" class="anchor-navigation-ex-anchor" href="#test-container-loggers"><i class="fa fa-link" aria-hidden="true"></i></a><a name="test-container-loggers" class="plugin-anchor" href="#test-container-loggers"><i class="fa fa-link" aria-hidden="true"></i></a>Test container loggers </h3>
+<ol>
+<li><p>Write a configuration file (<code>test.conf</code>) to dump input logs:</p>
+<pre class="language-"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>
+   @type forward
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>match</span> <span class="token attr-name">*</span><span class="token punctuation">&gt;</span></span>
+   @type stdout
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>match</span><span class="token punctuation">&gt;</span></span>
+</code></pre></li>
+<li><p>Launch Fluentd container with this configuration file:</p>
+<pre class="language-"><code> $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
+</code></pre></li>
+<li><p>Start one or more containers with the<code>fluentd</code>logging driver:</p>
+<pre class="language-"><code> $ docker run --log-driver=fluentd your/application
+</code></pre></li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="syslog-logging-driver.html" class="navigation navigation-prev " aria-label="Previous page: Syslog logging driver">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="journald-logging-driver.html" class="navigation navigation-next " aria-label="Next page: Journald logging driver">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Fluentd logging driver","level":"1.2.1.4","depth":3,"next":{"title":"Journald logging driver","level":"1.2.1.5","depth":3,"path":"ji-zhu-xuan-xing/journald-logging-driver.md","ref":"ji-zhu-xuan-xing/journald-logging-driver.md","articles":[]},"previous":{"title":"Syslog logging driver","level":"1.2.1.3","depth":3,"path":"ji-zhu-xuan-xing/syslog-logging-driver.md","ref":"ji-zhu-xuan-xing/syslog-logging-driver.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","prism","prism-themes","anchors","-include-codeblock","emphasize","splitter","sectionx","anchor-navigation-ex","todo","-disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"shortName":"laniakea"},"emphasize":{},"todo":{},"splitter":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{"tag":"b"},"anchor-navigation-ex":{"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"isRewritePageTitle":false,"showLevel":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right","printLog":false,"multipleH1":true,"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false}},"prism-themes":{},"include-codeblock":{"template":"ace","unindent":true,"edit":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"jrr","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Implement CI/CD with Docker and Jenkins","language":"zh-hans","output.name":"site","gitbook":"*","description":"利用Docker及Jenkins Pipeline实现微服务的CI/CD"},"file":{"path":"ji-zhu-xuan-xing/fluentd-logging-driver.md","mtime":"2017-10-20T07:19:47.929Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-15T10:48:35.749Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sectionx/sectionx.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

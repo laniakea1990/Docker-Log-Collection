@@ -1,0 +1,636 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>基于Prometheus的容器监控 · Implement CI/CD with Docker and Jenkins</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="jrr">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-atom-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-emphasize/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-sectionx/sectionx.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                <a href="../dockerrong-qi-nei-ying-yong-ri-zhi-shou-ji-fang-an.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    Docker容器内应用日志收集方案
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ji-zhu-xuan-xing.html">
+            
+                <a href="../ji-zhu-xuan-xing.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    技术选型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/json-file-logging-driver.html">
+            
+                    
+                        <b>1.2.1.1.</b>
+                    
+                    JSON File logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/graylog-extended-formatgelflogging-driver.html">
+            
+                    
+                        <b>1.2.1.2.</b>
+                    
+                    Graylog Extended Format(GELF)logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/syslog-logging-driver.html">
+            
+                    
+                        <b>1.2.1.3.</b>
+                    
+                    Syslog logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/fluentd-logging-driver.html">
+            
+                    
+                        <b>1.2.1.4.</b>
+                    
+                    Fluentd logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.5" data-path="../ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/journald-logging-driver.html">
+            
+                    
+                        <b>1.2.1.5.</b>
+                    
+                    Journald logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.6" data-path="../ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                <a href="../ji-zhu-xuan-xing/other-online-logging-driver.html">
+            
+                    
+                        <b>1.2.1.6.</b>
+                    
+                    Other online logging driver
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    基于fluentd的日志收集
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                <a href="../ji-yu-xxx-de-ri-zhi-shou-ji/ji-yu-elasticsearch-+-fluentd-+-kibana-de-ri-zhi-fang-an-shi-jian.html">
+            
+                    
+                        <b>1.2.2.1.</b>
+                    
+                    基于ElasticSearch+Fluentd+Kibana的日志方案实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../dockerrong-qi-de-jian-kong.html">
+            
+                <a href="../dockerrong-qi-de-jian-kong.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker容器的监控
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="rong-qi-jian-kong-xuan-xing.html">
+            
+                <a href="rong-qi-jian-kong-xuan-xing.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    容器监控选型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                <a href="ji-yu-cadvisor-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    基于CAdvisor的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                <a href="ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    基于Cadvisor+InfluxDB+Grafna的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.4" data-path="ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                <a href="ji-yu-prometheus-de-rong-qi-jian-kong.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    基于Prometheus的容器监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >基于Prometheus的容器监控</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>Prometheus&#x662F;&#x4E00;&#x6B3E;&#x5F00;&#x6E90;&#x7684;&#x7CFB;&#x7EDF;&#x76D1;&#x63A7;&#x548C;&#x544A;&#x8B66;&#x5DE5;&#x5177;&#xFF0C;&#x6700;&#x521D;&#x7531;SoundCloud&#x63A8;&#x51FA;&#x3002;&#x81EA;2012&#x6210;&#x7ACB;&#x4EE5;&#x6765;&#xFF0C;&#x8BB8;&#x591A;&#x516C;&#x53F8;&#x548C;&#x7EC4;&#x7EC7;&#x90FD;&#x91C7;&#x7528;&#x4E86;prometheus&#xFF0C;&#x9879;&#x76EE;&#x6709;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x6D3B;&#x8DC3;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x548C;&#x7528;&#x6237;&#x793E;&#x533A;&#x3002;Prometheus&#x73B0;&#x5728;&#x662F;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5F00;&#x6E90;&#x9879;&#x76EE;&#xFF0C;&#x5B83;&#x7684;&#x7EF4;&#x62A4;&#x72EC;&#x7ACB;&#x4E8E;&#x4EFB;&#x4F55;&#x516C;&#x53F8;&#xFF0C;2016&#x5E74;&#xFF0C;Prometheus&#x5728;Kubernetes&#x4E4B;&#x540E;&#x7B2C;&#x4E8C;&#x4E2A;&#x52A0;&#x5165;&#x5230; <a href="https://cncf.io/" target="_blank">Cloud Native Computing Foundation</a> &#x9879;&#x76EE;&#x3002;</p>
+<h2 id="features"><a name="features" class="anchor-navigation-ex-anchor" href="#features"><i class="fa fa-link" aria-hidden="true"></i></a><a name="features" class="plugin-anchor" href="#features"><i class="fa fa-link" aria-hidden="true"></i></a>Features</h2>
+<p>Prometheus&#x7684;&#x4E3B;&#x8981;&#x7279;&#x6027;&#x6709;&#xFF1A;</p>
+<ul>
+<li>&#x591A;&#x7EF4;&#x5EA6;&#x6570;&#x636E;&#x6A21;&#x578B;&#xFF08;&#x7531;&#x952E;/&#x503C;&#x5BF9;&#x786E;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x6570;&#x636E;&#x6A21;&#x578B;&#xFF09;</li>
+<li>&#x5177;&#x6709;&#x4E00;&#x4E2A;&#x7075;&#x6D3B;&#x7684;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#x6765;&#x5229;&#x7528;&#x8FD9;&#x4E9B;&#x7EF4;&#x5EA6;</li>
+<li>&#x4E0D;&#x4F9D;&#x8D56;&#x5206;&#x5E03;&#x5F0F;&#x5B58;&#x50A8;&#xFF1B;&#x53EF;&#x5355;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x8282;&#x70B9;&#x5DE5;&#x4F5C;&#x3002;</li>
+<li>&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x7684;&#x91C7;&#x96C6;&#x662F;&#x901A;&#x8FC7;HTTP pull&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x89E3;&#x51B3;&#x5F88;&#x591A;push&#x67B6;&#x6784;&#x7684;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x901A;&#x8FC7;&#x4E2D;&#x4ECB;&#x7F51;&#x5173;&#x652F;&#x6301;push&#x5F62;&#x5F0F;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x6570;&#x636E;&#x7684;&#x6536;&#x96C6;( pushing time series is supported via an intermediary gateway )</li>
+<li>&#x76D1;&#x63A7;&#x76EE;&#x6807;&#x7684;&#x53D1;&#x73B0;&#x662F;&#x901A;&#x8FC7;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x6216;&#x9759;&#x6001;&#x914D;&#x7F6E;( targets are discovered via service discovery or static configuration )</li>
+<li>&#x591A;&#x79CD;&#x6570;&#x636E;&#x5C55;&#x793A;&#x9762;&#x677F;&#x652F;&#x6301;&#xFF0C;&#x4F8B;&#x5982;grafana ( multiple modes of graphing and dashboarding support )</li>
+</ul>
+<h2 id="architecture"><a name="architecture" class="anchor-navigation-ex-anchor" href="#architecture"><i class="fa fa-link" aria-hidden="true"></i></a><a name="architecture" class="plugin-anchor" href="#architecture"><i class="fa fa-link" aria-hidden="true"></i></a>Architecture</h2>
+<p>This diagram illustrates the architecture of Prometheus and some of its ecosystem components:</p>
+<p><img src="../assets/Architecture-Prometheus.png" alt=""></p>
+<p>Prometheus scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts. <a href="https://grafana.com/" target="_blank">Grafana</a> or other API consumers can be used to visualize the collected data.</p>
+<p><strong>Prometheus Server</strong></p>
+<p>Prometheus Server &#x8D1F;&#x8D23;&#x4ECE; Exporter &#x62C9;&#x53D6;&#x548C;&#x5B58;&#x50A8;&#x76D1;&#x63A7;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x4E00;&#x5957;&#x7075;&#x6D3B;&#x7684;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#xFF08;PromQL&#xFF09;&#x4F9B;&#x7528;&#x6237;&#x4F7F;&#x7528;&#x3002;</p>
+<p><strong>Exporter</strong></p>
+<p>Exporter &#x8D1F;&#x8D23;&#x6536;&#x96C6;&#x76EE;&#x6807;&#x5BF9;&#x8C61;&#xFF08;host, container&#x2026;&#xFF09;&#x7684;&#x6027;&#x80FD;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x901A;&#x8FC7; HTTP &#x63A5;&#x53E3;&#x4F9B; Prometheus Server &#x83B7;&#x53D6;&#x3002;</p>
+<p><strong>Push gateway</strong></p>
+<p>push gateway &#x7528;&#x6765;&#x652F;&#x6301; short-lived jobs</p>
+<p><strong>&#x53EF;&#x89C6;&#x5316;&#x7EC4;&#x4EF6;</strong></p>
+<p>&#x76D1;&#x63A7;&#x6570;&#x636E;&#x7684;&#x53EF;&#x89C6;&#x5316;&#x5C55;&#x73B0;&#x5BF9;&#x4E8E;&#x76D1;&#x63A7;&#x65B9;&#x6848;&#x81F3;&#x5173;&#x91CD;&#x8981;&#x3002;&#x4EE5;&#x524D; Prometheus &#x81EA;&#x5DF1;&#x5F00;&#x53D1;&#x4E86;&#x4E00;&#x5957;&#x5DE5;&#x5177;&#xFF0C;&#x4E0D;&#x8FC7;&#x540E;&#x6765;&#x5E9F;&#x5F03;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x5F00;&#x6E90;&#x793E;&#x533A;&#x51FA;&#x73B0;&#x4E86;&#x66F4;&#x4E3A;&#x4F18;&#x79C0;&#x7684;&#x4EA7;&#x54C1; Grafana&#x3002;Grafana &#x80FD;&#x591F;&#x4E0E; Prometheus &#x65E0;&#x7F1D;&#x96C6;&#x6210;&#xFF0C;&#x63D0;&#x4F9B;&#x5B8C;&#x7F8E;&#x7684;&#x6570;&#x636E;&#x5C55;&#x793A;&#x80FD;&#x529B;&#x3002;</p>
+<p><strong>Alertmanager</strong></p>
+<p>&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x57FA;&#x4E8E;&#x76D1;&#x63A7;&#x6570;&#x636E;&#x7684;&#x544A;&#x8B66;&#x89C4;&#x5219;&#xFF0C;&#x89C4;&#x5219;&#x4F1A;&#x89E6;&#x53D1;&#x544A;&#x8B66;&#x3002;&#x4E00;&#x65E6; Alermanager &#x6536;&#x5230;&#x544A;&#x8B66;&#xFF0C;&#x4F1A;&#x901A;&#x8FC7;&#x9884;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x5F0F;&#x53D1;&#x51FA;&#x544A;&#x8B66;&#x901A;&#x77E5;&#x3002;&#x652F;&#x6301;&#x7684;&#x65B9;&#x5F0F;&#x5305;&#x62EC; Email&#x3001;PagerDuty&#x3001;Webhook &#x7B49;.</p>
+<p>&#x4E5F;&#x8BB8;&#x4E00;&#x4E9B;&#x719F;&#x6089;&#x5176;&#x4ED6;&#x76D1;&#x63A7;&#x65B9;&#x6848;&#x7684;&#x540C;&#x5B66;&#x770B;&#x4E86; Prometheus &#x7684;&#x67B6;&#x6784;&#x4F1A;&#x4E0D;&#x4EE5;&#x4E3A;&#x7136;&#xFF0C;&#x201C;&#x8FD9;&#x4E9B;&#x529F;&#x80FD; Zabbix&#x3001;Graphite&#x3001;Nagios &#x8FD9;&#x7C7B;&#x76D1;&#x63A7;&#x7CFB;&#x7EDF;&#x4E5F;&#x90FD;&#x6709;&#xFF0C;&#x6CA1;&#x4EC0;&#x4E48;&#x7279;&#x522B;&#x7684;&#x554A;&#xFF01;&#x201D;&#x3002;Prometheus &#x6700;&#x5927;&#x7684;&#x4EAE;&#x70B9;&#x548C;&#x5148;&#x8FDB;&#x6027;&#x662F;&#x5B83;&#x7684;&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;&#xFF0C;&#x4E0B;&#x9762;&#x5C06;&#x505A;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h2 id="&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;"><a name="&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;" class="anchor-navigation-ex-anchor" href="#&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;" class="plugin-anchor" href="#&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;</h2>
+<p>&#x672C;&#x8282;&#x8BA8;&#x8BBA; Prometheus &#x7684;&#x6838;&#x5FC3;&#xFF0C;&#x591A;&#x7EF4;&#x6570;&#x636E;&#x6A21;&#x578B;&#x3002;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x8981;&#x76D1;&#x63A7;&#x5BB9;&#x5668;<code>webapp1</code>&#x7684;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF0C;&#x6700;&#x4F20;&#x7EDF;&#x548C;&#x5178;&#x578B;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6307;&#x6807;<code>container_memory_usage_bytes_webapp1</code>&#x6765;&#x8BB0;&#x5F55;<code>webapp1</code>&#x7684;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x3002;&#x5047;&#x5982;&#x6BCF;1&#x5206;&#x949F;&#x53D6;&#x4E00;&#x6B21;&#x6837;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x6570;&#x636E;&#x5E93;&#x91CC;&#x5C31;&#x4F1A;&#x6709;&#x7C7B;&#x4F3C;&#x4E0B;&#x9762;&#x7684;&#x8BB0;&#x5F55;&#x3002;</p>
+<p><img src="../assets/webapp1-1.png" alt="">&#x5982;&#x679C;&#x73B0;&#x5728;&#x9700;&#x6C42;&#x53D1;&#x751F;&#x4E86;&#x70B9;&#x53D8;&#x5316;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x77E5;&#x9053;&#x6240;&#x6709; webapp &#x5BB9;&#x5668;&#x7684;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#x3002;&#x5982;&#x679C;&#x8FD8;&#x662F;&#x91C7;&#x7528;&#x524D;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5C31;&#x4E0D;&#x5F97;&#x4E0D;&#x589E;&#x52A0;&#x65B0;&#x7684;&#x6307;&#x6807;<code>container_memory_usage_bytes_webapp2</code>&#x3001;<code>container_memory_usage_bytes_webapp3</code>&#x2026;</p>
+<p>&#x50CF; Graphite &#x8FD9;&#x7C7B;&#x76D1;&#x63A7;&#x65B9;&#x6848;&#x91C7;&#x7528;&#x4E86;&#x66F4;&#x4E3A;&#x4F18;&#x96C5;&#x7684;&#x5C42;&#x6B21;&#x5316;&#x6570;&#x636E;&#x6A21;&#x578B;&#x3002;&#x4E3A;&#x4E86;&#x6EE1;&#x8DB3;&#x4E0A;&#x9762;&#x7684;&#x9700;&#x6C42;&#xFF0C;Graphite &#x4F1A;&#x5B9A;&#x4E49;&#x6307;&#x6807;<code>container.memory_usage_bytes.webapp1</code>&#x3001;<code>container.memory_usage_bytes.webapp2</code>&#x3001;<code>container.memory_usage_bytes.webapp3</code>&#x2026;</p>
+<p>&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x7528;<code>container.memory_usage_bytes.webapp*</code>&#x83B7;&#x53D6;&#x6240;&#x6709;&#x7684; webapp &#x7684;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x6B64;&#x5916;&#xFF0C;Graphite &#x8FD8;&#x652F;&#x6301;<code>sum()</code>&#x7B49;&#x51FD;&#x6570;&#x5BF9;&#x6307;&#x6807;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x548C;&#x5904;&#x7406;&#xFF0C;&#x6BD4;&#x5982;<code>sum(container.memory_usage_bytes.webapp*)</code>&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x6240;&#x6709; webapp &#x5BB9;&#x5668;&#x5360;&#x7528;&#x7684;&#x603B;&#x5185;&#x5B58;&#x91CF;&#x3002;</p>
+<p>&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#x95EE;&#x9898;&#x5904;&#x7406;&#x5F97;&#x90FD;&#x5F88;&#x597D;&#x3002;&#x4F46;&#x5BA2;&#x6237;&#x603B;&#x662F;&#x4F1A;&#x63D0;&#x51FA;&#x66F4;&#x591A;&#x7684;&#x9700;&#x6C42;&#xFF1A;&#x73B0;&#x5728;&#x4E0D;&#x4EC5;&#x8981;&#x6309;&#x5BB9;&#x5668;&#x540D;&#x5B57;&#x7EDF;&#x8BA1;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x91CF;&#xFF0C;&#x8FD8;&#x8981;&#x6309;&#x955C;&#x50CF;&#x6765;&#x7EDF;&#x8BA1;&#xFF1B;&#x6216;&#x8005;&#x60F3;&#x5BF9;&#x6BD4;&#x4E00;&#x4E0B;&#x67D0;&#x4E00;&#x7EC4;&#x5BB9;&#x5668;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x548C;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#x4E2D;&#x5BF9;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x7684;&#x4E0D;&#x540C;&#x60C5;&#x51B5;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#x4F60;&#x53EF;&#x4EE5;&#x8BF4;&#xFF1A;&#x53EA;&#x8981;&#x5B9A;&#x4E49;&#x66F4;&#x591A;&#x7684;&#x6307;&#x6807;&#x5C31;&#x80FD;&#x6EE1;&#x8DB3;&#x8FD9;&#x4E9B;&#x9700;&#x6C42;&#x3002;&#x6BD4; &#x5982;<code>container.memory_usage_bytes.image1.webapp1</code>&#x3001;<code>container.memory_usage_bytes.webapp1.prod</code>&#x7B49;&#x3002;</p>
+<p>&#x4F46;&#x95EE;&#x9898;&#x5728;&#x4E8E;&#x6211;&#x4EEC;&#x6CA1;&#x529E;&#x6CD5;&#x63D0;&#x524D;&#x9884;&#x77E5;&#x5BA2;&#x6237;&#x8981;&#x7528;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x56DE;&#x7B54;&#x600E;&#x6837;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x6CA1;&#x529E;&#x6CD5;&#x63D0;&#x524D;&#x5B9A;&#x4E49;&#x597D;&#x6240;&#x6709;&#x7684;&#x6307;&#x6807;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x6765;&#x770B;&#x770B; Prometheus &#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;</p>
+<p>Prometheus &#x53EA;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x7684;&#x6307;&#x6807;<code>container_memory_usage_bytes</code>&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x6DFB;&#x52A0;&#x4E0D;&#x540C;&#x7684;&#x7EF4;&#x5EA6;&#x6570;&#x636E;&#x6765;&#x6EE1;&#x8DB3;&#x4E0D;&#x540C;&#x7684;&#x4E1A;&#x52A1;&#x9700;&#x6C42;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x5BF9;&#x4E8E;&#x524D;&#x9762; webapp1 &#x7684;&#x4E09;&#x6761;&#x53D6;&#x6837;&#x6570;&#x636E;&#xFF0C;&#x8F6C;&#x6362;&#x6210; Prometheus &#x591A;&#x7EF4;&#x6570;&#x636E;&#x5C06;&#x53D8;&#x6210;&#xFF1A;</p>
+<p><img src="../assets/webapp1-2.png" alt="">&#x540E;&#x9762;&#x4E09;&#x5217;<code>container_name</code>&#x3001;<code>image</code>&#x3001;<code>env</code>&#x5C31;&#x662F;&#x6570;&#x636E;&#x7684;&#x4E09;&#x4E2A;&#x7EF4;&#x5EA6;&#x3002;&#x60F3;&#x8C61;&#x4E00;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x540C;<code>env</code>&#xFF08;prod&#x3001;test&#x3001;dev&#xFF09;&#xFF0C;&#x4E0D;&#x540C;<code>image</code>&#xFF08;mycom/webapp:1.2&#x3001;mycom/webapp:1.3&#xFF09;&#x7684;&#x5BB9;&#x5668;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x4E2D;&#x6807;&#x6CE8;&#x4E86;&#x8FD9;&#x4E09;&#x4E2A;&#x7EF4;&#x5EA6;&#x4FE1;&#x606F;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x80FD;&#x6EE1;&#x8DB3;&#x5F88;&#x591A;&#x4E1A;&#x52A1;&#x9700;&#x6C42;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<ol>
+<li><p>&#x8BA1;&#x7B97; webapp2 &#x7684;&#x5E73;&#x5747;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;avg(container_memory_usage_bytes{container_name=&#x201C;webapp2&#x201D;})</p>
+</li>
+<li><p>&#x8BA1;&#x7B97;&#x8FD0;&#x884C; mycom/webapp:1.3 &#x955C;&#x50CF;&#x7684;&#x6240;&#x6709;&#x5BB9;&#x5668;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x603B;&#x91CF;&#xFF1A;sum(container_memory_usage_bytes{image=&#x201C;mycom/webapp:1.3&#x201D;})</p>
+</li>
+<li><p>&#x7EDF;&#x8BA1;&#x4E0D;&#x540C;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x4E2D; webapp &#x5BB9;&#x5668;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x603B;&#x91CF;&#xFF1A;sum(container_memory_usage_bytes{container_name=~&#x201C;webapp&#x201D;}) by (env)</p>
+</li>
+</ol>
+<p>&#x8FD9;&#x91CC;&#x53EA;&#x5217;&#x4E86;&#x51E0;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x4E0D;&#x8FC7;&#x5DF2;&#x7ECF;&#x80FD;&#x591F;&#x8BF4;&#x660E; Prometheus &#x6570;&#x636E;&#x6A21;&#x578B;&#x7684;&#x4F18;&#x52BF;&#x4E86;&#xFF1A;</p>
+<ol>
+<li><p>&#x901A;&#x8FC7;&#x7EF4;&#x5EA6;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x8BF4;&#x660E;&#xFF0C;&#x9644;&#x52A0;&#x66F4;&#x591A;&#x7684;&#x4E1A;&#x52A1;&#x4FE1;&#x606F;&#xFF0C;&#x8FDB;&#x800C;&#x6EE1;&#x8DB3;&#x4E0D;&#x540C;&#x4E1A;&#x52A1;&#x7684;&#x9700;&#x6C42;&#x3002;&#x540C;&#x65F6;&#x7EF4;&#x5EA6;&#x662F;&#x53EF;&#x4EE5;&#x52A8;&#x6001;&#x6DFB;&#x52A0;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x518D;&#x7ED9;&#x6570;&#x636E;&#x52A0;&#x4E0A;&#x4E00;&#x4E2A;<code>user</code>&#x7EF4;&#x5EA6;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x6309;&#x7528;&#x6237;&#x6765;&#x7EDF;&#x8BA1;&#x5BB9;&#x5668;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x91CF;&#x4E86;&#x3002;</p>
+</li>
+<li><p>Prometheus &#x4E30;&#x5BCC;&#x7684;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#x80FD;&#x591F;&#x7075;&#x6D3B;&#x3001;&#x5145;&#x5206;&#x5730;&#x6316;&#x6398;&#x6570;&#x636E;&#x7684;&#x4EF7;&#x503C;&#x3002;&#x524D;&#x9762;&#x793A;&#x4F8B;&#x4E2D;&#x7684; avg&#x3001;sum&#x3001;by &#x53EA;&#x662F;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#x4E2D;&#x5F88;&#x5C0F;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x529F;&#x80FD;&#xFF0C;&#x5DF2;&#x7ECF;&#x4E3A;&#x6211;&#x4EEC;&#x5C55;&#x73B0;&#x4E86; Prometheus &#x5BF9;&#x591A;&#x7EF4;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5206;&#x7247;&#x3001;&#x805A;&#x5408;&#x7684;&#x5F3A;&#x5927;&#x80FD;&#x529B;&#x3002;</p>
+</li>
+</ol>
+<h2 id="&#x57FA;&#x4E8E;prometheus&#x7684;&#x5BB9;&#x5668;&#x76D1;&#x63A7;&#x90E8;&#x7F72;"><a name="&#x57FA;&#x4E8E;prometheus&#x7684;&#x5BB9;&#x5668;&#x76D1;&#x63A7;&#x90E8;&#x7F72;" class="anchor-navigation-ex-anchor" href="#&#x57FA;&#x4E8E;prometheus&#x7684;&#x5BB9;&#x5668;&#x76D1;&#x63A7;&#x90E8;&#x7F72;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x57FA;&#x4E8E;prometheus&#x7684;&#x5BB9;&#x5668;&#x76D1;&#x63A7;&#x90E8;&#x7F72;" class="plugin-anchor" href="#&#x57FA;&#x4E8E;prometheus&#x7684;&#x5BB9;&#x5668;&#x76D1;&#x63A7;&#x90E8;&#x7F72;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x57FA;&#x4E8E;Prometheus&#x7684;&#x5BB9;&#x5668;&#x76D1;&#x63A7;&#x90E8;&#x7F72;</h2>
+<p>&#x57FA;&#x4E8E;CAdvisor&#x7684;exporter&#xFF0C;Prometheus&#x7684;&#x90E8;&#x7F72;&#x4F7F;&#x7528;docker-compose.yml&#x6587;&#x4EF6;&#x5C06;&#x591A;&#x4E2A;&#x5BB9;&#x5668;&#x7EDF;&#x4E00;&#x90E8;&#x7F72;&#xFF1A;</p>
+<pre class="language-"><code>version: &apos;2&apos;
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - ./data/prometheus:/prometheus
+    command:
+      - &apos;-config.file=/etc/prometheus/prometheus.yml&apos;
+      - &apos;-storage.local.path=/prometheus&apos;
+      - &apos;-alertmanager.url=http://alertmanager:9093&apos;
+      - &apos;-web.console.libraries=/usr/share/prometheus/console_libraries&apos;
+      - &apos;-web.console.templates=/usr/share/prometheus/consoles&apos;
+    ports:
+      - 9090:9090
+    links:
+      - cadvisor:cadvisor
+      - alertmanager:alertmanager
+    depends_on:
+      - cadvisor
+    restart: always
+
+  node-exporter:
+    image: prom/node-exporter
+    volumes:
+      -  /proc:/host/proc
+      -  /sys:/host/sys
+      -  /:/rootfs
+    command: 
+      - &apos;--path.procfs=/host/proc&apos; 
+      - &apos;--path.sysfs=/host/sys&apos;
+      - &apos;--collector.filesystem.ignored-mount-points=&quot;^/(sys|proc|dev|host|etc)($$|/)&quot;&apos;
+    ports:
+      - 9100:9100
+    restart: always
+
+  alertmanager:
+    image: prom/alertmanager
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    restart: always
+    command:
+      - &apos;-config.file=/etc/alertmanager/config.yml&apos;
+      - &apos;-storage.path=/alertmanager&apos;
+  cadvisor:
+    image: google/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 8011:8080
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3009:3000
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    env_file:
+      - config.monitoring
+</code></pre><p>&#x6267;&#x884C;docker-compose up -d &#xFF0C;&#x8BE5;&#x65B9;&#x6848;&#x91C7;&#x7528;&#x7684;&#x4E5F;&#x662F;&#x4F7F;&#x7528;grafana&#x4F5C;&#x4E3A;&#x53EF;&#x89C6;&#x5316;&#x7EC4;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;<a href="http://localhost:3009/" target="_blank">http://localhost:3009</a> &#x8FDB;&#x5165;Grafana&#x4E3B;&#x9875;,  &#x7136;&#x540E;&#x914D;&#x7F6E;Prometheus&#x7684;&#x6570;&#x636E;&#x6E90;&#xFF0C;&#x5E76;&#x5BFC;&#x5165;&#x4E00;&#x4E2A;docker-dashboard.json&#x7684;dashboard&#x6A21;&#x677F;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5982;&#x4E0B;&#x56FE;&#x7684;&#x76D1;&#x63A7;&#x6548;&#x679C;&#x56FE;&#xFF1A;</p>
+<p><img src="../assets/432.png" alt=""><img src="../assets/32.png" alt=""></p>
+<h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;"><a name="&#x53C2;&#x8003;&#x8D44;&#x6599;" class="anchor-navigation-ex-anchor" href="#&#x53C2;&#x8003;&#x8D44;&#x6599;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="&#x53C2;&#x8003;&#x8D44;&#x6599;" class="plugin-anchor" href="#&#x53C2;&#x8003;&#x8D44;&#x6599;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x53C2;&#x8003;&#x8D44;&#x6599;</h2>
+<p><a href="https://grafana.com/dashboards/179" target="_blank">https://grafana.com/dashboards/179</a></p>
+<p><a href="https://grafana.com/dashboards/893" target="_blank">https://grafana.com/dashboards/893</a></p>
+<p><a href="https://grafana.com/dashboards?dataSource=prometheus&amp;search=docker" target="_blank">https://grafana.com/dashboards?dataSource=prometheus&amp;search=docker</a></p>
+<p><a href="https://github.com/vegasbrianc/prometheus/tree/version-2" target="_blank">https://github.com/vegasbrianc/prometheus/tree/version-2</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 基于Cadvisor+InfluxDB+Grafna的容器监控">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"基于Prometheus的容器监控","level":"1.3.4","depth":2,"previous":{"title":"基于Cadvisor+InfluxDB+Grafna的容器监控","level":"1.3.3","depth":2,"path":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.md","ref":"dockerrong-qi-de-jian-kong/ji-yu-cadvisor-+-influxdb-+-grafna-de-rong-qi-jian-kong.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","-highlight","-livereload","search-plus","prism","prism-themes","anchors","-include-codeblock","emphasize","splitter","sectionx","anchor-navigation-ex","todo","-disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-atom-dark.css"]},"disqus":{"shortName":"laniakea"},"emphasize":{},"todo":{},"splitter":{},"fontsettings":{"theme":"white","family":"sans","size":2},"sectionx":{"tag":"b"},"anchor-navigation-ex":{"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"isRewritePageTitle":false,"showLevel":true,"tocLevel1Icon":"fa fa-hand-o-right","tocLevel2Icon":"fa fa-hand-o-right","tocLevel3Icon":"fa fa-hand-o-right","printLog":false,"multipleH1":true,"associatedWithSummary":true,"float":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false}},"prism-themes":{},"include-codeblock":{"template":"ace","unindent":true,"edit":true},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{},"search-plus":{}},"theme":"default","author":"jrr","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Implement CI/CD with Docker and Jenkins","language":"zh-hans","output.name":"site","gitbook":"*","description":"利用Docker及Jenkins Pipeline实现微服务的CI/CD"},"file":{"path":"dockerrong-qi-de-jian-kong/ji-yu-prometheus-de-rong-qi-jian-kong.md","mtime":"2017-10-30T10:46:35.154Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-15T10:48:35.749Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sectionx/sectionx.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
